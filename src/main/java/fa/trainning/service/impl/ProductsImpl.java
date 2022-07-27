@@ -1,5 +1,5 @@
 package fa.trainning.service.impl;
 
-public class ProductsService {
+public class ProductsImpl {
 
 }
