@@ -1,5 +1,5 @@
 package fa.trainning.converter;
 
-public class Products {
+public class ProductsConverter {
 
 }
