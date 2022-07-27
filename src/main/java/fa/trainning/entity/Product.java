@@ -25,6 +25,10 @@ public class Product {
 	private String name;
 	
 	@ManyToOne
+	@JoinColumn(name = "category_id")
+	private Category category;
+	
+	@ManyToOne
 	@JoinColumn(name="manufacturer_id")
 	private Manufacturer manufacturer;
 	
