@@ -1,5 +1,5 @@
 package fa.trainning.entity;
 
-public class Phone {
+public class PhoneEntity {
 
 }

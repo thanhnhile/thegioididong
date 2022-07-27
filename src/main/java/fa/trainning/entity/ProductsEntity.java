@@ -1,6 +1,6 @@
 package fa.trainning.entity;
 
 //parent contains repeated child attributes
-public abstract class Products {
+public abstract class ProductsEntity {
 
 }
