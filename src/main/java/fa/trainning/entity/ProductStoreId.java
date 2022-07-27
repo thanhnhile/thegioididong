@@ -1,34 +1,9 @@
 package fa.trainning.entity;
 
-import javax.persistence.Embeddable;
-import javax.persistence.ManyToOne;
+import java.io.Serializable;
 
-@Embeddable
-public class ProductStoreId {
-	
-	
+
+public class ProductStoreId implements Serializable{
 	private Product product;
-	
 	private Store store;
-	
-	@ManyToOne
-	public Product getProduct() {
-		return product;
-	}
-
-	public void setProduct(Product product) {
-		this.product = product;
-	}
-	
-	@ManyToOne
-	public Store getStore() {
-		return store;
-	}
-
-	public void setStore(Store store) {
-		this.store = store;
-	}
-	
-	
-	
 }

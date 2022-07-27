@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -45,8 +46,8 @@ public class Product {
 	
 	private String unit;
 	
-	//private List<ProductStore> productStores;
-	
+	@OneToMany(mappedBy="product", fetch = FetchType.LAZY)
+	private List<ProductStore> productStores;
 	
 
 	public Product() {
@@ -157,14 +158,13 @@ public class Product {
 		this.unit = unit;
 	}
 	
-//	@OneToMany(mappedBy="pk.product")
-//	public List<ProductStore> getProductStores() {
-//		return productStores;
-//	}
-//
-//	public void setProductStores(List<ProductStore> productStores) {
-//		this.productStores = productStores;
-//	}
+	public List<ProductStore> getProductStores() {
+		return productStores;
+	}
+
+	public void setProductStores(List<ProductStore> productStores) {
+		this.productStores = productStores;
+	}
 	
 
 }

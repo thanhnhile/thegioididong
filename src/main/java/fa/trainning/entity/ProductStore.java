@@ -1,59 +1,54 @@
 package fa.trainning.entity;
 
-import java.beans.Transient;
-
-import javax.persistence.AssociationOverride;
-import javax.persistence.AssociationOverrides;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-//@Entity
-//@Table(name = "product_store")
-//@AssociationOverrides({
-//		@AssociationOverride(name = "pk.product", 
-//			joinColumns = @JoinColumn(name = "product_id")),
-//		@AssociationOverride(name = "pk.store", 
-//			joinColumns = @JoinColumn(name = "store_id")) })
+@Entity
+@Table(name="product_store")
+@IdClass(ProductStoreId.class)
 public class ProductStore {
-
-	private ProductStoreId pk = new ProductStoreId();
 	
-	private int stock;
-
-	@EmbeddedId
-	public ProductStoreId getPk() {
-		return pk;
-	}
-
-	public void setPk(ProductStoreId pk) {
-		this.pk = pk;
-	}
+	@Id
+	@ManyToOne
+	@JoinColumn(name ="product_id")
+	private Product product;
 	
-	@Transient
+	@Id
+	@ManyToOne
+	@JoinColumn(name = "store_id")
+	private Store store;
+	
+	private int inStock;
+	
 	public Product getProduct() {
-		return pk.getProduct();
+		return product;
 	}
-	public void setProduct(Product p) {
-		pk.setProduct(p);
+
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 	
-	@Transient
 	public Store getStore() {
-		return pk.getStore();
+		return store;
 	}
+
 	public void setStore(Store store) {
-		pk.setStore(store);
+		this.store = store;
 	}
 
-	public int getStock() {
-		return stock;
+	public int getInStock() {
+		return inStock;
 	}
 
-	public void setStock(int stock) {
-		this.stock = stock;
+	public void setInStock(int inStock) {
+		this.inStock = inStock;
 	}
 	
 	
-}	
+	
+	
+}
