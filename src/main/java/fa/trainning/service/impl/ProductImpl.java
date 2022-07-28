@@ -47,17 +47,36 @@ public class ProductImpl implements ProductService {
 
 	@Override
 	public ProductDTO addProducts(ProductDTO productsDTO) {
-		
-		return null;
+		Product product = productMapper.toProductEntity(productsDTO);
+		product = productRepo.save(product);
+		return productMapper.toProductDTO(product);
 	}
 
+	//Check update with no ID is create new object
 	@Override
-	public ProductDTO updateAllPropertyProducts(Integer id, ProductDTO productsDTO) {
+	public ProductDTO updateAllPropertyProducts(Integer id, ProductDTO productDTO) {
+		/*
+		 * Product product = new Product(); if (productDTO.getId() != null) { Product
+		 * oldProduct = productRepo.findOneById(productDTO.getId()); product =
+		 * productMapper.toProductEntity(productDTO, oldProduct); } else { product =
+		 * productMapper.toProductEntity(productDTO); } product = productRepo.save(product);
+		 * return productMapper.toProductDTO(product);
+		 */
 		return null;
 	}
-
+	//Check update with no ID is create new object
 	@Override
 	public ProductDTO updateProducts(Integer id, ProductDTO productsDTO) {
+		/*
+		 * Product product = new Product(); if (productDTO.getId() != null) { Product
+		 * oldProduct = productRepo.findOneById(productDTO.getId()); product =
+		 * productMapper.toProductEntity(productDTO, oldProduct); } else { product =
+		 * productMapper.toProductEntity(productDTO); }
+		 * 
+		 * product = productRepo.save(product); return
+		 * productMapper.toProductDTO(product);
+		 */
+
 		return null;
 	}
 
