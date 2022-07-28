@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import fa.trainning.converter.ProductMapper;
 import fa.trainning.dto.ProductDTO;
@@ -11,6 +12,7 @@ import fa.trainning.entity.Product;
 import fa.trainning.repository.ProductsRepository;
 import fa.trainning.service.ProductService;
 
+@Service
 public class ProductImpl implements ProductService {
 	@Autowired
 	public ProductsRepository productRepo;
@@ -52,19 +54,20 @@ public class ProductImpl implements ProductService {
 		return productMapper.toProductDTO(product);
 	}
 
-	//Check update with no ID is create new object
+	// Check update with no ID is create new object
 	@Override
 	public ProductDTO updateAllPropertyProducts(Integer id, ProductDTO productDTO) {
 		/*
 		 * Product product = new Product(); if (productDTO.getId() != null) { Product
 		 * oldProduct = productRepo.findOneById(productDTO.getId()); product =
 		 * productMapper.toProductEntity(productDTO, oldProduct); } else { product =
-		 * productMapper.toProductEntity(productDTO); } product = productRepo.save(product);
-		 * return productMapper.toProductDTO(product);
+		 * productMapper.toProductEntity(productDTO); } product =
+		 * productRepo.save(product); return productMapper.toProductDTO(product);
 		 */
 		return null;
 	}
-	//Check update with no ID is create new object
+
+	// Check update with no ID is create new object
 	@Override
 	public ProductDTO updateProducts(Integer id, ProductDTO productsDTO) {
 		/*
