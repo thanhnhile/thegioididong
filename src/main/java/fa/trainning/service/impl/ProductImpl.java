@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-
 import fa.trainning.converter.ProductMapper;
 import fa.trainning.dto.ProductDTO;
 import fa.trainning.entity.Product;
@@ -48,20 +47,36 @@ public class ProductImpl implements ProductService {
 
 	@Override
 	public ProductDTO addProducts(ProductDTO productsDTO) {
-		Product product = productMapper.toProduct(productsDTO);
+		Product product = productMapper.toProductEntity(productsDTO);
 		product = productRepo.save(product);
 		return productMapper.toProductDTO(product);
 	}
 
+	//Check update with no ID is create new object
 	@Override
-	public ProductDTO updateAllPropertyProducts(Integer id, ProductDTO productsDTO) {
-		
+	public ProductDTO updateAllPropertyProducts(Integer id, ProductDTO productDTO) {
+		/*
+		 * Product product = new Product(); if (productDTO.getId() != null) { Product
+		 * oldProduct = productRepo.findOneById(productDTO.getId()); product =
+		 * productMapper.toProductEntity(productDTO, oldProduct); } else { product =
+		 * productMapper.toProductEntity(productDTO); } product = productRepo.save(product);
+		 * return productMapper.toProductDTO(product);
+		 */
 		return null;
 	}
-
+	//Check update with no ID is create new object
 	@Override
 	public ProductDTO updateProducts(Integer id, ProductDTO productsDTO) {
-		
+		/*
+		 * Product product = new Product(); if (productDTO.getId() != null) { Product
+		 * oldProduct = productRepo.findOneById(productDTO.getId()); product =
+		 * productMapper.toProductEntity(productDTO, oldProduct); } else { product =
+		 * productMapper.toProductEntity(productDTO); }
+		 * 
+		 * product = productRepo.save(product); return
+		 * productMapper.toProductDTO(product);
+		 */
+
 		return null;
 	}
 
