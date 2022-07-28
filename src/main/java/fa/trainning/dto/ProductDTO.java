@@ -1,5 +1,6 @@
 package fa.trainning.dto;
 
-public class Phone {
+
+public class ProductDTO {
 
 }
