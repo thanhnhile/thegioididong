@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+
 import fa.trainning.converter.ProductMapper;
 import fa.trainning.dto.ProductDTO;
 import fa.trainning.entity.Product;
@@ -47,17 +48,20 @@ public class ProductImpl implements ProductService {
 
 	@Override
 	public ProductDTO addProducts(ProductDTO productsDTO) {
+		Product product = productMapper.toProduct(productsDTO);
+		product = productRepo.save(product);
+		return productMapper.toProductDTO(product);
+	}
+
+	@Override
+	public ProductDTO updateAllPropertyProducts(Integer id, ProductDTO productsDTO) {
 		
 		return null;
 	}
 
 	@Override
-	public ProductDTO updateAllPropertyProducts(Integer id, ProductDTO productsDTO) {
-		return null;
-	}
-
-	@Override
 	public ProductDTO updateProducts(Integer id, ProductDTO productsDTO) {
+		
 		return null;
 	}
 
