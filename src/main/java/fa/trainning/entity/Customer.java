@@ -2,6 +2,7 @@ package fa.trainning.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,6 +16,7 @@ import javax.persistence.Table;
 public class Customer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "customer_id")
 	private Integer id;
 	
 	@Column(nullable = false)
@@ -26,7 +28,7 @@ public class Customer {
 	@Column(name="phone_number", nullable = false)
 	private String phone;
 	
-	@OneToMany(mappedBy="customer")
+	@OneToMany(mappedBy="customer", cascade = CascadeType.ALL)
 	List<Order> orders;
 
 	public Customer() {
@@ -39,6 +41,23 @@ public class Customer {
 		this.customerName = customerName;
 		this.address = address;
 		this.phone = phone;
+	}
+	
+	
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public List<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
 	}
 
 	public String getCustomerName() {

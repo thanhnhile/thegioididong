@@ -3,6 +3,8 @@ package fa.trainning.entity;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
@@ -22,30 +24,44 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 public class Order {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="order_id")
 	private Integer id;
-	
-	private float total;
 	
 	@ManyToOne
 	@JoinColumn(name = "customer_id")
 	private Customer customer;
 	
-	@OneToMany(mappedBy = "order")
+	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
 	private List<OrderDetail> details;
 	
 	@ManyToOne
 	@JoinColumn(name = "store_id")
 	private Store store;
 	
+	private float total;
+	
 	@CreatedDate
 	private Date createdDate;
-
-	public float getTotal() {
-		return total;
+	
+	public Order() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	public void setTotal(float total) {
+	public Order(Customer customer, List<OrderDetail> details, Store store, float total) {
+		super();
+		this.customer = customer;
+		this.details = details;
+		this.store = store;
 		this.total = total;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public Customer getCustomer() {
@@ -72,18 +88,24 @@ public class Order {
 		this.store = store;
 	}
 
-	public Order() {
-		super();
-		// TODO Auto-generated constructor stub
+	public float getTotal() {
+		return total;
 	}
 
-	public Order(float total, Customer customer, List<OrderDetail> details, Store store) {
-		super();
+	public void setTotal(float total) {
 		this.total = total;
-		this.customer = customer;
-		this.details = details;
-		this.store = store;
 	}
+
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	
+	
 	
 	
 }

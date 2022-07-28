@@ -1,10 +1,14 @@
 package fa.trainning.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -16,7 +20,11 @@ public class Manufacturer {
 	private Integer id;
 	
 	private String branchName;
+	
 	private String address;
+	
+	@OneToMany(mappedBy = "manufacturer", cascade = CascadeType.ALL)
+	List<Product> products;
 	
 	
 	public Manufacturer() {
@@ -29,6 +37,15 @@ public class Manufacturer {
 		super();
 		this.branchName = branchName;
 		this.address = address;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 

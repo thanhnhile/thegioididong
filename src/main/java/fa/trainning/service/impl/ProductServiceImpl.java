@@ -11,7 +11,7 @@ import fa.trainning.entity.Product;
 import fa.trainning.repository.ProductsRepository;
 import fa.trainning.service.ProductService;
 
-public class ProductImpl implements ProductService {
+public class ProductServiceImpl implements ProductService {
 	@Autowired
 	public ProductsRepository productRepo;
 	@Autowired
