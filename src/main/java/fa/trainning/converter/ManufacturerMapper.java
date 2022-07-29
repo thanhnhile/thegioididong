@@ -16,7 +16,7 @@ public interface ManufacturerMapper {
 
 	List<ManufacturerDTO> toManufacturerDTOs(List<Manufacturer> manufacturers);
 
-	Manufacturer toManufacturerEntity(ManufacturerDTO manufacturerDTO);
+	Manufacturer toManufacturer(ManufacturerDTO manufacturerDTO);
 
-	Manufacturer toManufacturerEntity(ManufacturerDTO manufacturerDTO, Manufacturer manufacturer);
+	List<Manufacturer> toManufacturers (List<ManufacturerDTO> list);
 }

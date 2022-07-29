@@ -1,6 +1,6 @@
 package fa.trainning.converter;
 
-import org.mapstruct.Mapper;
+//import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
 import fa.trainning.dto.ProductDTO;
@@ -9,7 +9,7 @@ import fa.trainning.entity.Product;
 import java.util.List;
 
 
-@Mapper
+//@Mapper
 public interface ProductMapper {
 	ProductMapper INSTANCE = Mappers.getMapper(ProductMapper.class);
 

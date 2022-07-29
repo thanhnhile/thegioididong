@@ -4,22 +4,17 @@ import java.util.List;
 
 import org.mapstruct.Mapper;
 
-import fa.trainning.dto.CategoryDTO;
-import fa.trainning.dto.ManufacturerDTO;
-import fa.trainning.dto.ProductInStoreDTO;
-import fa.trainning.dto.StoreDTO;
-import fa.trainning.entity.Category;
-import fa.trainning.entity.Manufacturer;
-import fa.trainning.entity.ProductStore;
-import fa.trainning.entity.Store;
+import fa.trainning.dto.ProductDTO;
+import fa.trainning.entity.Product;
 
-//khong generate file impl
 @Mapper
 public interface ProductStructMapper {
-	
-	CategoryDTO categoryToCategoryDTO(Category category);
-	ManufacturerDTO manufacturerToManufacturerDTO(Manufacturer manufacturer);
-	StoreDTO storeToStoreDTO(Store store);
-	ProductInStoreDTO productStoreToProductInStoreDTO(ProductStore productStore);
-	List<ProductInStoreDTO> productStoresToProductInStoreDTOs(List<ProductStore> list);
+
+	ProductDTO toProductDTO(Product product);
+
+	List<ProductDTO> toProductDTOs(List<Product> list);
+
+	Product toProduct(ProductDTO productDTO);
+
+	List<Product> toProducts(List<ProductDTO> list);
 }
