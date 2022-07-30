@@ -10,7 +10,7 @@ import lombok.Getter;
 @Setter
 public class ProductInStoreDTO {
 	@JsonProperty("store")
-	private StoreDTO storeDTO;
+	private StoreDTO store;
 	
 	@JsonProperty("inStock")
 	private int inStock;

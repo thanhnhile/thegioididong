@@ -10,7 +10,6 @@ import fa.trainning.entity.Category;
 @Mapper
 public interface CategoryMapper {
 	
-	//Category to CategoryDTO
 	CategoryDTO toCategoryDTO(Category category);
 
 	List<CategoryDTO> toCategoryDTOs(List<Category> categories);

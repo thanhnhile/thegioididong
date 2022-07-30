@@ -1,22 +1,19 @@
 package fa.trainning.converter;
 
-//import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
-
+import org.mapstruct.Mapper;
 import fa.trainning.dto.ProductDTO;
 import fa.trainning.entity.Product;
 
 import java.util.List;
 
 
-//@Mapper
+@Mapper
 public interface ProductMapper {
-	ProductMapper INSTANCE = Mappers.getMapper(ProductMapper.class);
+	ProductDTO toProductDTO(Product product);
 
-    ProductDTO toProductDTO(Product product);
+	List<ProductDTO> toProductDTOs(List<Product> list);
 
-    List<ProductDTO> toProductDTOs(List<Product> products);
+	Product toProduct(ProductDTO productDTO);
 
-    Product toProductEntity(ProductDTO productDTO);
-    Product toProductEntity(ProductDTO productDTO, Product product);
+	List<Product> toProducts(List<ProductDTO> list);
 }
