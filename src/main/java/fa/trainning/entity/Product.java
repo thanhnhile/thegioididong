@@ -90,6 +90,14 @@ public class Product {
 		this.name = name;
 	}
 
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
 	public Manufacturer getManufacturer() {
 		return manufacturer;
 	}
@@ -161,7 +169,7 @@ public class Product {
 	public void setUnit(String unit) {
 		this.unit = unit;
 	}
-	
+
 	public List<ProductStore> getProductStores() {
 		return productStores;
 	}
@@ -169,6 +177,7 @@ public class Product {
 	public void setProductStores(List<ProductStore> productStores) {
 		this.productStores = productStores;
 	}
+
 	
 
 }

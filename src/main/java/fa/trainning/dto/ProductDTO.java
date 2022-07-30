@@ -48,7 +48,4 @@ public class ProductDTO {
 	
 	@JsonProperty("unit")
 	private String unit;
-	
-	@JsonProperty("inStores")
-	List<ProductInStoreDTO> stores;
 }
