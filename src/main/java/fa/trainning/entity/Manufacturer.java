@@ -1,43 +1,41 @@
 package fa.trainning.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
 @Entity
-@Table(name = "manufacturer")
+@Table
 public class Manufacturer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "manufacturer_id")
+	@Column(name="manufacturer_id")
 	private Integer id;
-
-	@Column(name = "branch_name")
+	
 	private String branchName;
-	@Column
+	
 	private String address;
-
-	public String getBranchName() {
-		return branchName;
+	
+	@OneToMany(mappedBy = "manufacturer", cascade = CascadeType.ALL)
+	List<Product> products;
+	
+	
+	public Manufacturer() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	public void setBranchName(String branchName) {
+
+	public Manufacturer(String branchName, String address) {
+		super();
 		this.branchName = branchName;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
 		this.address = address;
 	}
 
@@ -45,8 +43,31 @@ public class Manufacturer {
 		return id;
 	}
 
-	/*
-	 * @OneToMany(mappedBy = "manufacturer", cascade = CascadeType.ALL)
-	 * List<Product> products;
-	 */
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+
+	public String getBranchName() {
+		return branchName;
+	}
+
+
+	public void setBranchName(String branchName) {
+		this.branchName = branchName;
+	}
+
+
+	public String getAddress() {
+		return address;
+	}
+
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	
+	
+	
 }
