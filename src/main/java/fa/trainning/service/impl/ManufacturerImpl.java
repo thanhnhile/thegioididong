@@ -1,42 +1,64 @@
 package fa.trainning.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import fa.trainning.converter.ManufacturerMapper;
-import fa.trainning.dto.ManufacturerDTO;
+import fa.trainning.dto.ManufacturerDto;
 import fa.trainning.entity.Manufacturer;
+import fa.trainning.mapstruct.MapStructMapper;
 import fa.trainning.repository.ManufacturerRepository;
 import fa.trainning.service.ManufacturerService;
 
+
+
 @Service
 public class ManufacturerImpl implements ManufacturerService {
+
 	@Autowired
-	public ManufacturerRepository manufacturerRepo;
+	private ManufacturerRepository manufacturerRepo;
 	@Autowired
-	private ManufacturerMapper manufacturerMapper;
+	private MapStructMapper mapStructMapper;
 
-	@Override
-	public List<ManufacturerDTO> getAllManufacturers() {
-		List<Manufacturer> listManufacturer = new ArrayList<>();
-		manufacturerRepo.findAll().forEach(listManufacturer::add);
-		return manufacturerMapper.toManufacturerDTOs(listManufacturer);
+	@Autowired
+	public ManufacturerImpl(MapStructMapper mapStructMapper, ManufacturerRepository manufacturerRepo) {
+		this.mapStructMapper = mapStructMapper;
+		this.manufacturerRepo = manufacturerRepo;
 	}
 
 	@Override
-	public ManufacturerDTO getManufacturer(Integer id) {
-		Manufacturer manufacturer = new Manufacturer();
-		manufacturerRepo.findOneById(id);
-		return manufacturerMapper.toManufacturerDTO(manufacturer);
+	public List<ManufacturerDto> getAllManufacturer() {
+		return mapStructMapper.manufacturerToManufacturerDtos(manufacturerRepo.findAll());
 	}
 
 	@Override
-	public ManufacturerDTO addManufacturer(ManufacturerDTO manufacturersDTO) {
-		Manufacturer manufacturer = manufacturerMapper.toManufacturerEntity(manufacturersDTO);
-		manufacturer = manufacturerRepo.save(manufacturer);
-		return manufacturerMapper.toManufacturerDTO(manufacturer);
+	public ManufacturerDto getManufacturer(Integer id) {
+		return mapStructMapper.manufacturerToManufacturerDto(manufacturerRepo.findOneById(id));
 	}
+
+	@Override
+	public void addManufacturer(ManufacturerDto manufacturerDto) {
+		manufacturerRepo.save(mapStructMapper.manufacturerDtoToManufacturer(manufacturerDto));
+	}
+
+	@Override
+	public void deleteManufacturer(Integer id) {
+		manufacturerRepo.delete(manufacturerRepo.findOneById(id));
+	}
+
+	@Override
+	public ManufacturerDto updateManufacturer(Integer id, ManufacturerDto manufacturerDto) {
+		Manufacturer manufacturerNew = mapStructMapper.manufacturerDtoToManufacturer(manufacturerDto);
+		Manufacturer manufacturerOld = manufacturerRepo.findOneById(id);
+		manufacturerOld.setAddress(manufacturerNew.getAddress());
+		manufacturerOld.setBranchName(manufacturerNew.getBranchName());
+		manufacturerRepo.save(manufacturerOld);
+		return mapStructMapper.manufacturerToManufacturerDto(manufacturerOld);
+	}
+
+	
+
+	
+
 }
