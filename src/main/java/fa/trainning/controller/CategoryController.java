@@ -18,7 +18,7 @@ import fa.trainning.service.impl.CategoryImpl;
 
 
 @RestController
-@RequestMapping("/category")
+@RequestMapping("/categories")
 public class CategoryController {
 	@Autowired
 	private CategoryImpl categoryImpl;
