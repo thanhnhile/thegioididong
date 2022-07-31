@@ -18,7 +18,7 @@ import fa.trainning.service.impl.ManufacturerImpl;
 
 
 @RestController
-@RequestMapping("/manufacturer")
+@RequestMapping("/manufacturers")
 public class ManufacturerController {
 
 	@Autowired
