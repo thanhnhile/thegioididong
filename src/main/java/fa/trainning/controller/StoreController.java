@@ -16,7 +16,7 @@ import fa.trainning.dto.StoreDto;
 import fa.trainning.service.impl.StoreImpl;
 
 @RestController
-@RequestMapping("/store")
+@RequestMapping("/stores")
 public class StoreController {
 	@Autowired
 	private StoreImpl storeImpl;
