@@ -6,12 +6,14 @@ import org.mapstruct.Mapper;
 
 import fa.trainning.dto.CategoryDto;
 import fa.trainning.dto.ManufacturerDto;
+import fa.trainning.dto.StoreDto;
 import fa.trainning.entity.Category;
 import fa.trainning.entity.Manufacturer;
+import fa.trainning.entity.Store;
 
 @Mapper(componentModel = "spring")
 public interface MapStructMapper {
-	// Entity To DTO
+	// ----------------------------Entity To DTO---------------------------
 	// Category
 	CategoryDto categoryToCategoryDto(Category category);
 
@@ -22,11 +24,19 @@ public interface MapStructMapper {
 
 	List<ManufacturerDto> manufacturerToManufacturerDtos(List<Manufacturer> manufacturer);
 
-	// DTO To Entity
+	// Store
+	StoreDto storeToStoreDto(Store store);
 
+	List<StoreDto> storeToStoreDtos(List<Store> stores);
+	
+	// ---------------------------DTO To Entity----------------------
 	// Category
 	Category categoryDtoToCategory(CategoryDto categoryDto);
 
 	// Manufacturer
 	Manufacturer manufacturerDtoToManufacturer(ManufacturerDto manufacturerDTO);
+
+	// Store
+	Store storeDtoToStore(StoreDto storeDto);
+
 }

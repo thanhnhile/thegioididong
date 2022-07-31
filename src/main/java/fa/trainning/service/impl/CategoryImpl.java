@@ -28,12 +28,12 @@ public class CategoryImpl implements CategoryService {
 	}
 
 	@Override
-	public List<CategoryDto> getAllCategorysDto() {
+	public List<CategoryDto> getAllCategorys() {
 		return mapStructMapper.categoryToCategoryDtos(categoryRepo.findAll());
 	}
 
 	@Override
-	public CategoryDto getCategoryDto(Integer id) {
+	public CategoryDto getCategory(Integer id) {
 		return mapStructMapper.categoryToCategoryDto(categoryRepo.findOneById(id));
 	}
 

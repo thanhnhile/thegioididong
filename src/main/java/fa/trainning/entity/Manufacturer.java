@@ -18,7 +18,7 @@ public class Manufacturer {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="manufacturer_id")
 	private Integer id;
-	
+	@Column( nullable = false,unique = true)
 	private String branchName;
 	
 	private String address;

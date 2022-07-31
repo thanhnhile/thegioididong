@@ -25,12 +25,12 @@ public class CategoryController {
 
 	@GetMapping()
 	public List<CategoryDto> getAllCategory() {
-		return categoryImpl.getAllCategorysDto();
+		return categoryImpl.getAllCategorys();
 	}
 
 	@GetMapping("/{category_id}")
 	public CategoryDto getCategory(@PathVariable(value = "category_id") Integer category_id) {
-		return categoryImpl.getCategoryDto(category_id);
+		return categoryImpl.getCategory(category_id);
 	}
 
 	@PostMapping()

@@ -6,9 +6,9 @@ import fa.trainning.dto.CategoryDto;
 
 
 public interface CategoryService {
-	List<CategoryDto> getAllCategorysDto();
+	List<CategoryDto> getAllCategorys();
 
-	CategoryDto getCategoryDto(Integer id);
+	CategoryDto getCategory(Integer id);
 
 	void addCategory(CategoryDto categoryDto);
 
