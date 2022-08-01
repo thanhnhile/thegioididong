@@ -12,7 +12,7 @@ import fa.trainning.repository.StoreRepository;
 import fa.trainning.service.StoreService;
 
 @Service
-public class StoreImpl implements StoreService {
+public class StoreServiceImpl implements StoreService {
 
 	@Autowired
 	private StoreRepository storeRepo;
@@ -20,7 +20,7 @@ public class StoreImpl implements StoreService {
 	private MapStructMapper mapStructMapper;
 
 	@Autowired
-	public StoreImpl(MapStructMapper mapStructMapper, StoreRepository storeRepo) {
+	public StoreServiceImpl(MapStructMapper mapStructMapper, StoreRepository storeRepo) {
 		this.mapStructMapper = mapStructMapper;
 		this.storeRepo = storeRepo;
 	}

@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import fa.trainning.dto.StoreDto;
-import fa.trainning.service.impl.StoreImpl;
+import fa.trainning.service.impl.StoreServiceImpl;
 
 @RestController
 @RequestMapping("/stores")
 public class StoreController {
 	@Autowired
-	private StoreImpl storeImpl;
+	private StoreServiceImpl storeImpl;
 
 	@GetMapping()
 	public List<StoreDto> getAllStore() {

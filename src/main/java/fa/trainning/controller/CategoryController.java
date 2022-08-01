@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import fa.trainning.dto.CategoryDto;
-import fa.trainning.service.impl.CategoryImpl;
+import fa.trainning.service.impl.CategoryServiceImpl;
 
 
 
@@ -21,7 +21,7 @@ import fa.trainning.service.impl.CategoryImpl;
 @RequestMapping("/categories")
 public class CategoryController {
 	@Autowired
-	private CategoryImpl categoryImpl;
+	private CategoryServiceImpl categoryImpl;
 
 	@GetMapping()
 	public List<CategoryDto> getAllCategory() {

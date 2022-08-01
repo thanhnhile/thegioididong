@@ -14,7 +14,7 @@ import fa.trainning.service.CategoryService;
 
 
 @Service
-public class CategoryImpl implements CategoryService {
+public class CategoryServiceImpl implements CategoryService {
 
 	@Autowired
 	private CategoryRepository categoryRepo;
@@ -22,7 +22,7 @@ public class CategoryImpl implements CategoryService {
 	private MapStructMapper mapStructMapper;
 
 	@Autowired
-	public CategoryImpl(MapStructMapper mapStructMapper, CategoryRepository categoryRepo) {
+	public CategoryServiceImpl(MapStructMapper mapStructMapper, CategoryRepository categoryRepo) {
 		this.mapStructMapper = mapStructMapper;
 		this.categoryRepo = categoryRepo;
 	}

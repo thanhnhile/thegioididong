@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import fa.trainning.dto.ManufacturerDto;
-import fa.trainning.service.impl.ManufacturerImpl;
+import fa.trainning.service.ManufacturerService;
+import fa.trainning.service.impl.ManufacturerServiceImpl;
 
 
 
@@ -22,7 +23,7 @@ import fa.trainning.service.impl.ManufacturerImpl;
 public class ManufacturerController {
 
 	@Autowired
-	private ManufacturerImpl manufacturerImpl;
+	private ManufacturerServiceImpl manufacturerImpl;
 
 	@GetMapping()
 	public List<ManufacturerDto> getAllCategory() {
