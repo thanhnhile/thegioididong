@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import fa.trainning.dto.CategoryDto;
 import fa.trainning.entity.Category;
-import fa.trainning.mapstruct.MapStructMapper;
+import fa.trainning.mapstruct.CategoryMapper;
 import fa.trainning.repository.CategoryRepository;
 import fa.trainning.service.CategoryService;
 
@@ -19,27 +19,27 @@ public class CategoryServiceImpl implements CategoryService {
 	@Autowired
 	private CategoryRepository categoryRepo;
 	@Autowired
-	private MapStructMapper mapStructMapper;
+	private CategoryMapper categoryMapper;
 
 	@Autowired
-	public CategoryServiceImpl(MapStructMapper mapStructMapper, CategoryRepository categoryRepo) {
-		this.mapStructMapper = mapStructMapper;
+	public CategoryServiceImpl(CategoryMapper categoryMapper, CategoryRepository categoryRepo) {
+		this.categoryMapper = categoryMapper;
 		this.categoryRepo = categoryRepo;
 	}
 
 	@Override
 	public List<CategoryDto> getAllCategorys() {
-		return mapStructMapper.categoryToCategoryDtos(categoryRepo.findAll());
+		return categoryMapper.categoryToCategoryDtos(categoryRepo.findAll());
 	}
 
 	@Override
 	public CategoryDto getCategory(Integer id) {
-		return mapStructMapper.categoryToCategoryDto(categoryRepo.findOneById(id));
+		return categoryMapper.categoryToCategoryDto(categoryRepo.findOneById(id));
 	}
 
 	@Override
 	public void addCategory(CategoryDto categoryDto) {
-		categoryRepo.save(mapStructMapper.categoryDtoToCategory(categoryDto));
+		categoryRepo.save(categoryMapper.categoryDtoToCategory(categoryDto));
 	}
 
 	@Override
@@ -49,11 +49,11 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public CategoryDto updateCategory(Integer id, CategoryDto categoryDto) {
-		Category categoryNew = mapStructMapper.categoryDtoToCategory(categoryDto);
+		Category categoryNew = categoryMapper.categoryDtoToCategory(categoryDto);
 		Category categoryOld = categoryRepo.findOneById(id);
 		categoryOld.setName(categoryNew.getName());
 		categoryRepo.save(categoryOld);
-		return mapStructMapper.categoryToCategoryDto(categoryOld);
+		return categoryMapper.categoryToCategoryDto(categoryOld);
 	}
 
 }
