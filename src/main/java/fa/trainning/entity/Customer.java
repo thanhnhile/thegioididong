@@ -34,7 +34,7 @@ public class Customer {
 	List<Order> orders;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "user_name", referencedColumnName = "user_name")
+	@JoinColumn(name = "userName", referencedColumnName = "userName")
 	private Account account;
 
 	public Customer() {

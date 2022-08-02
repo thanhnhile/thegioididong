@@ -3,7 +3,6 @@ package fa.trainning.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,17 +25,12 @@ public class StoreController {
 	public List<StoreDto> getAllStore() {
 		return storeImpl.getAllStore();
 	}
-	
-	/*
-	 * @GetMapping("/{offSet}/{pageSize}") public Page<StoreDto>
-	 * getAllStore(@PathVariable int offSet,@PathVariable int pageSize) { return
-	 * storeImpl.getAllStorePagnation(offSet,pageSize); }
-	 */
+
 	@GetMapping("/{offSet}/{pageSize}")
-	public List<StoreDto> getAllStore(@PathVariable int offSet,@PathVariable int pageSize) {
-		return storeImpl.getAllStorePagnation(offSet,pageSize);
+	public List<StoreDto> getAllStore(@PathVariable int offSet, @PathVariable int pageSize) {
+		return storeImpl.getAllStorePagnation(offSet, pageSize);
 	}
-	
+
 	@GetMapping("/{store_id}")
 	public StoreDto getCategory(@PathVariable(value = "store_id") Integer store_id) {
 		return storeImpl.getStore(store_id);

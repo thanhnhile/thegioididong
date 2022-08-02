@@ -35,7 +35,7 @@ public class Staff {
 
 	// Staff 1-->1 Account
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "user_name", referencedColumnName = "user_name")
+	@JoinColumn(name = "userName", referencedColumnName = "userName")
 	private Account account;
 
 	// Staff N-->1 Store

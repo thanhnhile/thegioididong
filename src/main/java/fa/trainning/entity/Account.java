@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 public class Account {
 	@Id
-	@Column(name = "user_name")
+	@Column()
 	private String userName;
 
 	@Column(nullable = false)
