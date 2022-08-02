@@ -7,9 +7,9 @@ import fa.trainning.dto.ProductDTO;
 public interface ProductService {
 	List<ProductDTO> getAllProducts();
 
-	List<ProductDTO> getProductsByCategory(Integer category_id);
+	//List<ProductDTO> getProductsByCategory(Integer category_id);
 
-	List<ProductDTO> getProductsByManufacturer(Integer manufacturer_id);
+	//List<ProductDTO> getProductsByManufacturer(Integer manufacturer_id);
 
 	ProductDTO getProduct(Integer id);
 
@@ -17,7 +17,7 @@ public interface ProductService {
 
 	ProductDTO updateAllPropertyProducts(Integer id, ProductDTO productsDTO);
 
-	ProductDTO updateProducts(Integer id, ProductDTO productsDTO);
+	ProductDTO updateProducts(ProductDTO productsDTO);
 
 	void deleteProduct(Integer id);
 }

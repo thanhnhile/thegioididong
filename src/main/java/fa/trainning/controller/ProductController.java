@@ -12,28 +12,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import fa.trainning.dto.ProductDTO;
-import fa.trainning.service.impl.ProductImpl;
+import fa.trainning.service.impl.ProductServiceImpl;
 
 @RestController
 @RequestMapping(path="products")
-public class ProductAPI {
+public class ProductController {
 	@Autowired
-	private ProductImpl productImpl;
+	private ProductServiceImpl productImpl;
 
 	@GetMapping(value = "/all")
 	public List<ProductDTO> getAllProducts() {
 		return productImpl.getAllProducts();
 	}
 
-	@GetMapping(value = "/categoryproduct/{category_id}")
-	public List<ProductDTO> getProductsByCategory(@PathVariable Integer category_id) {
-		return productImpl.getProductsByCategory(category_id);
-	}
-
-	@GetMapping(value = "/manufacturerproduct/{manufacturer_id}")
-	public List<ProductDTO> getProductsByManufacturer(@PathVariable Integer manufacturer_id) {
-		return productImpl.getProductsByManufacturer(manufacturer_id);
-	}
+//	@GetMapping(value = "/categoryproduct/{category_id}")
+//	public List<ProductDTO> getProductsByCategory(@PathVariable Integer category_id) {
+//		return productImpl.getProductsByCategory(category_id);
+//	}
+//
+//	@GetMapping(value = "/manufacturerproduct/{manufacturer_id}")
+//	public List<ProductDTO> getProductsByManufacturer(@PathVariable Integer manufacturer_id) {
+//		return productImpl.getProductsByManufacturer(manufacturer_id);
+//	}
 
 	@GetMapping(value = "/{id}")
 	public ProductDTO getProduct(@PathVariable Integer id) {
