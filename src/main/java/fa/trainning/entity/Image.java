@@ -23,11 +23,21 @@ public class Image {
 	@JoinColumn(name="product_id")
 	@JsonIgnore
 	private Product product;
-
+	
 	public Image() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+	
+	public Image(String url, Product product) {
+		super();
+		this.url = url;
+		this.product = product;
+	}
+
+
 
 	public Image(String url) {
 		super();

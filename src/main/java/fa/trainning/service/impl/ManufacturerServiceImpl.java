@@ -29,7 +29,7 @@ public class ManufacturerServiceImpl implements ManufacturerService {
 
 	@Override
 	public List<ManufacturerDto> getAllManufacturer() {
-		return manufacturerMapper.manufacturerToManufacturerDtos(manufacturerRepo.findAll());
+		return manufacturerMapper.manufacturersToManufacturerDtos(manufacturerRepo.findAll());
 	}
 
 	@Override

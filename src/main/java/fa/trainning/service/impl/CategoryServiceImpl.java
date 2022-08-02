@@ -29,7 +29,7 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public List<CategoryDto> getAllCategorys() {
-		return categoryMapper.categoryToCategoryDtos(categoryRepo.findAll());
+		return categoryMapper.categorysToCategoryDtos(categoryRepo.findAll());
 	}
 
 	@Override

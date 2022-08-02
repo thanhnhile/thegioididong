@@ -27,7 +27,7 @@ public class StoreServiceImpl implements StoreService {
 
 	@Override
 	public List<StoreDto> getAllStore() {
-		return storeMapper.storeToStoreDtos(storeRepo.findAll());
+		return storeMapper.storesToStoreDtos(storeRepo.findAll());
 	}
 
 	@Override

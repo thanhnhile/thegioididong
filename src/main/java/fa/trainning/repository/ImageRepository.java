@@ -3,9 +3,9 @@ package fa.trainning.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import fa.trainning.entity.Product;
+import fa.trainning.entity.Image;
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Integer>{
+public interface ImageRepository extends JpaRepository<Image, Integer>{
 
 }

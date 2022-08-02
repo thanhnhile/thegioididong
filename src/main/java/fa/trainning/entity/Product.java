@@ -1,6 +1,5 @@
 package fa.trainning.entity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -11,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -52,15 +50,15 @@ public class Product {
 
 	private String unit;
 
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "products")
-	private List<Store> stores = new ArrayList<>();
+	@OneToMany(mappedBy="product", fetch = FetchType.LAZY)
+	private List<ProductsStores> productsStores;
 
 	public Product() {
 	}
 
-	public Product(Integer id, String name, Category category, Manufacturer manufacturer, String description,
-			float price, float discount, List<Image> images, String video, String productWarranty, Boolean status,
-			String unit, List<Store> stores) {
+	public Product(Integer id, String name, Category category, Manufacturer manufacturer, String description, float price,
+			float discount, List<Image> images, String video, String productWarranty, Boolean status, String unit,
+			List<ProductsStores> productsStores) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -74,7 +72,15 @@ public class Product {
 		this.productWarranty = productWarranty;
 		this.status = status;
 		this.unit = unit;
-		this.stores = stores;
+		this.productsStores = productsStores;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -165,18 +171,15 @@ public class Product {
 		this.unit = unit;
 	}
 
-	public List<Store> getStores() {
-		return stores;
+	public List<ProductsStores> getProductsStores() {
+		return productsStores;
 	}
 
-	public void setStores(List<Store> stores) {
-		this.stores = stores;
+	public void setProductsStores(List<ProductsStores> productsStores) {
+		this.productsStores = productsStores;
 	}
 
-	public Integer getId() {
-		return id;
-	}
-
+	
 	
 
 }

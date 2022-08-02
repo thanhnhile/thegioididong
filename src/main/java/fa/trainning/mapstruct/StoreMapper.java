@@ -13,7 +13,7 @@ public interface StoreMapper {
 
 	StoreDto storeToStoreDto(Store store);
 
-	List<StoreDto> storeToStoreDtos(List<Store> stores);
+	List<StoreDto> storesToStoreDtos(List<Store> stores);
 
 	// ---------------------------DTO To Entity----------------------
 
