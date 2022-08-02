@@ -3,6 +3,8 @@ package fa.trainning.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import fa.trainning.dto.StoreDto;
@@ -26,10 +28,16 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	@Override
+	public List<StoreDto> getAllStorePagnation(int offSet,int pageSize) {
+		Page<Store> page=  storeRepo.findAll(PageRequest.of(offSet, pageSize));
+		return storeMapper.storesToStoreDtos(page.getContent());
+	}
+
+	@Override
 	public List<StoreDto> getAllStore() {
 		return storeMapper.storesToStoreDtos(storeRepo.findAll());
 	}
-
+	
 	@Override
 	public StoreDto getStore(Integer id) {
 		return storeMapper.storeToStoreDto(storeRepo.findOneById(id));

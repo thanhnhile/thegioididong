@@ -7,6 +7,8 @@ import fa.trainning.dto.StoreDto;
 
 public interface StoreService {
 	List<StoreDto> getAllStore();
+	
+	List<StoreDto> getAllStorePagnation(int offSet,int pageSize);
 
 	StoreDto getStore(Integer id);
 
