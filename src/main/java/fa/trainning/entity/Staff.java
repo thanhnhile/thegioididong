@@ -9,56 +9,50 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table
-public class Customer {
+@Table(name = "Staff")
+
+public class Staff {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "customer_id")
+	@Column(name = "Staff_id")
 	private Integer id;
-
-	@Column(nullable = false)
-	private String customerName;
 
 	@Column(nullable = false)
 	private String address;
 
+	@Column(nullable = false)
+	private String staff_name;
+
 	@Column(name = "phone_number", nullable = false)
 	private String phone;
 
-	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-	List<Order> orders;
-
+	// Staff 1-->1 Account
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_name", referencedColumnName = "user_name")
 	private Account account;
 
-	public Customer() {
-		super();
-		// TODO Auto-generated constructor stub
+	// Staff N-->1 Store
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "Store_id")
+	private Store store;
+
+	public Staff() {
 	}
 
-	public Customer(Integer id, String customerName, String address, String phone, List<Order> orders,
-			Account account) {
+	public Staff(Integer id, String address, String staff_name, String phone, Account account) {
 		super();
 		this.id = id;
-		this.customerName = customerName;
 		this.address = address;
+		this.staff_name = staff_name;
 		this.phone = phone;
-		this.orders = orders;
 		this.account = account;
-	}
-
-	public String getCustomerName() {
-		return customerName;
-	}
-
-	public void setCustomerName(String customerName) {
-		this.customerName = customerName;
 	}
 
 	public String getAddress() {
@@ -69,20 +63,20 @@ public class Customer {
 		this.address = address;
 	}
 
+	public String getStaff_name() {
+		return staff_name;
+	}
+
+	public void setStaff_name(String staff_name) {
+		this.staff_name = staff_name;
+	}
+
 	public String getPhone() {
 		return phone;
 	}
 
 	public void setPhone(String phone) {
 		this.phone = phone;
-	}
-
-	public List<Order> getOrders() {
-		return orders;
-	}
-
-	public void setOrders(List<Order> orders) {
-		this.orders = orders;
 	}
 
 	public Account getAccount() {

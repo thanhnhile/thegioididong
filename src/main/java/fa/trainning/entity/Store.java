@@ -8,6 +8,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -33,6 +35,9 @@ public class Store {
 	
 	@OneToMany(mappedBy="store", fetch = FetchType.LAZY)
 	private List<ProductsStores> productsStores;
+	
+	@OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
+	private List<Staff> staffs;
 
 	public Store() {
 		super();
