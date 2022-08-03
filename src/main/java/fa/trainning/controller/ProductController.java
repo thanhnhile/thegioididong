@@ -23,30 +23,30 @@ import fa.trainning.service.impl.ProductServiceImpl;
 public class ProductController {
 	
 	@Autowired
-	ProductServiceImpl productService;
+	private ProductServiceImpl productService;
 	
 	@GetMapping
-	List<ProductDto> getAllProducts(){
+	public List<ProductDto> getAllProducts(){
 		return productService.getAllProducts();
 	}
 	
 	@GetMapping(value="/{id}")
-	ProductDto getProduct(@PathVariable(value ="id") Integer id) {
+	public ProductDto getProduct(@PathVariable(value ="id") Integer id) {
 		return productService.getProduct(id);
 	}
 	
 	@DeleteMapping(value = "/{id}")
-	void deleteProduct(@PathVariable(value = "id") Integer id) {
+	public void deleteProduct(@PathVariable(value = "id") Integer id) {
 		productService.deleteProduct(id);
 	}
 	
 	@PostMapping
-	ProductDto addProduct(@Validated @RequestBody ProductDto productDto) {
+	public ProductDto addProduct(@Validated @RequestBody ProductDto productDto) {
 		return productService.addProduct(productDto);
 	}
 	
 	@PutMapping(value="/{id}")
-	ProductDto updateProduct(@PathVariable(value="id") Integer id,@Validated @RequestBody ProductDto productDto) {
+	public ProductDto updateProduct(@PathVariable(value="id") Integer id,@Validated @RequestBody ProductDto productDto) {
 		return productService.updateProrduct(id, productDto);
 	}
 	
