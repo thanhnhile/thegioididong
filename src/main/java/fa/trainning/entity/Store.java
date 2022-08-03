@@ -36,8 +36,10 @@ public class Store {
 	@OneToMany(mappedBy="store", fetch = FetchType.LAZY)
 	private List<ProductsStores> productsStores;
 	
-	@OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
-	private List<Staff> staffs;
+	/*
+	 * @OneToMany(mappedBy = "store", cascade = CascadeType.ALL) private List<Staff>
+	 * staffs;
+	 */
 
 	public Store() {
 		super();

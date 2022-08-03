@@ -26,19 +26,19 @@ public class Account {
 	@OneToOne(mappedBy = "account")
 	private Customer customer;
 
-	@OneToOne(mappedBy = "account")
-	private Staff staff;
+	/*
+	 * @OneToOne(mappedBy = "account") private Staff staff;
+	 */
 
 	public Account() {
 	}
 
-	public Account(String userName, String password, Role role, Customer customer, Staff staff) {
+	public Account(String userName, String password, Role role, Customer customer) {
 		super();
 		this.userName = userName;
 		this.password = password;
 		this.role = role;
 		this.customer = customer;
-		this.staff = staff;
 	}
 
 	public String getUserName() {
@@ -73,14 +73,5 @@ public class Account {
 		this.customer = customer;
 	}
 
-	public Staff getStaff() {
-		return staff;
-	}
-
-	public void setStaff(Staff staff) {
-		this.staff = staff;
-	}
-
-	
 
 }
