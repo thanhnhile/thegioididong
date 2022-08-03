@@ -39,7 +39,7 @@ public class Product {
 
 	private float discount;
 
-	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "product", cascade = CascadeType.MERGE, orphanRemoval=true)
 	private List<Image> images;
 
 	private String video;

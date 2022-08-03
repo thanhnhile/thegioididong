@@ -1,12 +1,10 @@
 package fa.trainning.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor;
 
 import fa.trainning.dto.ProductDto;
 import fa.trainning.entity.Image;
@@ -48,11 +46,26 @@ public class ProductServiceImpl implements ProductService{
 		}
 		return productMapper.productToProductDto(newestProduct);
 	}
-
+	//=================pending===========
 	@Override
 	public ProductDto updateProrduct(Integer id, ProductDto productDto) {
 		if(productRepo.findById(id).isPresent()) {
 			Product productToUpdate = productMapper.productDtoToProduct(productDto);
+			productToUpdate.setId(id);
+			List<Image> newImages = productDto.getImages();
+			List<Image> oldImages = productRepo.getReferenceById(id).getImages();
+			oldImages.forEach(image -> {
+				image.setProduct(null);
+				imageRepo.save(image);
+			});
+//			newImages.forEach(image -> System.out.println(image.toString()));
+//			System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+//			oldImages.forEach(image -> System.out.println(image.toString()));
+			for(Image image:newImages) {
+				image.setProduct(productToUpdate);
+			}
+			productToUpdate.setImages(newImages);
+			
 			return productMapper.productToProductDto(productRepo.save(productToUpdate));
 		}else return null;
 	}
