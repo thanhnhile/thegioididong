@@ -46,7 +46,7 @@ public class ProductServiceImpl implements ProductService{
 		}
 		return productMapper.productToProductDto(newestProduct);
 	}
-	//=================pending===========
+	
 	@Override
 	public ProductDto updateProrduct(Integer id, ProductDto productDto) {
 		if(productRepo.findById(id).isPresent()) {
@@ -58,9 +58,6 @@ public class ProductServiceImpl implements ProductService{
 				image.setProduct(null);
 				imageRepo.save(image);
 			});
-//			newImages.forEach(image -> System.out.println(image.toString()));
-//			System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
-//			oldImages.forEach(image -> System.out.println(image.toString()));
 			for(Image image:newImages) {
 				image.setProduct(productToUpdate);
 			}

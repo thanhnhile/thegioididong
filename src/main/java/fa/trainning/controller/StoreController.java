@@ -26,6 +26,11 @@ public class StoreController {
 		return storeImpl.getAllStore();
 	}
 
+	@GetMapping("/{offSet}/{pageSize}")
+	public List<StoreDto> getAllStore(@PathVariable int offSet, @PathVariable int pageSize) {
+		return storeImpl.getAllStorePagnation(offSet, pageSize);
+	}
+
 	@GetMapping("/{store_id}")
 	public StoreDto getCategory(@PathVariable(value = "store_id") Integer store_id) {
 		return storeImpl.getStore(store_id);

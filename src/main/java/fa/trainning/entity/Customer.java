@@ -8,7 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,46 +20,37 @@ public class Customer {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "customer_id")
 	private Integer id;
-	
+
 	@Column(nullable = false)
 	private String customerName;
-	
+
 	@Column(nullable = false)
 	private String address;
-	
-	@Column(name="phone_number", nullable = false)
+
+	@Column(name = "phone_number", nullable = false)
 	private String phone;
-	
-	@OneToMany(mappedBy="customer", cascade = CascadeType.ALL)
+
+	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
 	List<Order> orders;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "userName", referencedColumnName = "userName")
+	private Account account;
 
 	public Customer() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Customer(String customerName, String address, String phone) {
+	public Customer(Integer id, String customerName, String address, String phone, List<Order> orders,
+			Account account) {
 		super();
+		this.id = id;
 		this.customerName = customerName;
 		this.address = address;
 		this.phone = phone;
-	}
-	
-	
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public List<Order> getOrders() {
-		return orders;
-	}
-
-	public void setOrders(List<Order> orders) {
 		this.orders = orders;
+		this.account = account;
 	}
 
 	public String getCustomerName() {
@@ -84,15 +77,24 @@ public class Customer {
 		this.phone = phone;
 	}
 
-	public List<Order> getListOfOrder() {
+	public List<Order> getOrders() {
 		return orders;
 	}
 
-	public void setListOfOrder(List<Order> listOfOrder) {
-		this.orders = listOfOrder;
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
 	}
-	
-	
-	
-	
+
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
 }
