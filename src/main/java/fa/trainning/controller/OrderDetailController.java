@@ -16,7 +16,7 @@ import fa.trainning.service.impl.OrderDetailServiceImpl;
 @RestController
 @RequestMapping(value="/details")
 public class OrderDetailController {
-	
+
 	@Autowired
 	private OrderDetailServiceImpl detailServiceImpl;
 	
@@ -29,4 +29,5 @@ public class OrderDetailController {
 	public OrderDetailDto addOrderDetail(@Validated @RequestBody OrderDetailDto detailDto) {
 		return detailServiceImpl.addOrderDetail(detailDto);
 	}
+
 }
