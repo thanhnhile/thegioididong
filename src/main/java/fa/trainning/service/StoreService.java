@@ -2,13 +2,14 @@ package fa.trainning.service;
 
 import java.util.List;
 
+import fa.trainning.dto.PagingDto;
 import fa.trainning.dto.StoreDto;
 
 
 public interface StoreService {
 	List<StoreDto> getAllStore();
 	
-	List<StoreDto> getAllStorePagnation(int offSet,int pageSize);
+	PagingDto getAllStorePagnation(int offSet,int pageSize);
 
 	StoreDto getStore(Integer id);
 

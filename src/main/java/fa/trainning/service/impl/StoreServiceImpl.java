@@ -5,9 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import fa.trainning.dto.PagingDto;
+import fa.trainning.dto.ProductDto;
 import fa.trainning.dto.StoreDto;
+import fa.trainning.entity.Product;
 import fa.trainning.entity.Store;
 import fa.trainning.mapstruct.StoreMapper;
 import fa.trainning.repository.StoreRepository;
@@ -28,9 +32,22 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	@Override
-	public List<StoreDto> getAllStorePagnation(int offSet,int pageSize) {
-		Page<Store> page=  storeRepo.findAll(PageRequest.of(offSet, pageSize));
-		return storeMapper.storesToStoreDtos(page.getContent());
+	public PagingDto getAllStorePagnation(int offSet,int pageSize) {
+		/*
+		 * Page<Store> page= storeRepo.findAll(PageRequest.of(offSet, pageSize)); return
+		 * storeMapper.storesToStoreDtos(page.getContent());
+		 */
+		
+		Pageable pageable = PageRequest.of(offSet-1, pageSize);
+		Page<Store> page = storeRepo.findAll(pageable);
+		PagingDto response = new PagingDto();
+		response.setCurrentPage(offSet);
+		response.setPageSize(pageSize);
+		response.setTotalElements(page.getTotalElements());
+		response.setTotalPages(page.getTotalPages());
+		List<StoreDto> listStoreDtos = storeMapper.storesToStoreDtos(page.getContent());
+		response.setListDtos(listStoreDtos);
+		return response;
 	}
 
 	@Override
