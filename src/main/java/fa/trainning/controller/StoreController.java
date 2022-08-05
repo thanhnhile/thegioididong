@@ -24,8 +24,8 @@ public class StoreController {
 	private StoreServiceImpl storeImpl;
 
 	@GetMapping()
-	public List<StoreDto> getAllStore() {
-		return storeImpl.getAllStore();
+	public DataResponse getAllStore() {
+		return  new DataResponse(storeImpl.getAllStore());
 	}
 
 	@GetMapping("/{offset}/{pageSize}")
@@ -35,8 +35,8 @@ public class StoreController {
 	}
 
 	@GetMapping("/{store_id}")
-	public StoreDto getStore(@PathVariable(value = "store_id") Integer store_id) {
-		return storeImpl.getStore(store_id);
+	public DataResponse getStore(@PathVariable(value = "store_id") Integer store_id) {
+		 return new DataResponse(storeImpl.getStore(store_id));
 	}
 
 	@PostMapping()
@@ -46,17 +46,17 @@ public class StoreController {
 
 	@DeleteMapping("/{store_id}")
 	public void deleteStore(@PathVariable(value = "store_id") Integer store_id) {
-		storeImpl.deleteStore(store_id);
+		 storeImpl.deleteStore(store_id);
 	}
 
 	@PutMapping("/{store_id}")
-	public void updateStore(@PathVariable(value = "store_id") Integer store_id, @RequestBody StoreDto storeDto) {
-		storeImpl.updateStore(store_id, storeDto);
+	public DataResponse updateStore(@PathVariable(value = "store_id") Integer store_id, @RequestBody StoreDto storeDto) {
+		return new DataResponse(storeImpl.updateStore(store_id, storeDto));
 	}
 
 	@PutMapping("/property/{store_id}")
-	public void updatePropertyStore(@PathVariable(value = "store_id") Integer store_id,
+	public DataResponse updatePropertyStore(@PathVariable(value = "store_id") Integer store_id,
 			@RequestBody StoreDto storeDto) {
-		storeImpl.updatePropertyStore(store_id, storeDto);
+		return new DataResponse(storeImpl.updatePropertyStore(store_id, storeDto));
 	}
 }

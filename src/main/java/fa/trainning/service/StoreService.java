@@ -7,17 +7,17 @@ import fa.trainning.dto.StoreDto;
 
 
 public interface StoreService {
-	List<StoreDto> getAllStore();
+	Object getAllStore();
 	
 	PagingDto getAllStorePagnation(int offSet,int pageSize);
 
-	StoreDto getStore(Integer id);
+	Object getStore(Integer id);
 
 	Object addStore(StoreDto storeDto);
 
 	void deleteStore(Integer id);
 
-	StoreDto updateStore(Integer id, StoreDto storeDto);
+	Object updateStore(Integer id, StoreDto storeDto);
 	
-	StoreDto updatePropertyStore(Integer id, StoreDto storeDto);
+	Object updatePropertyStore(Integer id, StoreDto storeDto);
 }

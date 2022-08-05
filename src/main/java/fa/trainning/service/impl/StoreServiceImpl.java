@@ -51,12 +51,12 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	@Override
-	public List<StoreDto> getAllStore() {
+	public Object getAllStore() {
 		return storeMapper.storesToStoreDtos(storeRepo.findAll());
 	}
 	
 	@Override
-	public StoreDto getStore(Integer id) {
+	public Object getStore(Integer id) {
 		return storeMapper.storeToStoreDto(storeRepo.findOneById(id));
 	}
 
@@ -67,11 +67,11 @@ public class StoreServiceImpl implements StoreService {
 
 	@Override
 	public void deleteStore(Integer id) {
-		storeRepo.delete(storeRepo.findOneById(id));
+		 storeRepo.delete(storeRepo.findOneById(id));
 	}
 
 	@Override
-	public StoreDto updateStore(Integer id, StoreDto storeDto) {
+	public Object updateStore(Integer id, StoreDto storeDto) {
 		Store storeNew = storeMapper.storeDtoToStore(storeDto);
 		Store storeOld = storeRepo.findOneById(id);
 		storeOld.setAddress(storeNew.getAddress());
@@ -82,7 +82,7 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	@Override
-	public StoreDto updatePropertyStore(Integer id, StoreDto storeDto) {
+	public Object updatePropertyStore(Integer id, StoreDto storeDto) {
 		Store storeNew = storeMapper.storeDtoToStore(storeDto);
 		Store storeOld = storeRepo.findOneById(id);
 		if (!(storeNew.getAddress() == null)) {
