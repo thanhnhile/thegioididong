@@ -9,7 +9,7 @@ import fa.trainning.dto.StoreDto;
 public interface StoreService {
 	Object getAllStore();
 	
-	PagingDto getAllStorePagnation(int offSet,int pageSize);
+	Object getAllStorePagnation(int offSet,int pageSize);
 
 	Object getStore(Integer id);
 

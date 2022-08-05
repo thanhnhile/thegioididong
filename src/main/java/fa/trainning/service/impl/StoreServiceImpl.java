@@ -32,13 +32,9 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	@Override
-	public PagingDto getAllStorePagnation(int offSet,int pageSize) {
-		/*
-		 * Page<Store> page= storeRepo.findAll(PageRequest.of(offSet, pageSize)); return
-		 * storeMapper.storesToStoreDtos(page.getContent());
-		 */
-		
-		Pageable pageable = PageRequest.of(offSet-1, pageSize);
+	public Object getAllStorePagnation(int offSet, int pageSize) {
+
+		Pageable pageable = PageRequest.of(offSet - 1, pageSize);
 		Page<Store> page = storeRepo.findAll(pageable);
 		PagingDto response = new PagingDto();
 		response.setCurrentPage(offSet);
@@ -54,7 +50,7 @@ public class StoreServiceImpl implements StoreService {
 	public Object getAllStore() {
 		return storeMapper.storesToStoreDtos(storeRepo.findAll());
 	}
-	
+
 	@Override
 	public Object getStore(Integer id) {
 		return storeMapper.storeToStoreDto(storeRepo.findOneById(id));
@@ -67,7 +63,7 @@ public class StoreServiceImpl implements StoreService {
 
 	@Override
 	public void deleteStore(Integer id) {
-		 storeRepo.delete(storeRepo.findOneById(id));
+		storeRepo.delete(storeRepo.findOneById(id));
 	}
 
 	@Override
@@ -91,7 +87,7 @@ public class StoreServiceImpl implements StoreService {
 		if (!(storeNew.getCityName() == null)) {
 			storeOld.setCityName(storeNew.getCityName());
 		}
-		if (!(storeNew.getStoreName()==null)) {
+		if (!(storeNew.getStoreName() == null)) {
 			storeOld.setStoreName(storeNew.getStoreName());
 		}
 
