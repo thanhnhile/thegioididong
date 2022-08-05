@@ -1,21 +1,20 @@
 package fa.trainning.service;
 
-import java.util.List;
-
 import fa.trainning.dto.CategoryDto;
-import fa.trainning.dto.PagingDto;
+
+
 
 
 public interface CategoryService {
-	List<CategoryDto> getAllCategorys();
+	Object getAllCategorys();
 	
-	PagingDto getAllProductPagnation(int offSet,int pageSize);
+	Object getAllProductPagnation(int offSet,int pageSize);
 
-	CategoryDto getCategory(Integer id);
+	Object getCategory(Integer id);
 
-	void addCategory(CategoryDto categoryDto);
+	Object addCategory(CategoryDto categoryDto);
 
-	void deleteCategory(Integer id);
+	Object deleteCategory(Integer id);
 
-	CategoryDto updateCategory(Integer id, CategoryDto categoryDto);
+	Object updateCategory(Integer id, CategoryDto categoryDto);
 }

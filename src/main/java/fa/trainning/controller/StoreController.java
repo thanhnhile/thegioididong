@@ -1,6 +1,5 @@
 package fa.trainning.controller;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import fa.trainning.dto.DataResponse;
-import fa.trainning.dto.PagingDto;
 import fa.trainning.dto.StoreDto;
 import fa.trainning.service.impl.StoreServiceImpl;
 

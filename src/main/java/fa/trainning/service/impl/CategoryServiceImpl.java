@@ -1,7 +1,5 @@
 package fa.trainning.service.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -31,27 +29,23 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public List<CategoryDto> getAllCategorys() {
+	public Object getAllCategorys() {
 		return categoryMapper.categorysToCategoryDtos(categoryRepo.findAll());
 	}
 
 	@Override
-	public CategoryDto getCategory(Integer id) {
+	public Object getCategory(Integer id) {
 		return categoryMapper.categoryToCategoryDto(categoryRepo.findOneById(id));
 	}
 
 	@Override
-	public void addCategory(CategoryDto categoryDto) {
-		categoryRepo.save(categoryMapper.categoryDtoToCategory(categoryDto));
-	}
-
-	@Override
-	public void deleteCategory(Integer id) {
+	public Object deleteCategory(Integer id) {
 		categoryRepo.delete(categoryRepo.findOneById(id));
+		return new Object();
 	}
 
 	@Override
-	public CategoryDto updateCategory(Integer id, CategoryDto categoryDto) {
+	public Object updateCategory(Integer id, CategoryDto categoryDto) {
 		Category categoryNew = categoryMapper.categoryDtoToCategory(categoryDto);
 		Category categoryOld = categoryRepo.findOneById(id);
 		categoryOld.setName(categoryNew.getName());
@@ -60,7 +54,7 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public PagingDto getAllProductPagnation(int offSet, int pageSize) {
+	public Object getAllProductPagnation(int offSet, int pageSize) {
 		PageRequest pageable = PageRequest.of(offSet-1, pageSize);
 		Page<Category> page = categoryRepo.findAll(pageable);
 		PagingDto pageDto = new PagingDto();
@@ -70,6 +64,12 @@ public class CategoryServiceImpl implements CategoryService {
 		pageDto.setTotalPages(page.getTotalPages());
 		pageDto.setListDtos(categoryMapper.categorysToCategoryDtos(page.getContent()));
 		return pageDto;
+	}
+
+	@Override
+	public Object addCategory(CategoryDto categoryDto) {
+		Category categoryToAdd = categoryMapper.categoryDtoToCategory(categoryDto);
+		return categoryMapper.categoryToCategoryDto(categoryRepo.save(categoryToAdd));
 	}
 
 }
