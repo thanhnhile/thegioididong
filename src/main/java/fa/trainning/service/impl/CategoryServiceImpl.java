@@ -40,18 +40,13 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-<<<<<<< HEAD
 	public Object addCategory(CategoryDto categoryDto) {
 		return categoryRepo.save(categoryMapper.categoryDtoToCategory(categoryDto));
 	}
 
 	@Override
 	public void deleteCategory(Integer id) {
-=======
-	public Object deleteCategory(Integer id) {
->>>>>>> 3f8f1288e58394e44f933e4b17afd3342ca189f3
 		categoryRepo.delete(categoryRepo.findOneById(id));
-		return new Object();
 	}
 
 	@Override
@@ -74,12 +69,6 @@ public class CategoryServiceImpl implements CategoryService {
 		pageDto.setTotalPages(page.getTotalPages());
 		pageDto.setListDtos(categoryMapper.categorysToCategoryDtos(page.getContent()));
 		return pageDto;
-	}
-
-	@Override
-	public Object addCategory(CategoryDto categoryDto) {
-		Category categoryToAdd = categoryMapper.categoryDtoToCategory(categoryDto);
-		return categoryMapper.categoryToCategoryDto(categoryRepo.save(categoryToAdd));
 	}
 
 }

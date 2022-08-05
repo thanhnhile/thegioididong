@@ -33,18 +33,19 @@ public class StoreServiceImpl implements StoreService {
 	public Object getAllStorePagnation(int offSet, int pageSize) {
 
 		Pageable pageable = PageRequest.of(offSet - 1, pageSize);
-		//Page<Store> a = storeRepo.findAll(pageable);
+		// Page<Store> a = storeRepo.findAll(pageable);
 		Page<Store> page = storeRepo.findAll(pageable);
 		/*
 		 * page.forEach(); page.map(() -> convertStoreList());
 		 */
-		  PagingDto response = new PagingDto(); response.setCurrentPage(offSet);
-		  response.setPageSize(pageSize);
-		  response.setTotalElements(page.getTotalElements());
-		  response.setTotalPages(page.getTotalPages()); List<StoreDto> listStoreDtos =
-		  storeMapper.storesToStoreDtos(page.getContent());
-		  response.setListDtos(listStoreDtos);
-		 
+		PagingDto response = new PagingDto();
+		response.setCurrentPage(offSet);
+		response.setPageSize(pageSize);
+		response.setTotalElements(page.getTotalElements());
+		response.setTotalPages(page.getTotalPages());
+		List<StoreDto> listStoreDtos = storeMapper.storesToStoreDtos(page.getContent());
+		response.setListDtos(listStoreDtos);
+
 		return page;
 	}
 
@@ -96,7 +97,7 @@ public class StoreServiceImpl implements StoreService {
 		storeRepo.save(storeOld);
 		return storeMapper.storeToStoreDto(storeOld);
 	}
-	
+
 	/*
 	 * private List<StoreDto> convertStoreList(List<Store> entities) { return new
 	 * ArrayList<>();
