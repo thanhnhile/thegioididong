@@ -29,14 +29,10 @@ public class StoreController {
 	}
 
 	@GetMapping("/{offset}/{pageSize}")
-<<<<<<< HEAD
-	public PagingDto getAllStore(@PathVariable(value="offset") int offSet, @PathVariable int pageSize) {
-		return storeImpl.getAllStorePagnation(offSet, pageSize);
-=======
+
 	public DataResponse getAllStore(@PathVariable(value = "offset") int offSet,
 			@PathVariable(value = "pageSize") int pageSize) {
 		return new DataResponse(storeImpl.getAllStorePagnation(offSet, pageSize));
->>>>>>> 6221a17ec7262d16d2670c9485fec099dbfdc706
 	}
 
 	@GetMapping("/{store_id}")
