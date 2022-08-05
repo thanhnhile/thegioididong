@@ -9,9 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import fa.trainning.dto.PagingDto;
-import fa.trainning.dto.ProductDto;
 import fa.trainning.dto.StoreDto;
-import fa.trainning.entity.Product;
 import fa.trainning.entity.Store;
 import fa.trainning.mapstruct.StoreMapper;
 import fa.trainning.repository.StoreRepository;

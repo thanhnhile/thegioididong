@@ -33,24 +33,19 @@ public class Customer {
 	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
 	List<Order> orders;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "userName", referencedColumnName = "userName")
-	private Account account;
 
 	public Customer() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Customer(Integer id, String customerName, String address, String phone, List<Order> orders,
-			Account account) {
+	public Customer(Integer id, String customerName, String address, String phone, List<Order> orders) {
 		super();
 		this.id = id;
 		this.customerName = customerName;
 		this.address = address;
 		this.phone = phone;
 		this.orders = orders;
-		this.account = account;
 	}
 
 	public String getCustomerName() {
@@ -85,13 +80,6 @@ public class Customer {
 		this.orders = orders;
 	}
 
-	public Account getAccount() {
-		return account;
-	}
-
-	public void setAccount(Account account) {
-		this.account = account;
-	}
 
 	public Integer getId() {
 		return id;

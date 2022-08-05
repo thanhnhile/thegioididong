@@ -30,18 +30,18 @@ public class ProductServiceImpl implements ProductService{
 	private ProductMapper productMapper;
 
 	@Override
-	public List<ProductDto> getAllProducts() {
+	public Object getAllProducts() {
 		return productMapper.productsToProductDtos(productRepo.findAll());
 	}
 
 	@Override
-	public ProductDto getProduct(Integer id) {
+	public Object getProduct(Integer id) {
 		Product product = productRepo.getReferenceById(id);
 		return productMapper.productToProductDto(product);
 	}
 
 	@Override
-	public ProductDto addProduct(ProductDto productDto) {
+	public Object addProduct(ProductDto productDto) {
 		Product productToAdd = productMapper.productDtoToProduct(productDto);
 		Product newestProduct = productRepo.save(productToAdd);
 		for(Image image : newestProduct.getImages()) {
@@ -52,7 +52,7 @@ public class ProductServiceImpl implements ProductService{
 	}
 	
 	@Override
-	public ProductDto updateProrduct(Integer id, ProductDto productDto) {
+	public Object updateProrduct(Integer id, ProductDto productDto) {
 		if(productRepo.findById(id).isPresent()) {
 			Product productToUpdate = productMapper.productDtoToProduct(productDto);
 			productToUpdate.setId(id);
@@ -77,7 +77,7 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public PagingDto getAllProductPagnation(int offSet, int pageSize) {
+	public Object getAllProductPagnation(int offSet, int pageSize) {
 		Pageable pageable = PageRequest.of(offSet-1, pageSize);
 		Page<Product> page = productRepo.findAll(pageable);
 		PagingDto response = new PagingDto();
@@ -91,7 +91,7 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public PagingDto getProductByCategoryPaging(Integer categoryId, int offSet, int pageSize) {
+	public Object getProductByCategoryPaging(Integer categoryId, int offSet, int pageSize) {
 		Pageable pageable = PageRequest.of(offSet-1, pageSize);
 		Page<Product> page = productRepo.findByCategoryId(categoryId, pageable);
 		PagingDto response = new PagingDto();

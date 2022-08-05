@@ -1,8 +1,11 @@
 package fa.trainning.service.impl;
 
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import fa.trainning.dto.CategoryDto;
@@ -55,7 +58,7 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public Object getAllProductPagnation(int offSet, int pageSize) {
-		PageRequest pageable = PageRequest.of(offSet-1, pageSize);
+		Pageable pageable = PageRequest.of(offSet-1, pageSize);
 		Page<Category> page = categoryRepo.findAll(pageable);
 		PagingDto pageDto = new PagingDto();
 		pageDto.setCurrentPage(offSet);
