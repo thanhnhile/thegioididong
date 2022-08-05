@@ -17,7 +17,7 @@ public class Account {
 	private String userName;
 
 	@Column(nullable = false)
-	private String password;
+	private String passWord;
 
 	@ManyToOne
 	@JoinColumn(name = "role_id")
@@ -26,52 +26,58 @@ public class Account {
 	@OneToOne(mappedBy = "account")
 	private Customer customer;
 
-	/*
-	 * @OneToOne(mappedBy = "account") private Staff staff;
-	 */
 
 	public Account() {
 	}
 
-	public Account(String userName, String password, Role role, Customer customer) {
+
+	public Account(String userName, String passWord, Role role, Customer customer) {
 		super();
 		this.userName = userName;
-		this.password = password;
+		this.passWord = passWord;
 		this.role = role;
 		this.customer = customer;
 	}
+
 
 	public String getUserName() {
 		return userName;
 	}
 
+
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
 
-	public String getPassword() {
-		return password;
+
+	public String getPassWord() {
+		return passWord;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+
+	public void setPassWord(String passWord) {
+		this.passWord = passWord;
 	}
+
 
 	public Role getRole() {
 		return role;
 	}
 
+
 	public void setRole(Role role) {
 		this.role = role;
 	}
+
 
 	public Customer getCustomer() {
 		return customer;
 	}
 
+
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
 
-
+	
 }

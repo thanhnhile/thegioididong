@@ -32,7 +32,7 @@ public class StoreController {
 	}
 
 	@GetMapping("/{store_id}")
-	public StoreDto getCategory(@PathVariable(value = "store_id") Integer store_id) {
+	public StoreDto getStore(@PathVariable(value = "store_id") Integer store_id) {
 		return storeImpl.getStore(store_id);
 	}
 
