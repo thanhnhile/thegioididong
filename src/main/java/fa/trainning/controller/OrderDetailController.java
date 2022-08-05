@@ -20,7 +20,7 @@ public class OrderDetailController {
 	private OrderDetailServiceImpl detailServiceImpl;
 	
 	@GetMapping(value="/{id}")
-	public OrderDetailDto getOrderDetail(@PathVariable Integer id) {
+	public OrderDetailDto getOrderDetail(@PathVariable(value = "id") Integer id) {
 		return detailServiceImpl.getOrderDetail(id);
 	}
 	
