@@ -34,7 +34,7 @@ public class AccountServiceImpl implements AccountService {
 	
 	
 	@Override
-	public AccountNoPassDto getAccount(String userName) {
+	public Object getAccount(String userName) {
 		Account account = accountRepo.findOneByUserName(userName);
 		AccountNoPassDto accountNoPassDto = accountMapper.accountToAccountNoPassDto(account);
 		accountNoPassDto.setRole_id(account.getRole().getId());
@@ -42,7 +42,7 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public Boolean addAccount(AccountDto accountDto) {
+	public Object addAccount(AccountDto accountDto) {
 		Account account = accountMapper.accountDtoToAccount(accountDto);
 		Role role = new Role();
 		role = roleRepo.findOneById(accountDto.getRole_id());
@@ -61,7 +61,7 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public AccountDto updateAccount(String userName, AccountDto accountDto) {
+	public Object updateAccount(String userName, AccountDto accountDto) {
 		Account accountNew = accountMapper.accountDtoToAccount(accountDto);
 		Account accountOld = accountRepo.findOneByUserName(userName);
 		Role role = roleRepo.findOneById(accountDto.getRole_id());
@@ -77,7 +77,7 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public AccountDto updatePropertyAccount(String userName, AccountDto accountDto) {
+	public Object updatePropertyAccount(String userName, AccountDto accountDto) {
 		Account accountNew = accountMapper.accountDtoToAccount(accountDto);
 		Account accountOld = accountRepo.findOneByUserName(userName);
 		if (!(accountNew.getPassWord() == null)) {

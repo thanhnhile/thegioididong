@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import fa.trainning.dto.CategoryDto;
+import fa.trainning.dto.DataResponse;
 import fa.trainning.dto.PagingDto;
 import fa.trainning.service.impl.CategoryServiceImpl;
 
@@ -25,23 +26,23 @@ public class CategoryController {
 	private CategoryServiceImpl categoryImpl;
 
 	@GetMapping()
-	public List<CategoryDto> getAllCategory() {
-		return categoryImpl.getAllCategorys();
+	public DataResponse getAllCategory() {
+		return new DataResponse( categoryImpl.getAllCategorys());
 	}
 	
 	@GetMapping("/{offset}/{pageSize}")
-	public PagingDto getAllCategoryPagnation(@PathVariable (value = "offset") int offSet, @PathVariable(value="pageSize") int pageSize) {
-		return categoryImpl.getAllProductPagnation(offSet, pageSize);
+	public DataResponse getAllCategoryPagnation(@PathVariable (value = "offset") int offSet, @PathVariable(value="pageSize") int pageSize) {
+		return new DataResponse( categoryImpl.getAllProductPagnation(offSet, pageSize));
 	}
 	
 	@GetMapping("/{category_id}")
-	public CategoryDto getCategory(@PathVariable(value = "category_id") Integer category_id) {
-		return categoryImpl.getCategory(category_id);
+	public DataResponse getCategory(@PathVariable(value = "category_id") Integer category_id) {
+		return new DataResponse( categoryImpl.getCategory(category_id));
 	}
 
 	@PostMapping()
-	public void addCategory(@RequestBody CategoryDto categoryDto) {
-		categoryImpl.addCategory(categoryDto);
+	public DataResponse addCategory(@RequestBody CategoryDto categoryDto) {
+		return new DataResponse(categoryImpl.addCategory(categoryDto));
 	}
 
 	@DeleteMapping("/{category_id}")
@@ -50,7 +51,7 @@ public class CategoryController {
 	}
 
 	@PutMapping("/{category_id}")
-	public void updateCategory(@PathVariable(value = "category_id") Integer category_id, @RequestBody CategoryDto categoryDto ) {
-		categoryImpl.updateCategory(category_id, categoryDto);
+	public DataResponse updateCategory(@PathVariable(value = "category_id") Integer category_id, @RequestBody CategoryDto categoryDto ) {
+		return new DataResponse(categoryImpl.updateCategory(category_id, categoryDto));
 	}
 }

@@ -16,6 +16,7 @@ import fa.trainning.dto.DataResponse;
 import fa.trainning.dto.PagingDto;
 import fa.trainning.dto.StoreDto;
 import fa.trainning.service.impl.StoreServiceImpl;
+import lombok.EqualsAndHashCode;
 
 @RestController
 @RequestMapping("/stores")
@@ -29,7 +30,6 @@ public class StoreController {
 	}
 
 	@GetMapping("/{offset}/{pageSize}")
-
 	public DataResponse getAllStore(@PathVariable(value = "offset") int offSet,
 			@PathVariable(value = "pageSize") int pageSize) {
 		return new DataResponse(storeImpl.getAllStorePagnation(offSet, pageSize));

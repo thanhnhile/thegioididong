@@ -1,3 +1,4 @@
+
 package fa.trainning.service.impl;
 
 import java.util.List;
@@ -31,18 +32,18 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public List<CategoryDto> getAllCategorys() {
+	public Object getAllCategorys() {
 		return categoryMapper.categorysToCategoryDtos(categoryRepo.findAll());
 	}
 
 	@Override
-	public CategoryDto getCategory(Integer id) {
+	public Object getCategory(Integer id) {
 		return categoryMapper.categoryToCategoryDto(categoryRepo.findOneById(id));
 	}
 
 	@Override
-	public void addCategory(CategoryDto categoryDto) {
-		categoryRepo.save(categoryMapper.categoryDtoToCategory(categoryDto));
+	public Object addCategory(CategoryDto categoryDto) {
+		return categoryRepo.save(categoryMapper.categoryDtoToCategory(categoryDto));
 	}
 
 	@Override
@@ -51,7 +52,7 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public CategoryDto updateCategory(Integer id, CategoryDto categoryDto) {
+	public Object updateCategory(Integer id, CategoryDto categoryDto) {
 		Category categoryNew = categoryMapper.categoryDtoToCategory(categoryDto);
 		Category categoryOld = categoryRepo.findOneById(id);
 		categoryOld.setName(categoryNew.getName());
@@ -60,7 +61,7 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public PagingDto getAllProductPagnation(int offSet, int pageSize) {
+	public Object getAllProductPagnation(int offSet, int pageSize) {
 		PageRequest pageable = PageRequest.of(offSet-1, pageSize);
 		Page<Category> page = categoryRepo.findAll(pageable);
 		PagingDto pageDto = new PagingDto();
