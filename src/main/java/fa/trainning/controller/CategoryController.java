@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor;
 
 import fa.trainning.dto.CategoryDto;
 import fa.trainning.dto.DataResponse;
@@ -27,17 +28,18 @@ public class CategoryController {
 
 	@GetMapping()
 	public DataResponse getAllCategory() {
-		return new DataResponse( categoryImpl.getAllCategorys());
+
+		return new DataResponse(categoryImpl.getAllCategorys());
 	}
 	
 	@GetMapping("/{offset}/{pageSize}")
 	public DataResponse getAllCategoryPagnation(@PathVariable (value = "offset") int offSet, @PathVariable(value="pageSize") int pageSize) {
-		return new DataResponse( categoryImpl.getAllProductPagnation(offSet, pageSize));
+		return new DataResponse(categoryImpl.getAllProductPagnation(offSet, pageSize));
 	}
 	
 	@GetMapping("/{category_id}")
 	public DataResponse getCategory(@PathVariable(value = "category_id") Integer category_id) {
-		return new DataResponse( categoryImpl.getCategory(category_id));
+		return new DataResponse(categoryImpl.getCategory(category_id));
 	}
 
 	@PostMapping()
@@ -46,12 +48,14 @@ public class CategoryController {
 	}
 
 	@DeleteMapping("/{category_id}")
-	public void deleteCategory(@PathVariable(value = "category_id") Integer category_id) {
+	public DataResponse deleteCategory(@PathVariable(value = "category_id") Integer category_id) {
 		categoryImpl.deleteCategory(category_id);
+		return new DataResponse("Deleted");
 	}
 
 	@PutMapping("/{category_id}")
 	public DataResponse updateCategory(@PathVariable(value = "category_id") Integer category_id, @RequestBody CategoryDto categoryDto ) {
 		return new DataResponse(categoryImpl.updateCategory(category_id, categoryDto));
+
 	}
 }

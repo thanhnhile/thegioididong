@@ -1,9 +1,8 @@
 package fa.trainning.service;
 
-import java.util.List;
-
 import fa.trainning.dto.CategoryDto;
-import fa.trainning.dto.PagingDto;
+
+
 
 
 public interface CategoryService {
@@ -15,7 +14,7 @@ public interface CategoryService {
 
 	Object addCategory(CategoryDto categoryDto);
 
-	void deleteCategory(Integer id);
+	Object deleteCategory(Integer id);
 
 	Object updateCategory(Integer id, CategoryDto categoryDto);
 }

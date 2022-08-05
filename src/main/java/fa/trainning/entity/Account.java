@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -23,21 +22,20 @@ public class Account {
 	@JoinColumn(name = "role_id")
 	private Role role;
 
-	@OneToOne(mappedBy = "account")
-	private Customer customer;
 
 
 	public Account() {
 	}
 
 
-	public Account(String userName, String passWord, Role role, Customer customer) {
+
+	public Account(String userName, String passWord, Role role) {
 		super();
 		this.userName = userName;
 		this.passWord = passWord;
 		this.role = role;
-		this.customer = customer;
 	}
+
 
 
 	public String getUserName() {
@@ -45,9 +43,11 @@ public class Account {
 	}
 
 
+
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+
 
 
 	public String getPassWord() {
@@ -55,9 +55,11 @@ public class Account {
 	}
 
 
+
 	public void setPassWord(String passWord) {
 		this.passWord = passWord;
 	}
+
 
 
 	public Role getRole() {
@@ -65,19 +67,12 @@ public class Account {
 	}
 
 
+
 	public void setRole(Role role) {
 		this.role = role;
 	}
 
 
-	public Customer getCustomer() {
-		return customer;
-	}
-
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
-
+	
 	
 }
