@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import fa.trainning.dto.DataResponse;
 import fa.trainning.dto.PagingDto;
 import fa.trainning.dto.StoreDto;
 import fa.trainning.service.impl.StoreServiceImpl;
@@ -23,38 +24,44 @@ public class StoreController {
 	private StoreServiceImpl storeImpl;
 
 	@GetMapping()
-	public List<StoreDto> getAllStore() {
-		return storeImpl.getAllStore();
+	public DataResponse getAllStore() {
+		return  new DataResponse(storeImpl.getAllStore());
 	}
 
 	@GetMapping("/{offset}/{pageSize}")
+<<<<<<< HEAD
 	public PagingDto getAllStore(@PathVariable(value="offset") int offSet, @PathVariable int pageSize) {
 		return storeImpl.getAllStorePagnation(offSet, pageSize);
+=======
+	public DataResponse getAllStore(@PathVariable(value = "offset") int offSet,
+			@PathVariable(value = "pageSize") int pageSize) {
+		return new DataResponse(storeImpl.getAllStorePagnation(offSet, pageSize));
+>>>>>>> 6221a17ec7262d16d2670c9485fec099dbfdc706
 	}
 
 	@GetMapping("/{store_id}")
-	public StoreDto getStore(@PathVariable(value = "store_id") Integer store_id) {
-		return storeImpl.getStore(store_id);
+	public DataResponse getStore(@PathVariable(value = "store_id") Integer store_id) {
+		 return new DataResponse(storeImpl.getStore(store_id));
 	}
 
 	@PostMapping()
-	public void addStore(@RequestBody StoreDto storeDto) {
-		storeImpl.addStore(storeDto);
+	public DataResponse addStore(@RequestBody StoreDto storeDto) {
+		return new DataResponse(storeImpl.addStore(storeDto));
 	}
 
 	@DeleteMapping("/{store_id}")
 	public void deleteStore(@PathVariable(value = "store_id") Integer store_id) {
-		storeImpl.deleteStore(store_id);
+		 storeImpl.deleteStore(store_id);
 	}
 
 	@PutMapping("/{store_id}")
-	public void updateStore(@PathVariable(value = "store_id") Integer store_id, @RequestBody StoreDto storeDto) {
-		storeImpl.updateStore(store_id, storeDto);
+	public DataResponse updateStore(@PathVariable(value = "store_id") Integer store_id, @RequestBody StoreDto storeDto) {
+		return new DataResponse(storeImpl.updateStore(store_id, storeDto));
 	}
 
 	@PutMapping("/property/{store_id}")
-	public void updatePropertyStore(@PathVariable(value = "store_id") Integer store_id,
+	public DataResponse updatePropertyStore(@PathVariable(value = "store_id") Integer store_id,
 			@RequestBody StoreDto storeDto) {
-		storeImpl.updatePropertyStore(store_id, storeDto);
+		return new DataResponse(storeImpl.updatePropertyStore(store_id, storeDto));
 	}
 }

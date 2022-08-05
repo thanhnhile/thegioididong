@@ -32,13 +32,9 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	@Override
-	public PagingDto getAllStorePagnation(int offSet,int pageSize) {
-		/*
-		 * Page<Store> page= storeRepo.findAll(PageRequest.of(offSet, pageSize)); return
-		 * storeMapper.storesToStoreDtos(page.getContent());
-		 */
-		
-		Pageable pageable = PageRequest.of(offSet-1, pageSize);
+	public Object getAllStorePagnation(int offSet, int pageSize) {
+
+		Pageable pageable = PageRequest.of(offSet - 1, pageSize);
 		Page<Store> page = storeRepo.findAll(pageable);
 		PagingDto response = new PagingDto();
 		response.setCurrentPage(offSet);
@@ -51,18 +47,18 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	@Override
-	public List<StoreDto> getAllStore() {
+	public Object getAllStore() {
 		return storeMapper.storesToStoreDtos(storeRepo.findAll());
 	}
-	
+
 	@Override
-	public StoreDto getStore(Integer id) {
+	public Object getStore(Integer id) {
 		return storeMapper.storeToStoreDto(storeRepo.findOneById(id));
 	}
 
 	@Override
-	public void addStore(StoreDto storeDto) {
-		storeRepo.save(storeMapper.storeDtoToStore(storeDto));
+	public Object addStore(StoreDto storeDto) {
+		return storeRepo.save(storeMapper.storeDtoToStore(storeDto));
 	}
 
 	@Override
@@ -71,7 +67,7 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	@Override
-	public StoreDto updateStore(Integer id, StoreDto storeDto) {
+	public Object updateStore(Integer id, StoreDto storeDto) {
 		Store storeNew = storeMapper.storeDtoToStore(storeDto);
 		Store storeOld = storeRepo.findOneById(id);
 		storeOld.setAddress(storeNew.getAddress());
@@ -82,7 +78,7 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	@Override
-	public StoreDto updatePropertyStore(Integer id, StoreDto storeDto) {
+	public Object updatePropertyStore(Integer id, StoreDto storeDto) {
 		Store storeNew = storeMapper.storeDtoToStore(storeDto);
 		Store storeOld = storeRepo.findOneById(id);
 		if (!(storeNew.getAddress() == null)) {
@@ -91,7 +87,7 @@ public class StoreServiceImpl implements StoreService {
 		if (!(storeNew.getCityName() == null)) {
 			storeOld.setCityName(storeNew.getCityName());
 		}
-		if (!(storeNew.getStoreName()==null)) {
+		if (!(storeNew.getStoreName() == null)) {
 			storeOld.setStoreName(storeNew.getStoreName());
 		}
 
