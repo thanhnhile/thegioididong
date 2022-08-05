@@ -1,7 +1,5 @@
 package fa.trainning.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import fa.trainning.dto.DataResponse;
 import fa.trainning.dto.ManufacturerDto;
 import fa.trainning.service.impl.ManufacturerServiceImpl;
 
@@ -25,18 +24,18 @@ public class ManufacturerController {
 	private ManufacturerServiceImpl manufacturerImpl;
 
 	@GetMapping()
-	public List<ManufacturerDto> getAllCategory() {
-		return manufacturerImpl.getAllManufacturer();
+	public DataResponse getAllCategory() {
+		return new DataResponse( manufacturerImpl.getAllManufacturer());
 	}
 
 	@GetMapping("/{manufacturer_id}")
-	public ManufacturerDto getCategory(@PathVariable(value = "manufacturer_id") Integer manufacturer_id) {
-		return manufacturerImpl.getManufacturer(manufacturer_id);
+	public DataResponse getCategory(@PathVariable(value = "manufacturer_id") Integer manufacturer_id) {
+		return new DataResponse( manufacturerImpl.getManufacturer(manufacturer_id));
 	}
 
 	@PostMapping()
-	public void addCategory(@RequestBody ManufacturerDto manufacturerDto) {
-		manufacturerImpl.addManufacturer(manufacturerDto);
+	public DataResponse addCategory(@RequestBody ManufacturerDto manufacturerDto) {
+		return new DataResponse( manufacturerImpl.addManufacturer(manufacturerDto));
 	}
 
 	@DeleteMapping("/{manufacturer_id}")
@@ -45,7 +44,7 @@ public class ManufacturerController {
 	}
 
 	@PutMapping("/{manufacturer_id}")
-	public void updateCategory(@PathVariable(value = "manufacturer_id") Integer manufacturer_id, @RequestBody ManufacturerDto manufacturerDto ) {
-		manufacturerImpl.updateManufacturer(manufacturer_id, manufacturerDto);
+	public DataResponse updateCategory(@PathVariable(value = "manufacturer_id") Integer manufacturer_id, @RequestBody ManufacturerDto manufacturerDto ) {
+		return new DataResponse(manufacturerImpl.updateManufacturer(manufacturer_id, manufacturerDto));
 	}
 }

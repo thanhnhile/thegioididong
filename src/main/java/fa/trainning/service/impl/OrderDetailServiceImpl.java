@@ -24,12 +24,12 @@ public class OrderDetailServiceImpl implements OrderDetailService{
 //	}
 
 	@Override
-	public OrderDetailDto getOrderDetail(Integer id) {
+	public Object getOrderDetail(Integer id) {
 		return detailMapper.orderDetailToOrderDetailDto(detailRepo.getReferenceById(id));
 	}
 
 	@Override
-	public OrderDetailDto addOrderDetail(OrderDetailDto orderDetailDto) {
+	public Object addOrderDetail(OrderDetailDto orderDetailDto) {
 		OrderDetail orderDetailToAdd = detailMapper.orderDetailDtoToOrderDetail(orderDetailDto);
 		return detailMapper.orderDetailToOrderDetailDto(detailRepo.save(orderDetailToAdd));
 	}

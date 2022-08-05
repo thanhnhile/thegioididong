@@ -1,7 +1,5 @@
 package fa.trainning.service.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -28,24 +26,24 @@ public class RoleServiceImpl implements RoleService {
 	}
 
 	@Override
-	public List<RoleDto> getAllRolePagnation(int offSet,int pageSize) {
+	public Object getAllRolePagnation(int offSet,int pageSize) {
 		Page<Role> page=  roleRepo.findAll(PageRequest.of(offSet, pageSize));
 		return roleMapper.rolesToRoleDtos(page.getContent());
 	}
 
 	@Override
-	public List<RoleDto> getAllRole() {
+	public Object getAllRole() {
 		return roleMapper.rolesToRoleDtos(roleRepo.findAll());
 	}
 	
 	@Override
-	public RoleDto getRole(Integer id) {
+	public Object getRole(Integer id) {
 		return roleMapper.roleToRleDto(roleRepo.findOneById(id));
 	}
 
 	@Override
-	public void addRole(RoleDto roleDto) {
-		roleRepo.save(roleMapper.roleDtoToRole(roleDto));
+	public Object addRole(RoleDto roleDto) {
+		return roleRepo.save(roleMapper.roleDtoToRole(roleDto));
 	}
 
 	@Override
@@ -54,7 +52,7 @@ public class RoleServiceImpl implements RoleService {
 	}
 
 	@Override
-	public RoleDto updateRole(Integer id, RoleDto roleDto) {
+	public Object updateRole(Integer id, RoleDto roleDto) {
 		Role RoleNew = roleMapper.roleDtoToRole(roleDto);
 		Role RoleOld = roleRepo.findOneById(id);
 		RoleOld.setName(RoleNew.getName());

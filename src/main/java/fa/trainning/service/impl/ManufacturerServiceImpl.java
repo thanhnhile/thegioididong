@@ -1,7 +1,5 @@
 package fa.trainning.service.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,18 +26,18 @@ public class ManufacturerServiceImpl implements ManufacturerService {
 	}
 
 	@Override
-	public List<ManufacturerDto> getAllManufacturer() {
+	public Object getAllManufacturer() {
 		return manufacturerMapper.manufacturersToManufacturerDtos(manufacturerRepo.findAll());
 	}
 
 	@Override
-	public ManufacturerDto getManufacturer(Integer id) {
+	public Object getManufacturer(Integer id) {
 		return manufacturerMapper.manufacturerToManufacturerDto(manufacturerRepo.findOneById(id));
 	}
 
 	@Override
-	public void addManufacturer(ManufacturerDto manufacturerDto) {
-		manufacturerRepo.save(manufacturerMapper.manufacturerDtoToManufacturer(manufacturerDto));
+	public Object addManufacturer(ManufacturerDto manufacturerDto) {
+		return manufacturerRepo.save(manufacturerMapper.manufacturerDtoToManufacturer(manufacturerDto));
 	}
 
 	@Override
@@ -48,7 +46,7 @@ public class ManufacturerServiceImpl implements ManufacturerService {
 	}
 
 	@Override
-	public ManufacturerDto updateManufacturer(Integer id, ManufacturerDto manufacturerDto) {
+	public Object updateManufacturer(Integer id, ManufacturerDto manufacturerDto) {
 		Manufacturer manufacturerNew = manufacturerMapper.manufacturerDtoToManufacturer(manufacturerDto);
 		Manufacturer manufacturerOld = manufacturerRepo.findOneById(id);
 		manufacturerOld.setAddress(manufacturerNew.getAddress());

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import fa.trainning.dto.DataResponse;
 import fa.trainning.dto.OrderDetailDto;
 import fa.trainning.service.impl.OrderDetailServiceImpl;
 
@@ -20,12 +21,12 @@ public class OrderDetailController {
 	private OrderDetailServiceImpl detailServiceImpl;
 	
 	@GetMapping(value="/{id}")
-	public OrderDetailDto getOrderDetail(@PathVariable(value = "id") Integer id) {
-		return detailServiceImpl.getOrderDetail(id);
+	public DataResponse getOrderDetail(@PathVariable(value = "id") Integer id) {
+		return new DataResponse( detailServiceImpl.getOrderDetail(id));
 	}
 	
 	@PostMapping
-	public OrderDetailDto addOrderDetail(@Validated @RequestBody OrderDetailDto detailDto) {
-		return detailServiceImpl.addOrderDetail(detailDto);
+	public DataResponse addOrderDetail(@Validated @RequestBody OrderDetailDto detailDto) {
+		return new DataResponse( detailServiceImpl.addOrderDetail(detailDto));
 	}
 }

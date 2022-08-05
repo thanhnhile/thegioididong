@@ -1,9 +1,6 @@
 package fa.trainning.service;
 
-import java.util.List;
-
 import fa.trainning.dto.AccountDto;
-import fa.trainning.dto.AccountNoPassDto;
 
 
 public interface AccountService {

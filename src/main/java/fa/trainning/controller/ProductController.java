@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import fa.trainning.dto.DataResponse;
 import fa.trainning.dto.PagingDto;
 import fa.trainning.dto.ProductDto;
 import fa.trainning.service.impl.ProductServiceImpl;
@@ -27,13 +28,13 @@ public class ProductController {
 	private ProductServiceImpl productService;
 	
 	@GetMapping
-	public List<ProductDto> getAllProducts(){
-		return productService.getAllProducts();
+	public DataResponse getAllProducts(){
+		return new DataResponse( productService.getAllProducts());
 	}
 	
 	@GetMapping(value="/{id}")
-	public ProductDto getProduct(@PathVariable(value ="id") Integer id) {
-		return productService.getProduct(id);
+	public DataResponse getProduct(@PathVariable(value ="id") Integer id) {
+		return new DataResponse( productService.getProduct(id));
 	}
 	
 	@DeleteMapping(value = "/{id}")
@@ -42,26 +43,26 @@ public class ProductController {
 	}
 	
 	@PostMapping
-	public ProductDto addProduct(@Validated @RequestBody ProductDto productDto) {
-		return productService.addProduct(productDto);
+	public DataResponse addProduct(@Validated @RequestBody ProductDto productDto) {
+		return new DataResponse( productService.addProduct(productDto));
 	}
 	
 	@PutMapping(value="/{id}")
-	public ProductDto updateProduct(@PathVariable(value="id") Integer id,@Validated @RequestBody ProductDto productDto) {
-		return productService.updateProrduct(id, productDto);
+	public DataResponse updateProduct(@PathVariable(value="id") Integer id,@Validated @RequestBody ProductDto productDto) {
+		return new DataResponse( productService.updateProrduct(id, productDto));
 	}
 	
 	@GetMapping(value="/{offset}/{pageSize}")
-	public PagingDto getProductPaging(@PathVariable(value = "offset") int offSet,
+	public DataResponse getProductPaging(@PathVariable(value = "offset") int offSet,
 			@PathVariable(value = "pageSize") int pageSize){
-		return productService.getAllProductPagnation(offSet, pageSize);
+		return new DataResponse( productService.getAllProductPagnation(offSet, pageSize));
 		
 	}
 	
 	@GetMapping("/category/{id}/{offset}/{pageSize}")
-	public PagingDto getProductByCategoryPaging(@PathVariable(value = "id") Integer categoryId, 
+	public DataResponse getProductByCategoryPaging(@PathVariable(value = "id") Integer categoryId, 
 			@PathVariable(value="offset") int offSet, @PathVariable int pageSize){
-		return productService.getProductByCategoryPaging(categoryId, offSet, pageSize);
+		return new DataResponse( productService.getProductByCategoryPaging(categoryId, offSet, pageSize));
 	}
 	
 }

@@ -14,25 +14,23 @@ import fa.trainning.service.AccountService;
 
 @Service
 public class AccountServiceImpl implements AccountService {
-	//Get Role ADD To Account
+	// Get Role ADD To Account
 	@Autowired
 	private RoleRepository roleRepo;
 
-	//Account
+	// Account
 
 	@Autowired
 	private AccountRepository accountRepo;
 	@Autowired
 	private AccountMapper accountMapper;
-	
-	
+
 	@Autowired
 	public AccountServiceImpl(AccountMapper accountMapper, AccountRepository accountRepo) {
 		this.accountMapper = accountMapper;
 		this.accountRepo = accountRepo;
 	}
-	
-	
+
 	@Override
 	public Object getAccount(String userName) {
 		Account account = accountRepo.findOneByUserName(userName);
@@ -49,10 +47,10 @@ public class AccountServiceImpl implements AccountService {
 		if (!role.equals(null)) {
 			account.setRole(role);
 			accountRepo.save(account);
-			return true;
+			return accountDto;
 		}
 		return false;
-		
+
 	}
 
 	@Override
@@ -65,29 +63,36 @@ public class AccountServiceImpl implements AccountService {
 		Account accountNew = accountMapper.accountDtoToAccount(accountDto);
 		Account accountOld = accountRepo.findOneByUserName(userName);
 		Role role = roleRepo.findOneById(accountDto.getRole_id());
-		if(!role.equals(null))
-		{
+		if (!role.equals(null)) {
 			accountOld.setPassWord(accountNew.getPassWord());
 			accountOld.setRole(role);
 			accountRepo.save(accountOld);
-			return accountMapper.accountToAccountDto(accountOld);
+			AccountDto newAccountDto = accountMapper.accountToAccountDto(accountOld);
+			newAccountDto.setRole_id(accountDto.getRole_id());
+			return newAccountDto;
 		}
 		return null;
-		
+
 	}
 
 	@Override
 	public Object updatePropertyAccount(String userName, AccountDto accountDto) {
+		AccountDto newAccountDto = null;
 		Account accountNew = accountMapper.accountDtoToAccount(accountDto);
 		Account accountOld = accountRepo.findOneByUserName(userName);
 		if (!(accountNew.getPassWord() == null)) {
 			accountOld.setPassWord(accountNew.getPassWord());
+
+			newAccountDto = accountMapper.accountToAccountDto(accountOld);
+			newAccountDto.setRole_id(accountOld.getRole().getId());
 		}
 		if (!(accountDto.getRole_id() == null)) {
 			accountOld.setRole(roleRepo.findOneById(accountDto.getRole_id()));
+			newAccountDto = accountMapper.accountToAccountDto(accountOld);
+			newAccountDto.setRole_id(accountDto.getRole_id());
 		}
 		accountRepo.save(accountOld);
-		return accountMapper.accountToAccountDto(accountOld);
+		return newAccountDto;
 	}
 
 }
