@@ -14,7 +14,7 @@ public interface CategoryService {
 
 	Object addCategory(CategoryDto categoryDto);
 
-	Object deleteCategory(Integer id);
+	void deleteCategory(Integer id);
 
 	Object updateCategory(Integer id, CategoryDto categoryDto);
 }

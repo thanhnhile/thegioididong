@@ -1,3 +1,4 @@
+
 package fa.trainning.service.impl;
 
 
@@ -42,9 +43,13 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public Object deleteCategory(Integer id) {
+	public Object addCategory(CategoryDto categoryDto) {
+		return categoryRepo.save(categoryMapper.categoryDtoToCategory(categoryDto));
+	}
+
+	@Override
+	public void deleteCategory(Integer id) {
 		categoryRepo.delete(categoryRepo.findOneById(id));
-		return new Object();
 	}
 
 	@Override
@@ -67,12 +72,6 @@ public class CategoryServiceImpl implements CategoryService {
 		pageDto.setTotalPages(page.getTotalPages());
 		pageDto.setListDtos(categoryMapper.categorysToCategoryDtos(page.getContent()));
 		return pageDto;
-	}
-
-	@Override
-	public Object addCategory(CategoryDto categoryDto) {
-		Category categoryToAdd = categoryMapper.categoryDtoToCategory(categoryDto);
-		return categoryMapper.categoryToCategoryDto(categoryRepo.save(categoryToAdd));
 	}
 
 }

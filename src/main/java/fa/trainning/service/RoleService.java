@@ -5,15 +5,15 @@ import java.util.List;
 import fa.trainning.dto.RoleDto;
 
 public interface RoleService {
-	List<RoleDto> getAllRole();
+	Object getAllRole();
 
-	List<RoleDto> getAllRolePagnation(int offSet, int pageSize);
+	Object getAllRolePagnation(int offSet, int pageSize);
 
-	RoleDto getRole(Integer id);
+	Object getRole(Integer id);
 
-	void addRole(RoleDto roleDto);
+	Object addRole(RoleDto roleDto);
 
 	void deleteRole(Integer id);
 
-	RoleDto updateRole(Integer id, RoleDto roleDto);
+	Object updateRole(Integer id, RoleDto roleDto);
 }

@@ -1,6 +1,5 @@
 package fa.trainning.controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +24,7 @@ public class CategoryController {
 
 	@GetMapping()
 	public DataResponse getAllCategory() {
+
 		return new DataResponse(categoryImpl.getAllCategorys());
 	}
 	
@@ -44,14 +44,13 @@ public class CategoryController {
 	}
 
 	@DeleteMapping("/{category_id}")
-	public DataResponse deleteCategory(@PathVariable(value = "category_id") Integer category_id) {
+	public void deleteCategory(@PathVariable(value = "category_id") Integer category_id) {
 		categoryImpl.deleteCategory(category_id);
-		return new DataResponse("Deleted");
 	}
 
 	@PutMapping("/{category_id}")
 	public DataResponse updateCategory(@PathVariable(value = "category_id") Integer category_id, @RequestBody CategoryDto categoryDto ) {
 		return new DataResponse(categoryImpl.updateCategory(category_id, categoryDto));
-		
+
 	}
 }

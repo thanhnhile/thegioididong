@@ -9,4 +9,5 @@ import fa.trainning.entity.Store;
 @Repository
 public interface StoreRepository extends JpaRepository<Store, Integer> {
 	Store findOneById(Integer id);
+	
 }

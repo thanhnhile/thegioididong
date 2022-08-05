@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import fa.trainning.dto.DataResponse;
 import fa.trainning.dto.RoleDto;
 import fa.trainning.service.impl.RoleServiceImpl;
 
@@ -22,23 +23,23 @@ public class RoleController {
 	private RoleServiceImpl roleImpl;
 
 	@GetMapping()
-	public List<RoleDto> getAllRole() {
-		return roleImpl.getAllRole();
+	public DataResponse getAllRole() {
+		return new DataResponse( roleImpl.getAllRole());
 	}
 
 	@GetMapping("/{offSet}/{pageSize}")
-	public List<RoleDto> getAllRole(@PathVariable int offSet, @PathVariable int pageSize) {
-		return roleImpl.getAllRolePagnation(offSet, pageSize);
+	public DataResponse getAllRole(@PathVariable int offSet, @PathVariable int pageSize) {
+		return new DataResponse( roleImpl.getAllRolePagnation(offSet, pageSize));
 	}
 
 	@GetMapping("/{role_id}")
-	public RoleDto getCategory(@PathVariable(value = "role_id") Integer role_id) {
-		return roleImpl.getRole(role_id);
+	public DataResponse getCategory(@PathVariable(value = "role_id") Integer role_id) {
+		return new DataResponse( roleImpl.getRole(role_id));
 	}
 
 	@PostMapping()
-	public void addRole(@RequestBody RoleDto roleDto) {
-		roleImpl.addRole(roleDto);
+	public DataResponse addRole(@RequestBody RoleDto roleDto) {
+		return new DataResponse(roleImpl.addRole(roleDto));
 	}
 
 	@DeleteMapping("/{role_id}")
@@ -47,7 +48,7 @@ public class RoleController {
 	}
 
 	@PutMapping("/{role_id}")
-	public void updateRole(@PathVariable(value = "role_id") Integer role_id, @RequestBody RoleDto roleDto) {
-		roleImpl.updateRole(role_id, roleDto);
+	public DataResponse updateRole(@PathVariable(value = "role_id") Integer role_id, @RequestBody RoleDto roleDto) {
+		return new DataResponse(roleImpl.updateRole(role_id, roleDto));
 	}
 }
