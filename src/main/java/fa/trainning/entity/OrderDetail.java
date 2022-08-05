@@ -2,6 +2,8 @@ package fa.trainning.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -12,8 +14,9 @@ import javax.persistence.Table;
 @Table
 public class OrderDetail {
 	@Id
-	@Column(name = "order_detail_id", unique = true, nullable = false)
-	private String id;
+	@Column(name = "order_detail_id")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Integer id;
 	
 	@ManyToOne
 	@JoinColumn(name="order_id")
@@ -40,11 +43,11 @@ public class OrderDetail {
 		this.quantity = quantity;
 	}
 
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -79,11 +82,8 @@ public class OrderDetail {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	
-	
-
 
 	
-	
+
 	
 }

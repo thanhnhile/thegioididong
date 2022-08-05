@@ -3,6 +3,7 @@ package fa.trainning.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import fa.trainning.dto.OrderDetailDto;
 import fa.trainning.entity.OrderDetail;
@@ -10,6 +11,7 @@ import fa.trainning.mapstruct.OrderMapper;
 import fa.trainning.repository.OrderDetailRepository;
 import fa.trainning.service.OrderDetailService;
 
+@Service
 public class OrderDetailServiceImpl implements OrderDetailService{
 
 	@Autowired
@@ -18,10 +20,10 @@ public class OrderDetailServiceImpl implements OrderDetailService{
 	@Autowired
 	OrderMapper detailMapper;
 	
-	@Override
-	public List<OrderDetailDto> getOrderDetailsByOrderId(Integer orderId) {
-		return detailMapper.orderDetailsToOrderDetailDtos(detailRepo.getOrderDetailsByOrderId(orderId));
-	}
+//	@Override
+//	public List<OrderDetailDto> getOrderDetailsByOrderId(Integer orderId) {
+//		return detailMapper.orderDetailsToOrderDetailDtos(detailRepo.getOrderDetailsByOrderId(orderId));
+//	}
 
 	@Override
 	public OrderDetailDto getOrderDetail(Integer id) {
