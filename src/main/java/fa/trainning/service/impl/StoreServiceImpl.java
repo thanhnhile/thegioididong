@@ -61,8 +61,8 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	@Override
-	public void addStore(StoreDto storeDto) {
-		storeRepo.save(storeMapper.storeDtoToStore(storeDto));
+	public Object addStore(StoreDto storeDto) {
+		return storeRepo.save(storeMapper.storeDtoToStore(storeDto));
 	}
 
 	@Override

@@ -13,7 +13,7 @@ public interface StoreService {
 
 	StoreDto getStore(Integer id);
 
-	void addStore(StoreDto storeDto);
+	Object addStore(StoreDto storeDto);
 
 	void deleteStore(Integer id);
 

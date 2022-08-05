@@ -85,16 +85,6 @@ public class Store {
 	}
 
 
-	public List<ProductsStores> getProductsStores() {
-		return productsStores;
-	}
-
-
-	public void setProductsStores(List<ProductsStores> productsStores) {
-		this.productsStores = productsStores;
-	}
-
-
 	public Store(String storeName, String cityName, String address, List<ProductsStores> productsStores) {
 		super();
 		this.storeName = storeName;

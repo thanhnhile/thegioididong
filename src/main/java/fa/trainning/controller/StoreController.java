@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import fa.trainning.dto.DataResponse;
 import fa.trainning.dto.PagingDto;
 import fa.trainning.dto.StoreDto;
 import fa.trainning.service.impl.StoreServiceImpl;
@@ -39,8 +40,8 @@ public class StoreController {
 	}
 
 	@PostMapping()
-	public void addStore(@RequestBody StoreDto storeDto) {
-		storeImpl.addStore(storeDto);
+	public DataResponse addStore(@RequestBody StoreDto storeDto) {
+		return new DataResponse(storeImpl.addStore(storeDto));
 	}
 
 	@DeleteMapping("/{store_id}")
