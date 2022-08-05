@@ -48,9 +48,8 @@ public class CategoryController {
 	}
 
 	@DeleteMapping("/{category_id}")
-	public DataResponse deleteCategory(@PathVariable(value = "category_id") Integer category_id) {
+	public void deleteCategory(@PathVariable(value = "category_id") Integer category_id) {
 		categoryImpl.deleteCategory(category_id);
-		return new DataResponse("Deleted");
 	}
 
 	@PutMapping("/{category_id}")
