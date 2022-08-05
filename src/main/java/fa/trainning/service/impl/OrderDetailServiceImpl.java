@@ -17,6 +17,7 @@ public class OrderDetailServiceImpl implements OrderDetailService{
 	
 	@Autowired
 	OrderMapper detailMapper;
+	
 	@Override
 	public List<OrderDetailDto> getOrderDetailsByOrderId(Integer orderId) {
 		return detailMapper.orderDetailsToOrderDetailDtos(detailRepo.getOrderDetailsByOrderId(orderId));

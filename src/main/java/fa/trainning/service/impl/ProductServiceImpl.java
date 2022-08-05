@@ -9,7 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import fa.trainning.dto.PagingProductDto;
+import fa.trainning.dto.PagingDto;
 import fa.trainning.dto.ProductDto;
 import fa.trainning.entity.Image;
 import fa.trainning.entity.Product;
@@ -77,10 +77,10 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public PagingProductDto getAllProductPagnation(int offSet, int pageSize) {
+	public PagingDto getAllProductPagnation(int offSet, int pageSize) {
 		Pageable pageable = PageRequest.of(offSet-1, pageSize);
 		Page<Product> page = productRepo.findAll(pageable);
-		PagingProductDto response = new PagingProductDto();
+		PagingDto response = new PagingDto();
 		response.setCurrentPage(offSet);
 		response.setPageSize(pageSize);
 		response.setTotalElements(page.getTotalElements());
@@ -91,10 +91,10 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public PagingProductDto getProductByCategoryPaging(Integer categoryId, int offSet, int pageSize) {
+	public PagingDto getProductByCategoryPaging(Integer categoryId, int offSet, int pageSize) {
 		Pageable pageable = PageRequest.of(offSet-1, pageSize);
 		Page<Product> page = productRepo.findByCategoryId(categoryId, pageable);
-		PagingProductDto response = new PagingProductDto();
+		PagingDto response = new PagingDto();
 		response.setCurrentPage(offSet);
 		response.setPageSize(pageSize);
 		response.setTotalElements(page.getTotalElements());

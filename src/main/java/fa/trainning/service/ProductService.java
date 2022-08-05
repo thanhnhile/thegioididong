@@ -3,14 +3,14 @@ package fa.trainning.service;
 import java.util.List;
 
 
-import fa.trainning.dto.PagingProductDto;
+import fa.trainning.dto.PagingDto;
 import fa.trainning.dto.ProductDto;
 
 
 public interface ProductService {
 	List<ProductDto> getAllProducts();
 	
-	PagingProductDto getAllProductPagnation(int offSet,int pageSize);
+	PagingDto getAllProductPagnation(int offSet,int pageSize);
 	
 	ProductDto getProduct(Integer id);
 	
@@ -20,5 +20,5 @@ public interface ProductService {
 	
 	void deleteProduct(Integer id);
 	
-	PagingProductDto getProductByCategoryPaging(Integer categoryId,int offSet, int pageSize);
+	PagingDto getProductByCategoryPaging(Integer categoryId,int offSet, int pageSize);
 }

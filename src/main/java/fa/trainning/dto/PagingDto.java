@@ -2,7 +2,7 @@ package fa.trainning.dto;
 
 import java.util.List;
 
-public class PagingProductDto {
+public class PagingDto {
 	private int currentPage;
 	private int pageSize;
 	private int totalPages;
@@ -10,13 +10,13 @@ public class PagingProductDto {
 	private List<?> listDtos;
 	
 	
-	public PagingProductDto() {
+	public PagingDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 
-	public PagingProductDto(int currentPage, int pageSize, int totalPages, long totalElements, List<?> listDtos) {
+	public PagingDto(int currentPage, int pageSize, int totalPages, long totalElements, List<?> listDtos) {
 		super();
 		this.currentPage = currentPage;
 		this.pageSize = pageSize;

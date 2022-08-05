@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import fa.trainning.dto.PagingProductDto;
+import fa.trainning.dto.PagingDto;
 import fa.trainning.dto.ProductDto;
 import fa.trainning.service.impl.ProductServiceImpl;
 
@@ -51,14 +51,14 @@ public class ProductController {
 	}
 	
 	@GetMapping(value="/{offset}/{pageSize}")
-	public PagingProductDto getProductPaging(@PathVariable(value = "offset") int offSet,
+	public PagingDto getProductPaging(@PathVariable(value = "offset") int offSet,
 			@PathVariable(value = "pageSize") int pageSize){
 		return productService.getAllProductPagnation(offSet, pageSize);
 		
 	}
 	
 	@GetMapping("/category/{id}/{offset}/{pageSize}")
-	public PagingProductDto getProductByCategoryPaging(@PathVariable(value = "id") Integer categoryId, 
+	public PagingDto getProductByCategoryPaging(@PathVariable(value = "id") Integer categoryId, 
 			@PathVariable(value="offset") int offSet, @PathVariable int pageSize){
 		return productService.getProductByCategoryPaging(categoryId, offSet, pageSize);
 	}
