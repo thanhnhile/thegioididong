@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import fa.trainning.dto.PagingDto;
 import fa.trainning.dto.StoreDto;
 import fa.trainning.service.impl.StoreServiceImpl;
 
@@ -26,8 +27,8 @@ public class StoreController {
 		return storeImpl.getAllStore();
 	}
 
-	@GetMapping("/{offSet}/{pageSize}")
-	public List<StoreDto> getAllStore(@PathVariable int offSet, @PathVariable int pageSize) {
+	@GetMapping("/{offset}/{pageSize}")
+	public PagingDto getAllStore(@PathVariable int offSet, @PathVariable int pageSize) {
 		return storeImpl.getAllStorePagnation(offSet, pageSize);
 	}
 
