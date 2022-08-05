@@ -3,9 +3,12 @@ package fa.trainning.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import fa.trainning.dto.CategoryDto;
+import fa.trainning.dto.PagingDto;
 import fa.trainning.entity.Category;
 import fa.trainning.mapstruct.CategoryMapper;
 import fa.trainning.repository.CategoryRepository;
@@ -54,6 +57,19 @@ public class CategoryServiceImpl implements CategoryService {
 		categoryOld.setName(categoryNew.getName());
 		categoryRepo.save(categoryOld);
 		return categoryMapper.categoryToCategoryDto(categoryOld);
+	}
+
+	@Override
+	public PagingDto getAllProductPagnation(int offSet, int pageSize) {
+		PageRequest pageable = PageRequest.of(offSet-1, pageSize);
+		Page<Category> page = categoryRepo.findAll(pageable);
+		PagingDto pageDto = new PagingDto();
+		pageDto.setCurrentPage(offSet);
+		pageDto.setPageSize(pageSize);
+		pageDto.setTotalElements(page.getTotalElements());
+		pageDto.setTotalPages(page.getTotalPages());
+		pageDto.setListDtos(categoryMapper.categorysToCategoryDtos(page.getContent()));
+		return pageDto;
 	}
 
 }

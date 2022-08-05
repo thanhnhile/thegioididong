@@ -28,7 +28,7 @@ public class StoreController {
 	}
 
 	@GetMapping("/{offset}/{pageSize}")
-	public PagingDto getAllStore(@PathVariable int offSet, @PathVariable int pageSize) {
+	public PagingDto getAllStore(@PathVariable(value="offset") int offSet, @PathVariable int pageSize) {
 		return storeImpl.getAllStorePagnation(offSet, pageSize);
 	}
 

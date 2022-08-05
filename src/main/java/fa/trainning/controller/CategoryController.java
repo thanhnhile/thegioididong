@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import fa.trainning.dto.CategoryDto;
+import fa.trainning.dto.PagingDto;
 import fa.trainning.service.impl.CategoryServiceImpl;
 
 
@@ -27,7 +28,12 @@ public class CategoryController {
 	public List<CategoryDto> getAllCategory() {
 		return categoryImpl.getAllCategorys();
 	}
-
+	
+	@GetMapping("/{offset}/{pageSize}")
+	public PagingDto getAllCategoryPagnation(@PathVariable (value = "offset") int offSet, @PathVariable(value="pageSize") int pageSize) {
+		return categoryImpl.getAllProductPagnation(offSet, pageSize);
+	}
+	
 	@GetMapping("/{category_id}")
 	public CategoryDto getCategory(@PathVariable(value = "category_id") Integer category_id) {
 		return categoryImpl.getCategory(category_id);
