@@ -1,5 +1,7 @@
 package fa.trainning.controller;
 
+import javax.annotation.security.RolesAllowed;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,29 +22,34 @@ public class AccountController {
 	@Autowired
 	private AccountServiceImpl accountImpl;
 
-	@GetMapping("/{userName}")
-	public DataResponse getAccount(@PathVariable(value = "userName") String userName) {
-		return  new DataResponse( accountImpl.getAccount(userName));
+	@GetMapping()
+	@RolesAllowed({"ROLE_ADMIN", "ROLE_CUSTOMER"})
+	public DataResponse getAccount() {
+		return  new DataResponse( accountImpl.getAllAccount());
 	}
 
-	@PostMapping()
+	@GetMapping("/{id}")
+	@RolesAllowed({"ROLE_ADMIN", "ROLE_CUSTOMER"})
+
+	public DataResponse getAccount(@PathVariable(value = "id") Integer id) {
+		return  new DataResponse( accountImpl.getAccount(id));
+	}
+
+	@PostMapping("/access")
 	public DataResponse addAccount(@RequestBody AccountDto accountDto) {
 		return  new DataResponse( accountImpl.addAccount(accountDto));
 	}
 
-	@DeleteMapping("/{userName}")
-	public void deleteAccount(@PathVariable(value = "userName") String userName) {
-		accountImpl.deleteAccount(userName);
+	@DeleteMapping("/{id}")
+	@RolesAllowed({"ROLE_ADMIN", "ROLE_CUSTOMER"})
+	public void deleteAccount(@PathVariable(value = "id") Integer id) {
+		accountImpl.deleteAccount(id);
 	}
 
-	@PutMapping("/{userName}")
-	public DataResponse updateAccount(@PathVariable(value = "userName") String userName, @RequestBody AccountDto accountDto) {
-		return  new DataResponse(accountImpl.updateAccount(userName, accountDto));
+	@PutMapping("/{id}")
+	@RolesAllowed({"ROLE_ADMIN", "ROLE_CUSTOMER"})
+	public DataResponse updateAccount(@PathVariable(value = "id") Integer id, @RequestBody AccountDto accountDto) {
+		return  new DataResponse(accountImpl.updateAccount(id, accountDto));
 	}
 
-	@PutMapping("/property/{userName}")
-	public DataResponse updatePropertyAccount(@PathVariable(value = "userName") String userName,
-			@RequestBody AccountDto accountDto) {
-		return new DataResponse(accountImpl.updatePropertyAccount(userName, accountDto));
-	}
 }

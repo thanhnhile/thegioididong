@@ -4,13 +4,14 @@ import fa.trainning.dto.AccountDto;
 
 
 public interface AccountService {
-	Object getAccount(String userName);
+	Object getAccount(Integer id);
+	
+	Object getAllAccount();
 
 	Object addAccount(AccountDto accountDto);
 
-	void deleteAccount(String userName);
+	void deleteAccount(Integer id);
 
-	Object updateAccount(String userName, AccountDto accountDto);
+	Object updateAccount(Integer id, AccountDto accountDto);
 	
-	Object updatePropertyAccount(String userName, AccountDto accountDto);
 }

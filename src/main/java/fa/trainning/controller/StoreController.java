@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import fa.trainning.dto.DataResponse;
 import fa.trainning.dto.StoreDto;
 import fa.trainning.service.impl.StoreServiceImpl;
-import lombok.EqualsAndHashCode;
 
 @RestController
 @RequestMapping("/stores")

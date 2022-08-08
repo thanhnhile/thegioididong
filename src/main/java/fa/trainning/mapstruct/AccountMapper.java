@@ -18,9 +18,13 @@ public interface AccountMapper {
 	AccountNoPassDto accountToAccountNoPassDto(Account account);
 
 	List<AccountDto> accountsToAccountDtos(List<Account> accounts);
+	
+	List<AccountNoPassDto> accountsToAccountNoPassDtos(List<Account> accounts);
+
 
 	// ---------------------------DTO To Entity----------------------
 
 	Account accountDtoToAccount(AccountDto accountDto);
+	
 
 }

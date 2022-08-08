@@ -1,6 +1,14 @@
 package fa.trainning.service.impl;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import fa.trainning.dto.AccountDto;
@@ -9,17 +17,15 @@ import fa.trainning.entity.Account;
 import fa.trainning.entity.Role;
 import fa.trainning.mapstruct.AccountMapper;
 import fa.trainning.repository.AccountRepository;
-import fa.trainning.repository.RoleRepository;
 import fa.trainning.service.AccountService;
 
 @Service
+@Transactional
 public class AccountServiceImpl implements AccountService {
-	// Get Role ADD To Account
-	@Autowired
-	private RoleRepository roleRepo;
 
 	// Account
-
+	@Autowired private PasswordEncoder passwordEncoder;
+	
 	@Autowired
 	private AccountRepository accountRepo;
 	@Autowired
@@ -32,67 +38,61 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public Object getAccount(String userName) {
-		Account account = accountRepo.findOneByUserName(userName);
+	public Object getAccount(Integer id) {
+		Account account = accountRepo.findOneById(id);
+		Set<String> rolenames = new HashSet<String>();
+		for (Role element : account.getRoles()) {
+			rolenames.add(element.getName());
+		}
 		AccountNoPassDto accountNoPassDto = accountMapper.accountToAccountNoPassDto(account);
-		accountNoPassDto.setRole_id(account.getRole().getId());
+		accountNoPassDto.setRole(rolenames);
 		return accountNoPassDto;
 	}
 
 	@Override
 	public Object addAccount(AccountDto accountDto) {
 		Account account = accountMapper.accountDtoToAccount(accountDto);
-		Role role = new Role();
-		role = roleRepo.findOneById(accountDto.getRole_id());
-		if (!role.equals(null)) {
-			account.setRole(role);
-			accountRepo.save(account);
-			return accountDto;
-		}
-		return false;
-
+		String rawPassword = account.getPassword();
+		String encodedPassword = passwordEncoder.encode(rawPassword);
+		account.setPassword(encodedPassword);
+		accountRepo.save(account);
+		return accountDto;
 	}
 
 	@Override
-	public void deleteAccount(String userName) {
-		accountRepo.delete(accountRepo.findOneByUserName(userName));
+	public void deleteAccount(Integer id) {
+		accountRepo.delete(accountRepo.findOneById(id));
 	}
 
 	@Override
-	public Object updateAccount(String userName, AccountDto accountDto) {
+	public Object updateAccount(Integer id, AccountDto accountDto) {
 		Account accountNew = accountMapper.accountDtoToAccount(accountDto);
-		Account accountOld = accountRepo.findOneByUserName(userName);
-		Role role = roleRepo.findOneById(accountDto.getRole_id());
-		if (!role.equals(null)) {
-			accountOld.setPassWord(accountNew.getPassWord());
-			accountOld.setRole(role);
-			accountRepo.save(accountOld);
-			AccountDto newAccountDto = accountMapper.accountToAccountDto(accountOld);
-			newAccountDto.setRole_id(accountDto.getRole_id());
-			return newAccountDto;
-		}
-		return null;
-
+		Account accountOld = accountRepo.findOneById(id);
+		String rawPassword = accountNew.getPassword();
+		String encodedPassword = passwordEncoder.encode(rawPassword);
+		accountOld.setPassword(encodedPassword);
+		return accountRepo.save(accountOld);
 	}
 
 	@Override
-	public Object updatePropertyAccount(String userName, AccountDto accountDto) {
-		AccountDto newAccountDto = null;
-		Account accountNew = accountMapper.accountDtoToAccount(accountDto);
-		Account accountOld = accountRepo.findOneByUserName(userName);
-		if (!(accountNew.getPassWord() == null)) {
-			accountOld.setPassWord(accountNew.getPassWord());
+	public Object getAllAccount() {
+		List<Account> accounts = new ArrayList<>();
+		accountRepo.findAll().forEach(accounts::add);
+		List<AccountNoPassDto> accountNoPassDto = accountMapper.accountsToAccountNoPassDtos(accounts);
+		for (AccountNoPassDto accountDto : accountNoPassDto) {
+			Set<String> rolenames = new HashSet<String>();
+			for (Account account : accounts) {
+				if (accountDto.getUsername().equals(account.getUsername())) {
+					for (Role element : account.getRoles()) {
+						rolenames.add(element.getName());
+					}
+				}
 
-			newAccountDto = accountMapper.accountToAccountDto(accountOld);
-			newAccountDto.setRole_id(accountOld.getRole().getId());
+			}
+			accountDto.setRole(rolenames);
 		}
-		if (!(accountDto.getRole_id() == null)) {
-			accountOld.setRole(roleRepo.findOneById(accountDto.getRole_id()));
-			newAccountDto = accountMapper.accountToAccountDto(accountOld);
-			newAccountDto.setRole_id(accountDto.getRole_id());
-		}
-		accountRepo.save(accountOld);
-		return newAccountDto;
+
+		return accountNoPassDto;
 	}
 
 }

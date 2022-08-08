@@ -1,41 +1,53 @@
 package fa.trainning.dto;
 
+import java.util.Set;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class AccountNoPassDto {
-	@JsonProperty("userName")
-	private String userName;
-
+	@JsonProperty("username")
+	private String username;
+	@JsonProperty("role")
+	private Set<String> role;
 	
-	@JsonProperty("role_id")
-	private Integer role_id;
+
 
 	public AccountNoPassDto() {
 	}
 
-	public AccountNoPassDto(String userName, Integer role_id) {
+
+
+	public AccountNoPassDto(String username, Set<String> role) {
 		super();
-		this.userName = userName;
-		this.role_id = role_id;
+		this.username = username;
+		this.role = role;
 	}
 
-	public String getUserName() {
-		return userName;
+
+
+	public String getUsername() {
+		return username;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
-	public Integer getRole_id() {
-		return role_id;
+
+
+	public Set<String> getRole() {
+		return role;
 	}
 
-	public void setRole_id(Integer role_id) {
-		this.role_id = role_id;
+
+
+	public void setRole(Set<String> role) {
+		this.role = role;
 	}
 
-	
+
 
 	
 }

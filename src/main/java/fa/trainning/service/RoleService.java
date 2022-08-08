@@ -1,7 +1,7 @@
 package fa.trainning.service;
 
-import java.util.List;
 
+import fa.trainning.dto.AccountRoleDto;
 import fa.trainning.dto.RoleDto;
 
 public interface RoleService {
@@ -16,4 +16,5 @@ public interface RoleService {
 	void deleteRole(Integer id);
 
 	Object updateRole(Integer id, RoleDto roleDto);
+	Object addAccountToRole(AccountRoleDto accountRoleDto);
 }
