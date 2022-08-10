@@ -23,14 +23,11 @@ public class AccountController {
 	private AccountServiceImpl accountImpl;
 
 	@GetMapping()
-	@RolesAllowed({"ROLE_ADMIN", "ROLE_CUSTOMER"})
 	public DataResponse getAccount() {
 		return  new DataResponse( accountImpl.getAllAccount());
 	}
 
 	@GetMapping("/{id}")
-	@RolesAllowed({"ROLE_ADMIN", "ROLE_CUSTOMER"})
-
 	public DataResponse getAccount(@PathVariable(value = "id") Integer id) {
 		return  new DataResponse( accountImpl.getAccount(id));
 	}
@@ -41,13 +38,11 @@ public class AccountController {
 	}
 
 	@DeleteMapping("/{id}")
-	@RolesAllowed({"ROLE_ADMIN", "ROLE_CUSTOMER"})
 	public void deleteAccount(@PathVariable(value = "id") Integer id) {
 		accountImpl.deleteAccount(id);
 	}
 
 	@PutMapping("/{id}")
-	@RolesAllowed({"ROLE_ADMIN", "ROLE_CUSTOMER"})
 	public DataResponse updateAccount(@PathVariable(value = "id") Integer id, @RequestBody AccountDto accountDto) {
 		return  new DataResponse(accountImpl.updateAccount(id, accountDto));
 	}

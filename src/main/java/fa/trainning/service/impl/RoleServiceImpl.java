@@ -1,4 +1,4 @@
-package fa.trainning.service.impl;
+ package fa.trainning.service.impl;
 
 import javax.transaction.Transactional;
 
