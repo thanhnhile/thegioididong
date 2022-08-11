@@ -21,13 +21,14 @@ public interface OrderMapper {
 	
 	//----------------------------Order---------------------------------
 	//Entity to Dto
-//	OrderDto orderToOrderDto(Order order);
-//	
-//	List<OrderDto> ordersToOrderDtos(List<Order> list);
-//	//Dto to Entity
-//	Order orderDtoToOrder(OrderDto orderDto);
-//	
-//	List<Order> orderDtosToOrders(List<OrderDto> list);
+	OrderDto orderToOrderDto(Order order);
+	
+	List<OrderDto> ordersToOrderDtos(List<Order> list);
+	
+	//Dto to Entity
+	Order orderDtoToOrder(OrderDto orderDto);
+	
+	List<Order> orderDtosToOrders(List<OrderDto> list);
 	
 	
 }	
