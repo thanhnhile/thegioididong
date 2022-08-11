@@ -1,5 +1,8 @@
 package fa.trainning.service;
 
+import java.util.List;
+
+import fa.trainning.dto.FilterItemDto;
 import fa.trainning.dto.ProductDto;
 
 
@@ -17,4 +20,6 @@ public interface ProductService {
 	void deleteProduct(Integer id);
 	
 	Object getProductByCategoryPaging(Integer categoryId,int offSet, int pageSize);
+	
+	Object filterProduct(List<FilterItemDto> listFilters, int offSet, int pageSize);
 }

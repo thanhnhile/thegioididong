@@ -2,13 +2,13 @@ package fa.trainning.service.impl;
 
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import fa.trainning.dto.FilterItemDto;
 import fa.trainning.dto.PagingDto;
 import fa.trainning.dto.ProductDto;
 import fa.trainning.entity.Image;
@@ -19,13 +19,13 @@ import fa.trainning.repository.ProductRepository;
 import fa.trainning.service.ProductService;
 
 @Service
-public class ProductServiceImpl implements ProductService{
-	
+public class ProductServiceImpl implements ProductService {
+
 	@Autowired
 	private ProductRepository productRepo;
 	@Autowired
 	private ImageRepository imageRepo;
-	
+
 	@Autowired
 	private ProductMapper productMapper;
 
@@ -44,16 +44,16 @@ public class ProductServiceImpl implements ProductService{
 	public Object addProduct(ProductDto productDto) {
 		Product productToAdd = productMapper.productDtoToProduct(productDto);
 		Product newestProduct = productRepo.save(productToAdd);
-		for(Image image : newestProduct.getImages()) {
+		for (Image image : newestProduct.getImages()) {
 			image.setProduct(newestProduct);
 			imageRepo.save(image);
 		}
 		return productMapper.productToProductDto(newestProduct);
 	}
-	
+
 	@Override
 	public Object updateProrduct(Integer id, ProductDto productDto) {
-		if(productRepo.findById(id).isPresent()) {
+		if (productRepo.findById(id).isPresent()) {
 			Product productToUpdate = productMapper.productDtoToProduct(productDto);
 			productToUpdate.setId(id);
 			List<Image> newImages = productDto.getImages();
@@ -62,13 +62,14 @@ public class ProductServiceImpl implements ProductService{
 				image.setProduct(null);
 				imageRepo.save(image);
 			});
-			for(Image image:newImages) {
+			for (Image image : newImages) {
 				image.setProduct(productToUpdate);
 			}
 			productToUpdate.setImages(newImages);
-			
+
 			return productMapper.productToProductDto(productRepo.save(productToUpdate));
-		}else return null;
+		} else
+			return null;
 	}
 
 	@Override
@@ -78,7 +79,7 @@ public class ProductServiceImpl implements ProductService{
 
 	@Override
 	public Object getAllProductPagnation(int offSet, int pageSize) {
-		Pageable pageable = PageRequest.of(offSet-1, pageSize);
+		Pageable pageable = PageRequest.of(offSet - 1, pageSize);
 		Page<Product> page = productRepo.findAll(pageable);
 		PagingDto response = new PagingDto();
 		response.setCurrentPage(offSet);
@@ -92,7 +93,7 @@ public class ProductServiceImpl implements ProductService{
 
 	@Override
 	public Object getProductByCategoryPaging(Integer categoryId, int offSet, int pageSize) {
-		Pageable pageable = PageRequest.of(offSet-1, pageSize);
+		Pageable pageable = PageRequest.of(offSet - 1, pageSize);
 		Page<Product> page = productRepo.findByCategoryId(categoryId, pageable);
 		PagingDto response = new PagingDto();
 		response.setCurrentPage(offSet);
@@ -103,5 +104,32 @@ public class ProductServiceImpl implements ProductService{
 		return response;
 	}
 
+	@Override
+	public Object filterProduct(List<FilterItemDto> listFilters, int offSet, int pageSize) {
+		return null;
+//		Pageable pageable = PageRequest.of(offSet - 1, pageSize);
+//		Page<Product> page;
+//		String query = "SELECT p FROM Product p WHERE ";
+//		for (FilterItemDto fItemDto : listFilters) {
+//			switch (fItemDto.getOperation()) {
+//			case "cn":
+//				query = fItemDto.getFilterKey() +" LIKE %"+fItemDto.getValue()+"%";
+//				break;
+//			case "eq":
+//
+//				break;
+//
+//			default:
+//				break;
+//			}
+//		}
+//		PagingDto response = new PagingDto();
+//		response.setCurrentPage(offSet);
+//		response.setPageSize(pageSize);
+//		response.setTotalElements(page.getTotalElements());
+//		response.setTotalPages(page.getTotalPages());
+//		response.setListDtos(productMapper.productsToProductDtos(page.getContent()));
+//		return response;
+	}
 
 }
