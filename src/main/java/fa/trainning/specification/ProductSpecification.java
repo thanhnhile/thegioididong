@@ -3,6 +3,7 @@ package fa.trainning.specification;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
@@ -33,20 +34,18 @@ public class ProductSpecification implements Specification<Product> {
 	@Override
 	public Predicate toPredicate(Root<Product> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 		String strToSearch = searchCriteria.getValue().toString();
-		System.out.println(strToSearch);
 		switch (SearchOperation.getSimpleOperation(searchCriteria.getOperation())) {
 		case CONTAINS:
             return cb.like(cb.lower(root
                      .get(searchCriteria.getFilterKey())).as(String.class), 
-                     "%" + strToSearch + "%");
+                     "%" + strToSearch.toLowerCase() + "%");
 		case EQUAL:
 			if(searchCriteria.getFilterKey().equals("category")) {
-				return cb.equal(cb.lower(categoryJoin(root).get(searchCriteria.getFilterKey())).as(String.class), strToSearch);
+				return cb.equal(cb.lower(categoryJoin(root).get("name")).as(String.class), strToSearch.toLowerCase());
 			}else if(searchCriteria.getFilterKey().equals("manufacturer")){
-				return cb.equal(cb.lower(manufacturerJoin(root).get(searchCriteria.getFilterKey())).as(String.class), strToSearch);
+				return cb.equal(cb.lower(manufacturerJoin(root).get("branchName")).as(String.class), strToSearch.toLowerCase());
 			}
-			
-			else return cb.equal(cb.lower(root.get(searchCriteria.getFilterKey())),strToSearch);
+			else return cb.equal(cb.lower(root.get(searchCriteria.getFilterKey())),Double.parseDouble(strToSearch));
 		case GREATER_THAN:
 			return cb.greaterThan(root.get(searchCriteria.getFilterKey()), strToSearch);
 		case GREATER_THAN_EQUAL:
@@ -62,11 +61,11 @@ public class ProductSpecification implements Specification<Product> {
 		throw new RuntimeException("Operation not supported yet");
 	}
 	private Join<Product, Category> categoryJoin(Root<Product> root){
-		return root.join("category");
+		return root.join("category",JoinType.INNER);
 	}
 	
 	private Join<Product, Manufacturer> manufacturerJoin(Root<Product> root){
-		return root.join("manufacturer");
+		return root.join("manufacturer",JoinType.INNER);
 	}
 
 }

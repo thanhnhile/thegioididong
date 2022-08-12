@@ -22,5 +22,5 @@ public interface ProductService {
 	Object getProductByCategoryPaging(Integer categoryId,int offSet, int pageSize);
 	
 	//Filter
-	Object findBySearchCriteria(Specification<Product> spec,int offSet, int pageSize,String sortBy);
+	Object findBySearchCriteria(Specification<Product> spec,int offSet, int pageSize,String sortBy, Boolean asc);
 }

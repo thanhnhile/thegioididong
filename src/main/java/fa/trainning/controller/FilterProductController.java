@@ -22,9 +22,10 @@ public class FilterProductController {
 	@Autowired
 	private ProductServiceImpl productService;
 
-	// products/filter?pageSize=10&pageNum=1&sortBy=price
+	// products/filter?pageSize=10&pageNum=1&sortBy=price&asc=true
 	@PostMapping("/filter")
 	public DataResponse filterProduct(@RequestParam String sortBy, 
+			@RequestParam(defaultValue="true") Boolean asc,
 			@RequestParam int pageNum, @RequestParam(defaultValue="20") int pageSize,
 			@RequestBody ProductSearchDto searchDto) {
 		ProductSpecificationBuilder builder = new ProductSpecificationBuilder();
@@ -35,7 +36,7 @@ public class FilterProductController {
 				builder.with(x);
 			});
 		}
-		Object result = productService.findBySearchCriteria(builder.build(), pageNum, pageSize, sortBy);
+		Object result = productService.findBySearchCriteria(builder.build(), pageNum, pageSize, sortBy, asc);
 		DataResponse dataResponse = new DataResponse(result);
 		return dataResponse;
 	}
