@@ -43,10 +43,10 @@ public class ApplicationSecurity extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable();
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-		
-		http.authorizeRequests()
-				//.antMatchers("/login/access", "/roles", "/accounts/access").permitAll()
-				.anyRequest().permitAll();
+		 http
+         .authorizeRequests()
+             .antMatchers("/roles").authenticated()
+             .antMatchers("/**").permitAll();
 		
         http.exceptionHandling()
                 .authenticationEntryPoint(
