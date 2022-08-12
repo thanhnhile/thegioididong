@@ -28,18 +28,18 @@ public class  ImageController {
 	}
 
 	@GetMapping("/{offSet}/{pageSize}")
-	public List<ImageDto> getAllImage(@PathVariable int offSet, @PathVariable int pageSize) {
-		return imageImpl.getAllImagePagnation(offSet, pageSize);
+	public DataResponse getAllImage(@PathVariable int offSet, @PathVariable int pageSize) {
+		return new DataResponse(imageImpl.getAllImagePagnation(offSet, pageSize));
 	}
 
 	@GetMapping("/{image_id}")
-	public ImageDto getCategory(@PathVariable(value = "image_id") Integer image_id) {
-		return imageImpl.getImage(image_id);
+	public DataResponse getCategory(@PathVariable(value = "image_id") Integer image_id) {
+		return new DataResponse(imageImpl.getImage(image_id));
 	}
 
 	@PostMapping()
-	public void addImage(@RequestBody ImageDto imageDto) {
-		imageImpl.addImage(imageDto);
+	public DataResponse addImage(@RequestBody ImageDto imageDto) {
+		return new DataResponse(imageImpl.addImage(imageDto));
 	}
 
 	@DeleteMapping("/{image_id}")
@@ -48,7 +48,7 @@ public class  ImageController {
 	}
 
 	@PutMapping("/{image_id}")
-	public void updateImage(@PathVariable(value = "image_id") Integer image_id, @RequestBody ImageDto imageDto) {
-		imageImpl.updateImage(image_id, imageDto);
+	public DataResponse updateImage(@PathVariable(value = "image_id") Integer image_id, @RequestBody ImageDto imageDto) {
+		return new DataResponse(imageImpl.updateImage(image_id, imageDto));
 	}
 }
