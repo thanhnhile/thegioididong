@@ -8,7 +8,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import fa.trainning.dto.FilterItemDto;
 import fa.trainning.dto.PagingDto;
 import fa.trainning.dto.ProductDto;
 import fa.trainning.entity.Image;
@@ -103,33 +102,4 @@ public class ProductServiceImpl implements ProductService {
 		response.setListDtos(productMapper.productsToProductDtos(page.getContent()));
 		return response;
 	}
-
-	@Override
-	public Object filterProduct(List<FilterItemDto> listFilters, int offSet, int pageSize) {
-		return null;
-//		Pageable pageable = PageRequest.of(offSet - 1, pageSize);
-//		Page<Product> page;
-//		String query = "SELECT p FROM Product p WHERE ";
-//		for (FilterItemDto fItemDto : listFilters) {
-//			switch (fItemDto.getOperation()) {
-//			case "cn":
-//				query = fItemDto.getFilterKey() +" LIKE %"+fItemDto.getValue()+"%";
-//				break;
-//			case "eq":
-//
-//				break;
-//
-//			default:
-//				break;
-//			}
-//		}
-//		PagingDto response = new PagingDto();
-//		response.setCurrentPage(offSet);
-//		response.setPageSize(pageSize);
-//		response.setTotalElements(page.getTotalElements());
-//		response.setTotalPages(page.getTotalPages());
-//		response.setListDtos(productMapper.productsToProductDtos(page.getContent()));
-//		return response;
-	}
-
 }

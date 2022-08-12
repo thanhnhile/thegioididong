@@ -14,9 +14,4 @@ public interface ProductRepository extends JpaRepository<Product, Integer>{
 	@Query("SELECT p FROM Product p WHERE category_id = :categoryId order by product_id")
 	public Page<Product> findByCategoryId(Integer categoryId, Pageable pageable);
 	
-	@Query("")
-	public Page<Product> findProductByLikeKeyWord(String keyword,Pageable pageable);
-	
-	@Query("")
-	public Page<Product> findProductPriceBetween(float min,float max,Pageable pageable);
 }
