@@ -52,15 +52,33 @@ public class Product {
 
 	@OneToMany(mappedBy="product", fetch = FetchType.LAZY)
 	private List<ProductsStores> productsStores;
+	
+	///================\
+	
+	private String ram;
+	
+	private String rom;
+	
+	private String screen;
+	
+	private String battery;
+	
+	private String os;
+	
+	private String camera;
+	
+	private String color;
 
 	public Product() {
 	}
-
-	public Product(Integer id, String name, Category category, Manufacturer manufacturer, String description, float price,
+	
+	
+	
+	public Product(String name, Category category, Manufacturer manufacturer, String description, float price,
 			float discount, List<Image> images, String video, String productWarranty, Boolean status, String unit,
-			List<ProductsStores> productsStores) {
+			List<ProductsStores> productsStores, String ram, String rom, String screen, String battery, String os,
+			String camera, String color) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.category = category;
 		this.manufacturer = manufacturer;
@@ -73,7 +91,16 @@ public class Product {
 		this.status = status;
 		this.unit = unit;
 		this.productsStores = productsStores;
+		this.ram = ram;
+		this.rom = rom;
+		this.screen = screen;
+		this.battery = battery;
+		this.os = os;
+		this.camera = camera;
+		this.color = color;
 	}
+
+
 
 	public Integer getId() {
 		return id;
@@ -177,6 +204,90 @@ public class Product {
 
 	public void setProductsStores(List<ProductsStores> productsStores) {
 		this.productsStores = productsStores;
+	}
+
+
+
+	public String getRam() {
+		return ram;
+	}
+
+
+
+	public void setRam(String ram) {
+		this.ram = ram;
+	}
+
+
+
+	public String getRom() {
+		return rom;
+	}
+
+
+
+	public void setRom(String rom) {
+		this.rom = rom;
+	}
+
+
+
+	public String getScreen() {
+		return screen;
+	}
+
+
+
+	public void setScreen(String screen) {
+		this.screen = screen;
+	}
+
+
+
+	public String getBattery() {
+		return battery;
+	}
+
+
+
+	public void setBattery(String battery) {
+		this.battery = battery;
+	}
+
+
+
+	public String getOs() {
+		return os;
+	}
+
+
+
+	public void setOs(String os) {
+		this.os = os;
+	}
+
+
+
+	public String getCamera() {
+		return camera;
+	}
+
+
+
+	public void setCamera(String camera) {
+		this.camera = camera;
+	}
+
+
+
+	public String getColor() {
+		return color;
+	}
+
+
+
+	public void setColor(String color) {
+		this.color = color;
 	}
 
 	
