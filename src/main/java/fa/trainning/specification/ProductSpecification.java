@@ -45,7 +45,7 @@ public class ProductSpecification implements Specification<Product> {
 			}else if(searchCriteria.getFilterKey().equals("manufacturer")){
 				return cb.equal(cb.lower(manufacturerJoin(root).get("branchName")).as(String.class), strToSearch.toLowerCase());
 			}
-			else return cb.equal(cb.lower(root.get(searchCriteria.getFilterKey())),Double.parseDouble(strToSearch));
+			else return cb.equal(cb.lower(root.get(searchCriteria.getFilterKey())),strToSearch);
 		case GREATER_THAN:
 			return cb.greaterThan(root.get(searchCriteria.getFilterKey()), strToSearch);
 		case GREATER_THAN_EQUAL:
