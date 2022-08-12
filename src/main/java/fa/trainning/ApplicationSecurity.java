@@ -44,9 +44,10 @@ public class ApplicationSecurity extends WebSecurityConfigurerAdapter {
 		http.csrf().disable();
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		
-		http.authorizeRequests()
-				.antMatchers("/login/access", "/roles", "/accounts/access").permitAll()
-				.anyRequest().authenticated();
+		 http
+         .authorizeRequests()
+             .antMatchers("/roles").authenticated()
+             .antMatchers("/**").permitAll();
 		
         http.exceptionHandling()
                 .authenticationEntryPoint(

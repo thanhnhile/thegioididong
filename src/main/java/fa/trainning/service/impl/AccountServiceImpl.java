@@ -15,6 +15,7 @@ import fa.trainning.dto.AccountDto;
 import fa.trainning.dto.AccountNoPassDto;
 import fa.trainning.entity.Account;
 import fa.trainning.entity.Role;
+import fa.trainning.exception.AccountException;
 import fa.trainning.mapstruct.AccountMapper;
 import fa.trainning.repository.AccountRepository;
 import fa.trainning.service.AccountService;
@@ -40,6 +41,9 @@ public class AccountServiceImpl implements AccountService {
 	@Override
 	public Object getAccount(Integer id) {
 		Account account = accountRepo.findOneById(id);
+		if(account==null)
+		    throw new AccountException(id);
+			
 		Set<String> rolenames = new HashSet<String>();
 		for (Role element : account.getRoles()) {
 			rolenames.add(element.getName());
