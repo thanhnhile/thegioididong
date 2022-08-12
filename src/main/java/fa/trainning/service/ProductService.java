@@ -2,7 +2,10 @@ package fa.trainning.service;
 
 import java.util.List;
 
+import org.springframework.data.jpa.domain.Specification;
+
 import fa.trainning.dto.ProductDto;
+import fa.trainning.entity.Product;
 
 
 public interface ProductService {
@@ -20,4 +23,7 @@ public interface ProductService {
 	
 	Object getProductByCategoryPaging(Integer categoryId,int offSet, int pageSize);
 	
+	//Filter
+	Object findBySearchCriteria(Specification<Product> spec,int offSet, int pageSize,String sortBy, Boolean asc);
+
 }

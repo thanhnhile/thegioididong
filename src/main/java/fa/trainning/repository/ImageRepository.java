@@ -7,5 +7,5 @@ import fa.trainning.entity.Image;
 
 @Repository
 public interface ImageRepository extends JpaRepository<Image, Integer>{
-
+	Image findOneById(Integer id);
 }
