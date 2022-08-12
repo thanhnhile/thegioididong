@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import fa.trainning.dto.PagingDto;
@@ -102,6 +104,26 @@ public class ProductServiceImpl implements ProductService{
 		response.setListDtos(productMapper.productsToProductDtos(page.getContent()));
 		return response;
 	}
+
+	@Override
+	public Object findBySearchCriteria(Specification<Product> spec, int offSet, int pageSize, String sortBy, Boolean asc) {
+		Pageable pageable;
+		if(asc) {
+			pageable = PageRequest.of(offSet-1, pageSize,Sort.by(sortBy).ascending());
+		}else {
+			pageable = PageRequest.of(offSet-1, pageSize,Sort.by(sortBy).descending());
+		}
+		Page<Product> page = productRepo.findAll(spec,pageable);
+		PagingDto response = new PagingDto();
+		response.setCurrentPage(offSet);
+		response.setPageSize(pageSize);
+		response.setTotalElements(page.getTotalElements());
+		response.setTotalPages(page.getTotalPages());
+		response.setListDtos(productMapper.productsToProductDtos(page.getContent()));
+		return response;
+	}
+
+	
 
 
 }
