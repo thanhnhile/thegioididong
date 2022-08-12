@@ -32,7 +32,8 @@ public class ProductSpecification implements Specification<Product> {
 
 	@Override
 	public Predicate toPredicate(Root<Product> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-		String strToSearch = searchCriteria.getValue().toString().toLowerCase();
+		String strToSearch = searchCriteria.getValue().toString();
+		System.out.println(strToSearch);
 		switch (SearchOperation.getSimpleOperation(searchCriteria.getOperation())) {
 		case CONTAINS:
             return cb.like(cb.lower(root
@@ -47,13 +48,13 @@ public class ProductSpecification implements Specification<Product> {
 			
 			else return cb.equal(cb.lower(root.get(searchCriteria.getFilterKey())),strToSearch);
 		case GREATER_THAN:
-			return cb.greaterThan(root.get(searchCriteria.getFilterKey()).as(String.class), strToSearch);
+			return cb.greaterThan(root.get(searchCriteria.getFilterKey()), strToSearch);
 		case GREATER_THAN_EQUAL:
-			return cb.greaterThanOrEqualTo(root.get(searchCriteria.getFilterKey()).as(String.class),strToSearch);
+			return cb.greaterThanOrEqualTo(root.get(searchCriteria.getFilterKey()),strToSearch);
 		case LESS_THAN:
-			return cb.lessThan(root.get(searchCriteria.getFilterKey()).as(String.class), strToSearch);
+			return cb.lessThan(root.get(searchCriteria.getFilterKey()), strToSearch);
 		case LESS_THAN_EQUAL:
-			return cb.lessThanOrEqualTo(root.get(searchCriteria.getFilterKey()).as(String.class), strToSearch);
+			return cb.lessThanOrEqualTo(root.get(searchCriteria.getFilterKey()), strToSearch);
 		default:
 			break;
 
