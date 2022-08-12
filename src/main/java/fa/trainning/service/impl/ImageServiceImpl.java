@@ -28,24 +28,24 @@ public class ImageServiceImpl implements ImageService {
 	}
 
 	@Override
-	public List<ImageDto> getAllImagePagnation(int offSet,int pageSize) {
+	public Object getAllImagePagnation(int offSet,int pageSize) {
 		Page<Image> page=  imageRepo.findAll(PageRequest.of(offSet, pageSize));
 		return imageMapper.imagesToImageDtos(page.getContent());
 	}
 
 	@Override
-	public List<ImageDto> getAllImage() {
+	public Object getAllImage() {
 		return imageMapper.imagesToImageDtos(imageRepo.findAll());
 	}
 	
 	@Override
-	public ImageDto getImage(Integer id) {
+	public Object getImage(Integer id) {
 		return imageMapper.imageToImageDto(imageRepo.findOneById(id));
 	}
 
 	@Override
-	public void addImage(ImageDto imageDto) {
-		imageRepo.save(imageMapper.imageDtoToImage(imageDto));
+	public Object addImage(ImageDto imageDto) {
+		return imageRepo.save(imageMapper.imageDtoToImage(imageDto));
 	}
 
 	@Override
@@ -54,7 +54,7 @@ public class ImageServiceImpl implements ImageService {
 	}
 
 	@Override
-	public ImageDto updateImage(Integer id, ImageDto imageDto) {
+	public Object updateImage(Integer id, ImageDto imageDto) {
 		Image ImageNew = imageMapper.imageDtoToImage(imageDto);
 		Image ImageOld = imageRepo.findOneById(id);
 		ImageOld.setUrl(ImageNew.getUrl());

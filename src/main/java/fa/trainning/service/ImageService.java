@@ -5,15 +5,15 @@ import java.util.List;
 import fa.trainning.dto.ImageDto;
 
 public interface ImageService {
-	List<ImageDto> getAllImage();
+	Object getAllImage();
 
-	List<ImageDto> getAllImagePagnation(int offSet, int pageSize);
+	Object getAllImagePagnation(int offSet, int pageSize);
 
-	ImageDto getImage(Integer id);
+	Object getImage(Integer id);
 
-	void addImage(ImageDto imageDto);
+	Object addImage(ImageDto imageDto);
 
 	void deleteImage(Integer id);
 
-	ImageDto updateImage(Integer id, ImageDto imageDto);
+	Object updateImage(Integer id, ImageDto imageDto);
 }
