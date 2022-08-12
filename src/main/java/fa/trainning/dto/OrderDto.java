@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import fa.trainning.entity.OrderState;
+
 public class OrderDto {
 	@JsonProperty("id")
 	private Integer id;
@@ -23,6 +25,9 @@ public class OrderDto {
 	
 	@JsonProperty("date")
 	private Date createdDate;
+	
+	@JsonProperty("state")
+	private OrderState state;
 
 	public OrderDto() {
 		super();
@@ -30,7 +35,7 @@ public class OrderDto {
 	}
 
 	public OrderDto(Integer id, CustomerDto customer, List<OrderDetailDto> details, StoreDto store, float total,
-			Date createdDate) {
+			Date createdDate, OrderState state) {
 		super();
 		this.id = id;
 		this.customer = customer;
@@ -38,6 +43,7 @@ public class OrderDto {
 		this.store = store;
 		this.total = total;
 		this.createdDate = createdDate;
+		this.state = state;
 	}
 
 	public Integer getId() {
@@ -86,6 +92,14 @@ public class OrderDto {
 
 	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
+	}
+
+	public OrderState getState() {
+		return state;
+	}
+
+	public void setState(OrderState state) {
+		this.state = state;
 	}
 	
 	

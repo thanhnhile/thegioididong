@@ -43,18 +43,30 @@ public class Order {
 	@CreatedDate
 	private Date createdDate;
 	
+	@ManyToOne
+	@JoinColumn(name="state_id")
+	private OrderState state;
+	
+	
 	public Order() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Order(Customer customer, List<OrderDetail> details, Store store, float total) {
+	
+
+	public Order(Customer customer, List<OrderDetail> details, Store store, float total, Date createdDate,
+			OrderState state) {
 		super();
 		this.customer = customer;
 		this.details = details;
 		this.store = store;
 		this.total = total;
+		this.createdDate = createdDate;
+		this.state = state;
 	}
+
+
 
 	public Integer getId() {
 		return id;
@@ -104,8 +116,18 @@ public class Order {
 		this.createdDate = createdDate;
 	}
 
-	
-	
+
+
+	public OrderState getState() {
+		return state;
+	}
+
+
+
+	public void setState(OrderState state) {
+		this.state = state;
+	}
+
 	
 	
 }

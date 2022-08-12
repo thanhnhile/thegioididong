@@ -58,11 +58,6 @@ public class ProductServiceImpl implements ProductService {
 			Product productToUpdate = productMapper.productDtoToProduct(productDto);
 			productToUpdate.setId(id);
 			List<Image> newImages = productDto.getImages();
-			List<Image> oldImages = productRepo.getReferenceById(id).getImages();
-			oldImages.forEach(image -> {
-				image.setProduct(null);
-				imageRepo.save(image);
-			});
 			for (Image image : newImages) {
 				image.setProduct(productToUpdate);
 			}
