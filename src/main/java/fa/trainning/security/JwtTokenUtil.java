@@ -30,7 +30,7 @@ public class JwtTokenUtil {
 		
 		return Jwts.builder()
 				.setSubject(String.format("%s,%s", account.getId(), account.getUsername()))
-				.setIssuer("CodeJava")
+				.setIssuer("Nhom7")
 				.claim("roles", account.getRoles().toString())
 				.setIssuedAt(new Date())
 				.setExpiration(new Date(System.currentTimeMillis() + EXPIRE_DURATION))
