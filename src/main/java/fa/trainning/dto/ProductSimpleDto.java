@@ -2,19 +2,19 @@ package fa.trainning.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class ProductCartDto {
+public class ProductSimpleDto {
 	@JsonProperty("id")
 	private Integer id;
 	
 	@JsonProperty("productName")
 	private String name;
 
-	public ProductCartDto() {
+	public ProductSimpleDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public ProductCartDto(Integer id, String name) {
+	public ProductSimpleDto(Integer id, String name) {
 		super();
 		this.id = id;
 		this.name = name;

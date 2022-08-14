@@ -1,5 +1,6 @@
 package fa.trainning.exception.handler;
 
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,6 +21,10 @@ public class GlobalExceptionHandler {
 	@ResponseBody
 	public DataResponse handleAccountException(AccountException e) {
 		return new DataResponse("400", e.getMessage(), 200);
+	}
+	
+	public DataResponse handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
+		return new DataResponse("404","Please change method type",200);
 	}
 
 }
