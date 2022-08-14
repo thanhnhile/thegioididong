@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import fa.trainning.dto.OrderDto;
 import fa.trainning.entity.Order;
 import fa.trainning.entity.OrderDetail;
+import fa.trainning.entity.Store;
 import fa.trainning.mapstruct.OrderMapper;
 import fa.trainning.repository.OrderDetailRepository;
 import fa.trainning.repository.OrderRepository;
@@ -47,23 +48,14 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public OrderDto updateOrder(Integer id, OrderDto orderDto) {
-//		if (orderRepo.findById(id).isPresent()) {
-//			Order orderToUpdate = orderMapper.orderDtoToOrder(orderDto);
-//			orderToUpdate.setId(id);
-//			List<OrderDetail> newOrderDetails = orderDto.getDetails();
-//			List<OrderDetail> oldOrderDetails = orderRepo.getReferenceById(id).getDetails();
-//			oldOrderDetails.forEach(detail -> {
-//				detail.setOrder(null);
-//				orderDetailRepo.save(detail);
-//			});
-//			for (OrderDetail orderDetail : newOrderDetails) {
-//				orderDetail.setOrder(orderToUpdate);
-//			}
-//			orderToUpdate.setDetails(newOrderDetails);
-//			return orderMapper.orderToOrderDto(orderRepo.save(orderToUpdate));
-//		} else
-			return null;
+	public OrderDto updateStateOrder(Integer id, OrderDto orderDto) {
+		Order orderNew = orderMapper.orderDtoToOrder(orderDto);
+		Order orderOld = orderRepo.findOneById(id);
+		if (!(orderNew.getState() == null)) {
+			orderOld.setState(orderNew.getState());;
+		}
+		orderRepo.save(orderOld);
+		return orderMapper.orderToOrderDto(orderOld);
 	}
 
 	@Override

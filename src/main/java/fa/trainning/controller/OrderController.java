@@ -1,7 +1,5 @@
 package fa.trainning.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import fa.trainning.dto.DataResponse;
 import fa.trainning.dto.OrderDto;
 import fa.trainning.service.impl.OrderServiceImpl;
 
@@ -20,31 +19,31 @@ import fa.trainning.service.impl.OrderServiceImpl;
 @RequestMapping(path = "/orders")
 public class OrderController {
 	@Autowired
-	private OrderServiceImpl orderService;
+	private OrderServiceImpl orderImpl;
 
 	@GetMapping
-	public List<OrderDto> getAllOrders() {
-		return orderService.getAllOrders();
+	public DataResponse getAllOrders() {
+		return new DataResponse (orderImpl.getAllOrders());
 	}
 
-	@GetMapping(value = "/{id}")
-	public OrderDto getOrder(@PathVariable(value = "id") Integer id) {
-		return orderService.getOrder(id);
+	@GetMapping(value = "/{order_id}")
+	public DataResponse getOrder(@PathVariable(value = "order_id") Integer order_id) {
+		return new DataResponse (orderImpl.getOrder(order_id));
 	}
 
-	@DeleteMapping(value = "/{id}")
-	public void deleteOrder(@PathVariable(value = "id") Integer id) {
-		orderService.deleteOrder(id);
+	@DeleteMapping(value = "/{order_id}")
+	public void deleteOrder(@PathVariable(value = "order_id") Integer order_id) {
+		orderImpl.deleteOrder(order_id);
 	}
 
 	@PostMapping
-	public OrderDto addOrder(@Validated @RequestBody OrderDto OrderDto) {
-		return orderService.addOrder(OrderDto);
+	public DataResponse addOrder(@Validated @RequestBody OrderDto OrderDto) {
+		return new DataResponse (orderImpl.addOrder(OrderDto));
 	}
 
-	@PutMapping(value = "/{id}")
-	public OrderDto updateOrder(@PathVariable(value = "id") Integer id,
+	@PutMapping(value = "/{order_id}")
+	public DataResponse updateOrder(@PathVariable(value = "order_id") Integer order_id,
 			@Validated @RequestBody OrderDto orderDto) {
-		return orderService.updateOrder(id, orderDto);
+		return new DataResponse (orderImpl.updateStateOrder(order_id, orderDto));
 	}
 }
