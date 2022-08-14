@@ -3,6 +3,7 @@ package fa.trainning.specification;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import org.springframework.data.jpa.domain.Specification;
 
 import fa.trainning.dto.SearchCriteria;
@@ -30,9 +31,31 @@ public class ProductSpecificationBuilder {
         if(params.size() == 0){
             return null;
         }
+        SearchCriteria searchCriteria = params.get(0);
+        Specification<Product> result;
+        String strToSearch = searchCriteria.getValue().toString();
+        System.out.println(strToSearch);
+        if(strToSearch.contains(",")) {
+        	System.out.println("========================TWO VALUES");
+			String [] searchValues = strToSearch.split(",");
+			result = Specification.where(new ProductSpecification(
+					new SearchCriteria(
+					searchCriteria.getFilterKey(),
+					searchValues[0],
+					searchCriteria.getOperation())));
+			int i=1;
+			while(i<searchValues.length) {
+				result = result.or(new ProductSpecification(new SearchCriteria(
+						searchCriteria.getFilterKey(), 
+						searchValues[i],
+						searchCriteria.getOperation())));
+				i++;
+			}
+		}
+        else {
+        	result = new ProductSpecification(params.get(0));
+        }
 
-        Specification<Product> result = 
-                   new ProductSpecification(params.get(0));
         for (int idx = 1; idx < params.size(); idx++){
             SearchCriteria criteria = params.get(idx);
             result =  SearchOperation.getDataOption(criteria
