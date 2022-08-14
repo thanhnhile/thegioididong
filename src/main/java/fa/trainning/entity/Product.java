@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -53,6 +55,10 @@ public class Product {
 	@OneToMany(mappedBy="product", fetch = FetchType.LAZY)
 	private List<ProductsStores> productsStores;
 	
+	@ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "product_promotion", joinColumns = { @JoinColumn(name = "product_id") }, 
+    										inverseJoinColumns = {@JoinColumn(name = "promotion_id") })
+	private List<Promotion> promotions;
 	///================\
 	
 	private String ram;
@@ -71,13 +77,11 @@ public class Product {
 
 	public Product() {
 	}
-	
-	
-	
+
 	public Product(String name, Category category, Manufacturer manufacturer, String description, float price,
 			float discount, List<Image> images, String video, String productWarranty, Boolean status, String unit,
-			List<ProductsStores> productsStores, String ram, String rom, String screen, String battery, String os,
-			String camera, String color) {
+			List<ProductsStores> productsStores, List<Promotion> promotions, String ram, String rom, String screen,
+			String battery, String os, String camera, String color) {
 		super();
 		this.name = name;
 		this.category = category;
@@ -91,6 +95,7 @@ public class Product {
 		this.status = status;
 		this.unit = unit;
 		this.productsStores = productsStores;
+		this.promotions = promotions;
 		this.ram = ram;
 		this.rom = rom;
 		this.screen = screen;
@@ -99,8 +104,6 @@ public class Product {
 		this.camera = camera;
 		this.color = color;
 	}
-
-
 
 	public Integer getId() {
 		return id;
@@ -206,91 +209,69 @@ public class Product {
 		this.productsStores = productsStores;
 	}
 
+	public List<Promotion> getPromotions() {
+		return promotions;
+	}
 
+	public void setPromotions(List<Promotion> promotions) {
+		this.promotions = promotions;
+	}
 
 	public String getRam() {
 		return ram;
 	}
 
-
-
 	public void setRam(String ram) {
 		this.ram = ram;
 	}
-
-
 
 	public String getRom() {
 		return rom;
 	}
 
-
-
 	public void setRom(String rom) {
 		this.rom = rom;
 	}
-
-
 
 	public String getScreen() {
 		return screen;
 	}
 
-
-
 	public void setScreen(String screen) {
 		this.screen = screen;
 	}
-
-
 
 	public String getBattery() {
 		return battery;
 	}
 
-
-
 	public void setBattery(String battery) {
 		this.battery = battery;
 	}
-
-
 
 	public String getOs() {
 		return os;
 	}
 
-
-
 	public void setOs(String os) {
 		this.os = os;
 	}
-
-
 
 	public String getCamera() {
 		return camera;
 	}
 
-
-
 	public void setCamera(String camera) {
 		this.camera = camera;
 	}
-
-
 
 	public String getColor() {
 		return color;
 	}
 
-
-
 	public void setColor(String color) {
 		this.color = color;
 	}
-
 	
 	
-
 }
