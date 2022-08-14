@@ -1,40 +1,15 @@
 package fa.trainning.dto;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ProductsStoresDto {
-	@JsonProperty("product_id")
-	private Integer product;
 	
-	@JsonProperty("inStock")
-	private int inStock;
+	@JsonProperty("store")
+	private StoreDto store;
 	
-	public ProductsStoresDto() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public ProductsStoresDto(Integer product, int inStock) {
-		super();
-		this.product = product;
-		this.inStock = inStock;
-	}
-
-	public Integer getProduct() {
-		return product;
-	}
-
-	public void setProduct(Integer product) {
-		this.product = product;
-	}
-
-	public int getInStock() {
-		return inStock;
-	}
-
-	public void setInStock(int inStock) {
-		this.inStock = inStock;
-	}
-	
+	@JsonProperty("productsInStore")
+	private List<ProductInStoreDto> productsStores;
 	
 }

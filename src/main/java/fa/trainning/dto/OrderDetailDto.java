@@ -8,7 +8,7 @@ public class OrderDetailDto {
 	private Integer id;
 	
 	@JsonProperty("product")
-	private ProductCartDto product;
+	private ProductSimpleDto product;
 	
 	@JsonProperty("price")
 	private float price;
@@ -21,7 +21,7 @@ public class OrderDetailDto {
 		// TODO Auto-generated constructor stub
 	}
 
-	public OrderDetailDto(Integer id, ProductCartDto product, float price, int quantity) {
+	public OrderDetailDto(Integer id, ProductSimpleDto product, float price, int quantity) {
 		super();
 		this.id = id;
 		this.product = product;
@@ -37,11 +37,11 @@ public class OrderDetailDto {
 		this.id = id;
 	}
 
-	public ProductCartDto getProduct() {
+	public ProductSimpleDto getProduct() {
 		return product;
 	}
 
-	public void setProduct(ProductCartDto product) {
+	public void setProduct(ProductSimpleDto product) {
 		this.product = product;
 	}
 
