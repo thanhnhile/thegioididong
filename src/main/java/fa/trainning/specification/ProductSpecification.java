@@ -33,7 +33,7 @@ public class ProductSpecification implements Specification<Product> {
 
 	@Override
 	public Predicate toPredicate(Root<Product> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-		String strToSearch = searchCriteria.getValue().toString();
+		String strToSearch = searchCriteria.getValue().toString().trim();
 		switch (SearchOperation.getSimpleOperation(searchCriteria.getOperation())) {
 		case CONTAINS:
             return cb.like(cb.lower(root

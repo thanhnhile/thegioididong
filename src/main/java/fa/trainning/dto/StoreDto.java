@@ -1,6 +1,5 @@
 package fa.trainning.dto;
 
-import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -17,20 +16,6 @@ public class StoreDto {
 	@JsonProperty("address")
 	private String address;
 	
-	@JsonProperty("products")
-	List<ProductInStoreDto> productsStores;
-
-	
-	public StoreDto(Integer id, String storeName, String cityName, String address,
-			List<ProductInStoreDto> productsStores) {
-		super();
-		this.id = id;
-		this.storeName = storeName;
-		this.cityName = cityName;
-		this.address = address;
-		this.productsStores = productsStores;
-	}
-
 	public Integer getId() {
 		return id;
 	}
@@ -62,16 +47,5 @@ public class StoreDto {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-
-	public List<ProductInStoreDto> getProductsStores() {
-		return productsStores;
-	}
-
-	public void setProductsStores(List<ProductInStoreDto> productsStores) {
-		this.productsStores = productsStores;
-	}
-	
-	
-	
 	
 }

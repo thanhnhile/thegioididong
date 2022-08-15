@@ -3,31 +3,19 @@ package fa.trainning.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+
 public class OrderDetailDto {
 	@JsonProperty("detailId")
 	private Integer id;
 	
-	@JsonProperty("product")
-	private ProductSimpleDto product;
+	@JsonProperty("product_id")
+	private Integer product;
 	
 	@JsonProperty("price")
 	private float price;
 	
 	@JsonProperty("quantity")
 	private int quantity;
-
-	public OrderDetailDto() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public OrderDetailDto(Integer id, ProductSimpleDto product, float price, int quantity) {
-		super();
-		this.id = id;
-		this.product = product;
-		this.price = price;
-		this.quantity = quantity;
-	}
 
 	public Integer getId() {
 		return id;
@@ -37,11 +25,13 @@ public class OrderDetailDto {
 		this.id = id;
 	}
 
-	public ProductSimpleDto getProduct() {
+	
+
+	public Integer getProduct() {
 		return product;
 	}
 
-	public void setProduct(ProductSimpleDto product) {
+	public void setProduct(Integer product) {
 		this.product = product;
 	}
 
@@ -61,6 +51,6 @@ public class OrderDetailDto {
 		this.quantity = quantity;
 	}
 
-
+	
 	
 }

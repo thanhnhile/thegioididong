@@ -34,7 +34,6 @@ public class ProductSpecificationBuilder {
         SearchCriteria searchCriteria = params.get(0);
         Specification<Product> result;
         String strToSearch = searchCriteria.getValue().toString();
-        System.out.println(strToSearch);
         if(strToSearch.contains(",")) {
         	System.out.println("========================TWO VALUES");
 			String [] searchValues = strToSearch.split(",");

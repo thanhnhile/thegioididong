@@ -7,7 +7,7 @@ import org.mapstruct.Mapper;
 import fa.trainning.dto.StoreDto;
 import fa.trainning.entity.Store;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring",uses=ProductsStoresMapper.class)
 public interface StoreMapper {
 	// ----------------------------Entity To DTO---------------------------
 

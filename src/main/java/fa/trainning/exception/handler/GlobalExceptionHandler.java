@@ -23,8 +23,11 @@ public class GlobalExceptionHandler {
 		return new DataResponse("400", e.getMessage(), 200);
 	}
 	
+	@ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+	@ResponseBody
 	public DataResponse handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
 		return new DataResponse("404","Please change method type",200);
 	}
+
 
 }
