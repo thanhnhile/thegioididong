@@ -16,7 +16,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Entity
 @Table(name="orders")
@@ -131,12 +130,9 @@ public class Order {
 	public Date getShipDate() {
 		return shipDate;
 	}
-
-	public void setShipDate() {
-		int no_of_day_to_add = 1;
-		Date createDate = this.getCreatedDate();
-		Date tomorrow = new Date( createDate.getYear(), createDate.getMonth(), createDate.getDate() + no_of_day_to_add );
-		this.shipDate = tomorrow;
+	
+	public void setShipDate(Date shipDate) {
+		this.shipDate = shipDate;
 	}
 
 	public float getTotal() {

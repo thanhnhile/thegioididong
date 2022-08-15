@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import fa.trainning.entity.Manufacturer;
 import fa.trainning.entity.Product;
 
 @Repository

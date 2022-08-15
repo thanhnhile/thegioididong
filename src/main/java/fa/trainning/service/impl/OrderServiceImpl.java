@@ -1,6 +1,6 @@
 package fa.trainning.service.impl;
 
-import java.util.List;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,10 +8,8 @@ import org.springframework.stereotype.Service;
 import fa.trainning.dto.OrderDto;
 import fa.trainning.dto.OrderInPutDto;
 import fa.trainning.entity.Order;
-import fa.trainning.entity.OrderDetail;
 import fa.trainning.mapstruct.OrderMapper;
 import fa.trainning.repository.CustomerRepository;
-import fa.trainning.repository.OrderDetailRepository;
 import fa.trainning.repository.OrderRepository;
 import fa.trainning.repository.StoreRepository;
 import fa.trainning.service.OrderService;
@@ -25,9 +23,7 @@ public class OrderServiceImpl implements OrderService {
 	private CustomerRepository customerRepo;
 	@Autowired
 	private StoreRepository storeRepo;
-	@Autowired
-	private OrderDetailRepository orderDetailRepo;
-
+	
 	@Autowired
 	private OrderMapper orderMapper;
 
@@ -47,6 +43,11 @@ public class OrderServiceImpl implements OrderService {
 		Order order = orderMapper.orderInPutDtoToOrder(orderInPutDto);
 		order.setCustomer(customerRepo.findOneById(orderInPutDto.getCustomer_id()));
 		order.setStore(storeRepo.findOneById(orderInPutDto.getStore_id()));
+		orderRepo.save(order);
+		int no_of_day_to_add = 1;
+		Date createDate = order.getCreatedDate();
+		Date tomorrow = new Date( createDate.getYear(), createDate.getMonth(), createDate.getDate() + no_of_day_to_add );
+		order.setShipDate(tomorrow);
 		orderRepo.save(order);
 		OrderDto orderDto = orderMapper.orderToOrderDto(order);
 		return orderDto;

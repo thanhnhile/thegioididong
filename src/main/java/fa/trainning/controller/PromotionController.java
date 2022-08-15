@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fa.trainning.dto.DataResponse;
 import fa.trainning.dto.PromotionDto;
-import fa.trainning.entity.Promotion;
 import fa.trainning.service.impl.PromotionServiceImpl;
 
 @RestController
