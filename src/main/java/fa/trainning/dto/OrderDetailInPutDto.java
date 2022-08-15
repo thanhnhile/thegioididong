@@ -1,21 +1,33 @@
 package fa.trainning.dto;
 
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class OrderDetailDto {
+
+public class OrderDetailInPutDto {
 	@JsonProperty("detailId")
 	private Integer id;
-
+	
 	@JsonProperty("order_id")
 	private Integer order_id;
-	@JsonProperty("product")
-	private ProductDto product;
-
+	
+	@JsonProperty("product_id")
+	private Integer product_id;
+	
 	@JsonProperty("totalprice")
 	private float totalprice;
-
+	
 	@JsonProperty("quantity")
 	private int quantity;
+
+	public OrderDetailInPutDto(Integer id, Integer order_id, Integer product_id, float totalprice, int quantity) {
+		super();
+		this.id = id;
+		this.order_id = order_id;
+		this.product_id = product_id;
+		this.totalprice = totalprice;
+		this.quantity = quantity;
+	}
 
 	public Integer getId() {
 		return id;
@@ -23,18 +35,6 @@ public class OrderDetailDto {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public OrderDetailDto() {
-	}
-
-	public OrderDetailDto(Integer id, Integer order_id, ProductDto product, float totalprice, int quantity) {
-		super();
-		this.id = id;
-		this.order_id = order_id;
-		this.product = product;
-		this.totalprice = totalprice;
-		this.quantity = quantity;
 	}
 
 	public Integer getOrder_id() {
@@ -45,12 +45,12 @@ public class OrderDetailDto {
 		this.order_id = order_id;
 	}
 
-	public ProductDto getProduct() {
-		return product;
+	public Integer getProduct_id() {
+		return product_id;
 	}
 
-	public void setProduct(ProductDto product) {
-		this.product = product;
+	public void setProduct_id(Integer product_id) {
+		this.product_id = product_id;
 	}
 
 	public float getTotalprice() {
@@ -69,5 +69,7 @@ public class OrderDetailDto {
 		this.quantity = quantity;
 	}
 
+	
+	
 	
 }

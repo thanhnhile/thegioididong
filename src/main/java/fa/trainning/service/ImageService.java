@@ -1,7 +1,5 @@
 package fa.trainning.service;
 
-import java.util.List;
-
 import fa.trainning.dto.ImageDto;
 
 public interface ImageService {

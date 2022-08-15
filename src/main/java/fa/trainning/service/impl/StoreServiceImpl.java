@@ -15,6 +15,7 @@ import fa.trainning.mapstruct.StoreMapper;
 import fa.trainning.repository.StoreRepository;
 import fa.trainning.service.StoreService;
 
+
 @Service
 public class StoreServiceImpl implements StoreService {
 
@@ -61,7 +62,8 @@ public class StoreServiceImpl implements StoreService {
 
 	@Override
 	public Object addStore(StoreDto storeDto) {
-		return storeRepo.save(storeMapper.storeDtoToStore(storeDto));
+		storeRepo.save(storeMapper.storeDtoToStore(storeDto));
+		return storeDto;
 	}
 
 	@Override
@@ -98,11 +100,5 @@ public class StoreServiceImpl implements StoreService {
 		return storeMapper.storeToStoreDto(storeOld);
 	}
 
-	/*
-	 * private List<StoreDto> convertStoreList(List<Store> entities) { return new
-	 * ArrayList<>();
-	 * 
-	 * }
-	 */
 
 }

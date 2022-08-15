@@ -1,17 +1,13 @@
 package fa.trainning.service;
 
-import java.util.List;
-
-import fa.trainning.dto.OrderDto;
+import fa.trainning.dto.OrderInPutDto;
 
 public interface OrderService {
-	List<OrderDto> getAllOrders();
+	Object getAllOrders();
 
-	OrderDto getOrder(Integer id);
+	Object getOrder(Integer id);
 
-	OrderDto addOrder(OrderDto orderDto);
-
-	OrderDto updateStateOrder(Integer id, OrderDto orderDto);
-
+	Object addOrder(OrderInPutDto orderInPutDto);
+	
 	void deleteOrder(Integer id);
 }

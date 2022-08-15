@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import fa.trainning.entity.Manufacturer;
 import fa.trainning.entity.Product;
 
 @Repository
@@ -14,5 +15,8 @@ public interface ProductRepository extends JpaRepository<Product, Integer>, JpaS
 	
 	@Query("SELECT p FROM Product p WHERE category_id = :categoryId order by product_id")
 	public Page<Product> findByCategoryId(Integer categoryId, Pageable pageable);
+	
+	Product findOneById(Integer id);
+
 	
 }

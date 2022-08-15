@@ -6,13 +6,12 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import fa.trainning.dto.DataResponse;
-import fa.trainning.dto.OrderDto;
+import fa.trainning.dto.OrderInPutDto;
 import fa.trainning.service.impl.OrderServiceImpl;
 
 @RestController
@@ -37,13 +36,8 @@ public class OrderController {
 	}
 
 	@PostMapping
-	public DataResponse addOrder(@Validated @RequestBody OrderDto OrderDto) {
-		return new DataResponse (orderImpl.addOrder(OrderDto));
+	public DataResponse addOrder(@RequestBody OrderInPutDto orderInPutDto) {
+		return new DataResponse (orderImpl.addOrder(orderInPutDto));
 	}
 
-	@PutMapping(value = "/{order_id}")
-	public DataResponse updateOrder(@PathVariable(value = "order_id") Integer order_id,
-			@Validated @RequestBody OrderDto orderDto) {
-		return new DataResponse (orderImpl.updateStateOrder(order_id, orderDto));
-	}
 }
