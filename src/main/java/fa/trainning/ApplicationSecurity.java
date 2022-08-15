@@ -45,7 +45,7 @@ public class ApplicationSecurity extends WebSecurityConfigurerAdapter {
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		 http
          .authorizeRequests()
-             .antMatchers("/roles").authenticated()
+             .antMatchers("/roles","/store").authenticated()
              .antMatchers("/**").permitAll();
 		
         http.exceptionHandling()
