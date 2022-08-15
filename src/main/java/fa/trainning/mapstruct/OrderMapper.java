@@ -3,6 +3,7 @@ package fa.trainning.mapstruct;
 import java.util.List;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import fa.trainning.dto.OrderDetailDto;
 import fa.trainning.dto.OrderDto;
@@ -13,10 +14,12 @@ import fa.trainning.entity.OrderDetail;
 public interface OrderMapper {
 	//----------------------------OrderDetail---------------------------
 	//Entity to Dto
+	@Mapping(source="product.id",target="product")
 	OrderDetailDto orderDetailToOrderDetailDto(OrderDetail orderDetail);
 	
 	List<OrderDetailDto> orderDetailsToOrderDetailDtos(List<OrderDetail> list);
 	//Dto to Entity
+	@Mapping(source="product",target="product.id")
 	OrderDetail orderDetailDtoToOrderDetail(OrderDetailDto detailDto);
 	
 	List<OrderDetail> orderDetailDtosToOrderDetails(List<OrderDetailDto> list);
