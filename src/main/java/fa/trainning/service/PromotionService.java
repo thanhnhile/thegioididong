@@ -12,4 +12,6 @@ public interface PromotionService {
 	void deletePromotion(Integer id);
 
 	Object updatePromotion(Integer id, PromotionDto promotionDto);
+	
+	Object getPromotionByProductId(Integer productId);
 }

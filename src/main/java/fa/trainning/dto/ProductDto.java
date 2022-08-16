@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.istack.Nullable;
 
 import fa.trainning.entity.Image;
-import fa.trainning.entity.Promotion;
 
 public class ProductDto {
 	@JsonProperty("id")
@@ -67,9 +66,6 @@ public class ProductDto {
 	@JsonProperty("color")
 	private String color;
 
-	@JsonProperty("promotions")
-	private List<Promotion> promotions;
-	
 	public Integer getId() {
 		return id;
 	}
@@ -222,14 +218,6 @@ public class ProductDto {
 		this.color = color;
 	}
 
-	public List<Promotion> getPromotions() {
-		return promotions;
-	}
-
-	public void setPromotions(List<Promotion> promotions) {
-		this.promotions = promotions;
-	}
-	
 	
 	
 }
