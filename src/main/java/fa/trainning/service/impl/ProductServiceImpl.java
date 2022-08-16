@@ -117,4 +117,16 @@ public class ProductServiceImpl implements ProductService {
 		response.setListDtos(productMapper.productsToProductDtos(page.getContent()));
 		return response;
 	}
+
+	@Override
+	public Object getListColorValuesOfProductName(String productName) {
+		return productRepo.getListColorValuesOfProduct(productName);
+	}
+
+	@Override
+	public Object getListRamValuesOfProductName(String productName) {
+		return productRepo.getListRamValuesOfProduct(productName);
+	}
+
+	
 }

@@ -12,16 +12,16 @@ import fa.trainning.entity.ProductsStores;
 @Repository
 public interface ProductsStoresRepository extends JpaRepository<ProductsStores, ProductStoreId>{
 	
-	@Query("SELECT p from ProductsStores p where product_id = :productId and store_id = :storeId")
+	@Query(value = "SELECT p FROM products_stores p WHERE product_id = :productId AND store_id = :storeId", nativeQuery = true)
 	ProductsStores getProductStore(Integer productId,Integer storeId);
 	
 	@Modifying
 	@Transactional
-	@Query(value = "insert into products_stores (product_id,store_id,in_stock) values(:productId, :storeId, :inStock)", nativeQuery = true)
+	@Query(value = "INSERT INTO products_stores (product_id,store_id,in_stock) VALUES(:productId, :storeId, :inStock)", nativeQuery = true)
 	void insertIntoProductsStores(Integer productId, Integer storeId, Integer inStock);
 	
 	@Modifying
 	@Transactional
-	@Query(value = "update products_stores set in_stock = :inStock where product_id = :productId and store_id = :storeId", nativeQuery = true)
+	@Query(value = "UPDATE products_stores set in_stock = :inStock WHERE product_id = :productId AND store_id = :storeId", nativeQuery = true)
 	void updateIntoProductsStores(Integer productId, Integer storeId, Integer inStock);
 }
