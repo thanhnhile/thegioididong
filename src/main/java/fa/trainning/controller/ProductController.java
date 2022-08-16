@@ -56,17 +56,19 @@ public class ProductController {
 		return new DataResponse(productService.updateProrduct(id, productDto));
 	}
 
-	@GetMapping(value = "/{offset}/{pageSize}")
-	public DataResponse getProductPaging(@PathVariable(value = "offset") int offSet,
-			@PathVariable(value = "pageSize") int pageSize) {
-		return new DataResponse(productService.getAllProductPagnation(offSet, pageSize));
+	@GetMapping(value="/paging")
+	public DataResponse getProductPaging(
+			@RequestParam(defaultValue="id") String sortBy, @RequestParam(defaultValue = "true") Boolean asc,
+			@RequestParam(defaultValue="1") int pageNum, @RequestParam(defaultValue = "20") int pageSize) {
+		return new DataResponse(productService.getAllProductPagnation(pageNum, pageSize,sortBy,asc));
 
 	}
 
-	@GetMapping("/category/{id}/{offset}/{pageSize}")
+	@GetMapping("/category/{id}")
 	public DataResponse getProductByCategoryPaging(@PathVariable(value = "id") Integer categoryId,
-			@PathVariable(value = "offset") int offSet, @PathVariable int pageSize) {
-		return new DataResponse(productService.getProductByCategoryPaging(categoryId, offSet, pageSize));
+			@RequestParam(defaultValue="product_id") String sortBy, @RequestParam(defaultValue = "true") Boolean asc,
+			@RequestParam(defaultValue="1") int pageNum, @RequestParam(defaultValue = "20") int pageSize) {
+		return new DataResponse(productService.getProductByCategoryPaging(categoryId, pageNum, pageSize,sortBy,asc));
 	}
 	
 	@GetMapping("/colors/{productName}")
@@ -83,8 +85,8 @@ public class ProductController {
 	// products/filter?pageSize=10&pageNum=1&sortBy=price&asc=true
 	@PostMapping("/filter")
 	public DataResponse filterProduct(
-			@RequestParam String sortBy, @RequestParam(defaultValue = "true") Boolean asc,
-			@RequestParam int pageNum, @RequestParam(defaultValue = "20") int pageSize,
+			@RequestParam(defaultValue="id") String sortBy, @RequestParam(defaultValue = "true") Boolean asc,
+			@RequestParam(defaultValue="1") int pageNum, @RequestParam(defaultValue = "20") int pageSize,
 			@RequestBody ProductSearchDto searchDto) {
 		ProductSpecificationBuilder builder = new ProductSpecificationBuilder();
 		List<SearchCriteria> searchCriterias = searchDto.getSearchCriterias();

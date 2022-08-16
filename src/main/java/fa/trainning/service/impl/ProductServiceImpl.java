@@ -62,7 +62,6 @@ public class ProductServiceImpl implements ProductService {
 				image.setProduct(productToUpdate);
 			}
 			productToUpdate.setImages(newImages);
-
 			return productMapper.productToProductDto(productRepo.save(productToUpdate));
 		} else
 			return null;
@@ -74,8 +73,13 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public Object getAllProductPagnation(int offSet, int pageSize) {
-		Pageable pageable = PageRequest.of(offSet - 1, pageSize);
+	public Object getAllProductPagnation(int offSet, int pageSize, String sortBy, Boolean asc) {
+		Pageable pageable;
+		if(asc) {
+			pageable = PageRequest.of(offSet-1, pageSize,Sort.by(sortBy).ascending());
+		}else {
+			pageable = PageRequest.of(offSet-1, pageSize,Sort.by(sortBy).descending());
+		}
 		Page<Product> page = productRepo.findAll(pageable);
 		PagingDto response = new PagingDto();
 		response.setCurrentPage(offSet);
@@ -88,8 +92,13 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public Object getProductByCategoryPaging(Integer categoryId, int offSet, int pageSize) {
-		Pageable pageable = PageRequest.of(offSet - 1, pageSize);
+	public Object getProductByCategoryPaging(Integer categoryId, int offSet, int pageSize, String sortBy, Boolean asc) {
+		Pageable pageable;
+		if(asc) {
+			pageable = PageRequest.of(offSet-1, pageSize,Sort.by(sortBy).ascending());
+		}else {
+			pageable = PageRequest.of(offSet-1, pageSize,Sort.by(sortBy).descending());
+		}
 		Page<Product> page = productRepo.findByCategoryId(categoryId, pageable);
 		PagingDto response = new PagingDto();
 		response.setCurrentPage(offSet);

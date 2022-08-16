@@ -14,7 +14,7 @@ import fa.trainning.entity.Product;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer>, JpaSpecificationExecutor<Product>{
 	
-	@Query(value = "SELECT p FROM Product p WHERE category_id = :categoryId order by product_id", nativeQuery = true)
+	@Query(value = "SELECT * FROM Product WHERE category_id = :categoryId", nativeQuery = true)
 	public Page<Product> findByCategoryId(Integer categoryId, Pageable pageable);
 	
 	@Query(value="SELECT DISTINCT color FROM product WHERE name = :productName", nativeQuery=true)
