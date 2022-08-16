@@ -57,7 +57,7 @@ public class AccountServiceImpl implements AccountService {
 	public Object addAccount(AccountDto accountDto) {
 		Account account = accountMapper.accountDtoToAccount(accountDto);
 		String rawPassword = account.getPassword();
-		String encodedPassword = passwordEncoder.encode(rawPassword);
+		String encodedPassword = passwordEncoder.encode(rawPassword);// thuat toan ma hoa BCrypt
 		account.setPassword(encodedPassword);
 		accountRepo.save(account);
 		return accountDto;
