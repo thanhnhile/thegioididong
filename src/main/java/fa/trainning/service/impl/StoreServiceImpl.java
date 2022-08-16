@@ -100,5 +100,10 @@ public class StoreServiceImpl implements StoreService {
 		return storeMapper.storeToStoreDto(storeOld);
 	}
 
+	@Override
+	public Object getStoreByProductId(Integer productId) {
+		return storeMapper.storesToStoreDtos(storeRepo.findByProductId(productId));
+	}
+
 
 }
