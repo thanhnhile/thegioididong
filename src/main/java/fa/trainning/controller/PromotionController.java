@@ -45,4 +45,8 @@ public class PromotionController {
 			@RequestBody PromotionDto promotionDto) {
 		return new DataResponse(promotionImpl.updatePromotion(promotion_id, promotionDto));
 	}
+	@GetMapping("/product/{id}")
+	public DataResponse getPromotionByProductId(@PathVariable(value = "id") Integer productId){
+		return new DataResponse(promotionImpl.getPromotionByProductId(productId));
+	}
 }

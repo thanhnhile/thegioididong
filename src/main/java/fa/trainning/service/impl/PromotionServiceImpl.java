@@ -3,15 +3,24 @@ package fa.trainning.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import fa.trainning.dto.ProductsPromotionsDto;
 import fa.trainning.dto.PromotionDto;
 import fa.trainning.entity.Promotion;
 import fa.trainning.mapstruct.PromotionMapper;
+import fa.trainning.repository.ProductRepository;
+import fa.trainning.repository.ProductsPromotionsRepository;
 import fa.trainning.repository.PromotionRepository;
 import fa.trainning.service.PromotionService;
 @Service
 public class PromotionServiceImpl implements PromotionService{
 	@Autowired 
 	private PromotionRepository promotionRepo;
+	
+	@Autowired
+	private ProductRepository productRepo;
+	
+	@Autowired
+	private ProductsPromotionsRepository repo;
 	
 	@Autowired
 	private PromotionMapper promotionMapper;
@@ -50,6 +59,10 @@ public class PromotionServiceImpl implements PromotionService{
 		promotionOld.setExp(promotionNew.getExp());
 		promotionRepo.save(promotionOld);
 		return promotionMapper.promotionToPromotionDto(promotionOld);
+	}
+	@Override
+	public Object getPromotionByProductId(Integer productId) {
+		return promotionMapper.promotionsToPromotionDtos(promotionRepo.findByProductId(productId));
 	}
 
 }

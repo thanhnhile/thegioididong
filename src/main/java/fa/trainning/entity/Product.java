@@ -10,8 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -55,10 +53,8 @@ public class Product {
 	@OneToMany(mappedBy="product", fetch = FetchType.LAZY)
 	private List<ProductsStores> productsStores;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "product_promotion", joinColumns = { @JoinColumn(name = "product_id") }, 
-    										inverseJoinColumns = {@JoinColumn(name = "promotion_id") })
-	private List<Promotion> promotions;
+	@OneToMany(mappedBy="product", fetch = FetchType.LAZY)
+	private List<ProductsPromotions> productsPromotions;
 	///================\
 	
 	private String ram;
@@ -80,8 +76,8 @@ public class Product {
 
 	public Product(String name, Category category, Manufacturer manufacturer, String description, float price,
 			float discount, List<Image> images, String video, String productWarranty, Boolean status, String unit,
-			List<ProductsStores> productsStores, List<Promotion> promotions, String ram, String rom, String screen,
-			String battery, String os, String camera, String color) {
+			List<ProductsStores> productsStores, List<ProductsPromotions> productsPromotions, String ram, String rom,
+			String screen, String battery, String os, String camera, String color) {
 		super();
 		this.name = name;
 		this.category = category;
@@ -95,7 +91,7 @@ public class Product {
 		this.status = status;
 		this.unit = unit;
 		this.productsStores = productsStores;
-		this.promotions = promotions;
+		this.productsPromotions = productsPromotions;
 		this.ram = ram;
 		this.rom = rom;
 		this.screen = screen;
@@ -104,6 +100,8 @@ public class Product {
 		this.camera = camera;
 		this.color = color;
 	}
+
+
 
 	public Integer getId() {
 		return id;
@@ -209,12 +207,13 @@ public class Product {
 		this.productsStores = productsStores;
 	}
 
-	public List<Promotion> getPromotions() {
-		return promotions;
+	
+	public List<ProductsPromotions> getProductsPromotions() {
+		return productsPromotions;
 	}
 
-	public void setPromotions(List<Promotion> promotions) {
-		this.promotions = promotions;
+	public void setProductsPromotions(List<ProductsPromotions> productsPromotions) {
+		this.productsPromotions = productsPromotions;
 	}
 
 	public String getRam() {
