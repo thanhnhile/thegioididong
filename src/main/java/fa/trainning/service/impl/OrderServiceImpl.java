@@ -31,7 +31,6 @@ public class OrderServiceImpl implements OrderService {
 	public Object getAllOrders() {
 		return orderMapper.ordersToOrderDtos(orderRepo.findAll());
 	}
-
 	@Override
 	public Object getOrder(Integer id) {
 		Order order = orderRepo.getReferenceById(id);

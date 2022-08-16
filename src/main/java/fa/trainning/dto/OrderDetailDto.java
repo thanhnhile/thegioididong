@@ -6,8 +6,8 @@ public class OrderDetailDto {
 	@JsonProperty("detailId")
 	private Integer id;
 
-	@JsonProperty("order_id")
-	private Integer order_id;
+	@JsonProperty("order")
+	private OrderDto order;
 	@JsonProperty("product")
 	private ProductDto product;
 
@@ -28,21 +28,21 @@ public class OrderDetailDto {
 	public OrderDetailDto() {
 	}
 
-	public OrderDetailDto(Integer id, Integer order_id, ProductDto product, float totalprice, int quantity) {
+	public OrderDetailDto(Integer id, OrderDto order, ProductDto product, float totalprice, int quantity) {
 		super();
 		this.id = id;
-		this.order_id = order_id;
+		this.order = order;
 		this.product = product;
 		this.totalprice = totalprice;
 		this.quantity = quantity;
 	}
 
-	public Integer getOrder_id() {
-		return order_id;
+	public OrderDto getOrder() {
+		return order;
 	}
 
-	public void setOrder_id(Integer order_id) {
-		this.order_id = order_id;
+	public void setOrder(OrderDto order) {
+		this.order = order;
 	}
 
 	public ProductDto getProduct() {
