@@ -12,7 +12,7 @@ import fa.trainning.entity.ProductsStores;
 @Repository
 public interface ProductsStoresRepository extends JpaRepository<ProductsStores, ProductStoreId>{
 	
-	@Query(value = "SELECT p FROM products_stores p WHERE product_id = :productId AND store_id = :storeId", nativeQuery = true)
+	@Query(value = "SELECT * FROM products_stores WHERE product_id = :productId AND store_id = :storeId", nativeQuery = true)
 	ProductsStores getProductStore(Integer productId,Integer storeId);
 	
 	@Modifying

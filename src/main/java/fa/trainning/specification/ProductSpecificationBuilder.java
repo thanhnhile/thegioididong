@@ -3,7 +3,6 @@ package fa.trainning.specification;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import org.springframework.data.jpa.domain.Specification;
 
 import fa.trainning.dto.SearchCriteria;
@@ -27,42 +26,38 @@ public class ProductSpecificationBuilder {
 		params.add(searchCriteria);
 		return this;
 	}
-	public Specification<Product> build(){
-        if(params.size() == 0){
-            return null;
-        }
-        Specification<Product> result = createProductSpecification(params.get(0));
-        for (int idx = 1; idx < params.size(); idx++){
-            SearchCriteria criteria = params.get(idx);
-            Specification<Product> specification = createProductSpecification(params.get(idx));
-            result =  SearchOperation.getDataOption(criteria
-                     .getDataOption()) == SearchOperation.ALL
-                     ? Specification.where(result).and(specification)
-                     : Specification.where(result).or(specification);
-        }
-        return result;
+
+	public Specification<Product> build() {
+		if (params.size() == 0) {
+			return null;
+		}
+		Specification<Product> result = createProductSpecification(params.get(0));
+		for (int idx = 1; idx < params.size(); idx++) {
+			SearchCriteria criteria = params.get(idx);
+			Specification<Product> specification = createProductSpecification(params.get(idx));
+			result = SearchOperation.getDataOption(criteria.getDataOption()) == SearchOperation.ALL
+					? Specification.where(result).and(specification)
+					: Specification.where(result).or(specification);
+		}
+		return result;
 	}
+
 	public Specification<Product> createProductSpecification(SearchCriteria searchCriteria) {
-        Specification<Product> result;
-        String strToSearch = searchCriteria.getValue().toString();
-        if(strToSearch.contains(",")) {
-			String [] searchValues = strToSearch.split(",");
+		Specification<Product> result;
+		String strToSearch = searchCriteria.getValue().toString();
+		if (strToSearch.contains(",")) {
+			String[] searchValues = strToSearch.split(",");
 			result = Specification.where(new ProductSpecification(
-					new SearchCriteria(
-					searchCriteria.getFilterKey(),
-					searchValues[0],
-					searchCriteria.getOperation())));
-			int i=1;
-			while(i<searchValues.length) {
-				result = result.or(new ProductSpecification(new SearchCriteria(
-						searchCriteria.getFilterKey(), 
-						searchValues[i],
-						searchCriteria.getOperation())));
+					new SearchCriteria(searchCriteria.getFilterKey(), searchValues[0], searchCriteria.getOperation())));
+			int i = 1;
+			while (i < searchValues.length) {
+				result = result.or(new ProductSpecification(new SearchCriteria(searchCriteria.getFilterKey(),
+						searchValues[i], searchCriteria.getOperation())));
 				i++;
 			}
-		}else {
+		} else {
 			result = new ProductSpecification(searchCriteria);
 		}
-        return result;
+		return result;
 	}
 }

@@ -62,7 +62,6 @@ public class ProductServiceImpl implements ProductService {
 				image.setProduct(productToUpdate);
 			}
 			productToUpdate.setImages(newImages);
-
 			return productMapper.productToProductDto(productRepo.save(productToUpdate));
 		} else
 			return null;
