@@ -1,7 +1,7 @@
-package fa.trainning.entity;
+ package fa.trainning.entity;
 
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,9 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.springframework.data.annotation.CreatedDate;
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
 @Entity
 @Table(name="orders")
 @EntityListeners(AuditingEntityListener.class)
@@ -31,42 +30,46 @@ public class Order {
 	@JoinColumn(name = "customer_id")
 	private Customer customer;
 	
-	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-	private List<OrderDetail> details;
-	
 	@ManyToOne
 	@JoinColumn(name = "store_id")
 	private Store store;
 	
+	@Column(nullable = false)
+	private boolean status;// xac nhan(1) hay chua xac nhan (0)
+	@Column(nullable = false)
+	private boolean odertype; // nhan hang tai nha(1) hay den cua hang(0) 
+	@Column(nullable = false)
+	private boolean pay; //thanh toan(1) hay chua thanh toan(0)
+	
+	@CreationTimestamp
+	private Date createdDate;
+	@Column()
+	private Date shipDate; // ngay co hang de den nhan hoac giao	
+	@Column(nullable = false)
 	private float total;
 	
-	@CreatedDate
-	private Date createdDate;
-	
-	@ManyToOne
-	@JoinColumn(name="state_id")
-	private OrderState state;
-	
+	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+	private Set<OrderDetail> details;
 	
 	public Order() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	
-
-	public Order(Customer customer, List<OrderDetail> details, Store store, float total, Date createdDate,
-			OrderState state) {
+	public Order(Integer id, Customer customer, Store store, boolean status, boolean odertype, boolean pay,
+			Date createdDate, Date shipDate, float total, Set<OrderDetail> details) {
 		super();
+		this.id = id;
 		this.customer = customer;
-		this.details = details;
 		this.store = store;
-		this.total = total;
+		this.status = status;
+		this.odertype = odertype;
+		this.pay = pay;
 		this.createdDate = createdDate;
-		this.state = state;
+		this.shipDate = shipDate;
+		this.total = total;
+		this.details = details;
 	}
-
-
 
 	public Integer getId() {
 		return id;
@@ -84,14 +87,6 @@ public class Order {
 		this.customer = customer;
 	}
 
-	public List<OrderDetail> getDetails() {
-		return details;
-	}
-
-	public void setDetails(List<OrderDetail> details) {
-		this.details = details;
-	}
-
 	public Store getStore() {
 		return store;
 	}
@@ -100,12 +95,28 @@ public class Order {
 		this.store = store;
 	}
 
-	public float getTotal() {
-		return total;
+	public boolean isStatus() {
+		return status;
 	}
 
-	public void setTotal(float total) {
-		this.total = total;
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+
+	public boolean isOdertype() {
+		return odertype;
+	}
+
+	public void setOdertype(boolean odertype) {
+		this.odertype = odertype;
+	}
+
+	public boolean isPay() {
+		return pay;
+	}
+
+	public void setPay(boolean pay) {
+		this.pay = pay;
 	}
 
 	public Date getCreatedDate() {
@@ -116,17 +127,33 @@ public class Order {
 		this.createdDate = createdDate;
 	}
 
-
-
-	public OrderState getState() {
-		return state;
+	public Date getShipDate() {
+		return shipDate;
+	}
+	
+	public void setShipDate(Date shipDate) {
+		this.shipDate = shipDate;
 	}
 
-
-
-	public void setState(OrderState state) {
-		this.state = state;
+	public float getTotal() {
+		return total;
 	}
+
+	public void setTotal(float total) {
+		this.total = total;
+	}
+
+	public Set<OrderDetail> getDetails() {
+		return details;
+	}
+
+	public void setDetails(Set<OrderDetail> details) {
+		this.details = details;
+	}
+	public void addDetails(OrderDetail details) {
+		this.details.add(details);
+	}
+
 
 	
 	

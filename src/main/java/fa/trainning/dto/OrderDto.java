@@ -1,49 +1,54 @@
 package fa.trainning.dto;
 
 import java.util.Date;
-import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import fa.trainning.entity.OrderState;
 
 public class OrderDto {
 	@JsonProperty("id")
 	private Integer id;
 	
 	@JsonProperty("customer")
-	CustomerDto customer;
-	
-	@JsonProperty("details")
-	List<OrderDetailDto> details;
+	private CustomerDto customer;
 	
 	@JsonProperty("store")
-	StoreDto store;
+	private StoreDto store;
+	
+	@JsonProperty("status")
+	private boolean status;
+	
+	@JsonProperty("odertype")
+	private boolean odertype;
+	
+	@JsonProperty("pay")
+	private boolean pay;
+	
+	@JsonProperty("createdDate")
+	private Date createdDate;
+	
+	@JsonProperty("shipDate")
+	private Date shipDate;
 	
 	@JsonProperty("total")
 	private float total;
-	
-	@JsonProperty("date")
-	private Date createdDate;
-	
-	@JsonProperty("state")
-	private OrderState state;
 
 	public OrderDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public OrderDto(Integer id, CustomerDto customer, List<OrderDetailDto> details, StoreDto store, float total,
-			Date createdDate, OrderState state) {
+	public OrderDto(Integer id, CustomerDto customer, StoreDto store, boolean status, boolean odertype, boolean pay,
+			Date createdDate, Date shipDate, float total) {
 		super();
 		this.id = id;
 		this.customer = customer;
-		this.details = details;
 		this.store = store;
-		this.total = total;
+		this.status = status;
+		this.odertype = odertype;
+		this.pay = pay;
 		this.createdDate = createdDate;
-		this.state = state;
+		this.shipDate = shipDate;
+		this.total = total;
 	}
 
 	public Integer getId() {
@@ -62,14 +67,6 @@ public class OrderDto {
 		this.customer = customer;
 	}
 
-	public List<OrderDetailDto> getDetails() {
-		return details;
-	}
-
-	public void setDetails(List<OrderDetailDto> details) {
-		this.details = details;
-	}
-
 	public StoreDto getStore() {
 		return store;
 	}
@@ -78,12 +75,28 @@ public class OrderDto {
 		this.store = store;
 	}
 
-	public float getTotal() {
-		return total;
+	public boolean isStatus() {
+		return status;
 	}
 
-	public void setTotal(float total) {
-		this.total = total;
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+
+	public boolean isOdertype() {
+		return odertype;
+	}
+
+	public void setOdertype(boolean odertype) {
+		this.odertype = odertype;
+	}
+
+	public boolean isPay() {
+		return pay;
+	}
+
+	public void setPay(boolean pay) {
+		this.pay = pay;
 	}
 
 	public Date getCreatedDate() {
@@ -94,13 +107,21 @@ public class OrderDto {
 		this.createdDate = createdDate;
 	}
 
-	public OrderState getState() {
-		return state;
+	public Date getShipDate() {
+		return shipDate;
 	}
 
-	public void setState(OrderState state) {
-		this.state = state;
+	public void setShipDate(Date shipDate) {
+		this.shipDate = shipDate;
 	}
-	
+
+	public float getTotal() {
+		return total;
+	}
+
+	public void setTotal(float total) {
+		this.total = total;
+	}
+
 	
 }

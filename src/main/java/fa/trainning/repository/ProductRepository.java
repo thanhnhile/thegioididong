@@ -23,4 +23,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer>, JpaS
 	@Query(value="SELECT DISTINCT ram FROM product WHERE name = :productName", nativeQuery = true)
 	public List<String> getListRamValuesOfProduct(String productName);
 	
+	Product findOneById(Integer id);
+
+	
 }
