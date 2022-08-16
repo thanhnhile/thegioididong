@@ -1,5 +1,7 @@
 package fa.trainning.repository;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,8 +14,14 @@ import fa.trainning.entity.Product;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer>, JpaSpecificationExecutor<Product>{
 	
-	@Query("SELECT p FROM Product p WHERE category_id = :categoryId order by product_id")
+	@Query(value = "SELECT * FROM Product WHERE category_id = :categoryId", nativeQuery = true)
 	public Page<Product> findByCategoryId(Integer categoryId, Pageable pageable);
+	
+	@Query(value="SELECT DISTINCT color FROM product WHERE name = :productName", nativeQuery=true)
+	public List<String> getListColorValuesOfProduct(String productName);
+	
+	@Query(value="SELECT DISTINCT ram FROM product WHERE name = :productName", nativeQuery = true)
+	public List<String> getListRamValuesOfProduct(String productName);
 	
 	Product findOneById(Integer id);
 
