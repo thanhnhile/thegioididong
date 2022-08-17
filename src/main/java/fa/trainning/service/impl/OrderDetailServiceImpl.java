@@ -37,8 +37,10 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 		Order order = orderRepo.findOneById(orderDetailInPutDto.getOrder_id());
 		orderDetailToAdd.setOrder(order);
 		orderDetailToAdd.setProduct(product);
+		//Gia x so luong
 		orderDetailToAdd.setTotalprice(product.getPrice() * orderDetailInPutDto.getQuantity());
 		detailRepo.save(orderDetailToAdd);
+		//set lai gia cua oder
 		order.setTotal(order.getTotal() + orderDetailToAdd.getTotalprice());
 		orderRepo.save(order);
 		return detailMapper.orderDetailToOrderDetailDto(orderDetailToAdd);
@@ -61,7 +63,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 		// Tru gia detail hien tai
 		order.setTotal(order.getTotal() - detail.getTotalprice());
 		orderRepo.save(order);
-		// set lai gia moi update
+		// set lai gia moi update cua oderdetail
 		detail.setQuantity(quanlity);
 		detail.setTotalprice(detail.getQuantity() * detail.getProduct().getPrice());
 		detailRepo.save(detail);
