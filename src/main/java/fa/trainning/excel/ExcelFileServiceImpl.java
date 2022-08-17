@@ -28,7 +28,7 @@ public class ExcelFileServiceImpl implements ExcelFileService {
 	@Override
 	public ByteArrayInputStream export(List<OrderDetail> orderDetails) {
 		try(Workbook workbook = new XSSFWorkbook()){
-			Sheet sheet = workbook.createSheet("Contacts");
+			Sheet sheet = workbook.createSheet("report");
 			
 			Row row = sheet.createRow(0);
 			
