@@ -29,7 +29,7 @@ public class DownloadExcelController {
 		List<OrderDetail> contacts = (List<OrderDetail>) orderDetailRepo.findAll();
 		ByteArrayInputStream byteArrayInputStream = excelFileService.export(contacts);
 		response.setContentType("application/octet-stream");
-		response.setHeader("Content-Disposition", "attachment; filename=contacts.xlsx");
+		response.setHeader("Content-Disposition", "attachment; filename=report.xlsx");
 		IOUtils.copy(byteArrayInputStream, response.getOutputStream());
 	}
 
